@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>A TU MEDIDA TECH — Desarrollo web premium</title>
+  <meta name="description" content="A TU MEDIDA TECH: páginas web modernas, rápidas y claras para que tus clientes entiendan tu oferta y te contacten o compren." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./modern-styles.css" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='30%25' cy='30%25'%3E%3Cstop offset='0' stop-color='%2300E5FF'/%3E%3Cstop offset='1' stop-color='%237C3AED'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%23070A12'/%3E%3Cpath d='M14 40c8-18 28-26 36-16 6 8-2 28-20 30-9 1-14-5-16-14z' fill='url(%23g)'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="#inicio" aria-label="A TU MEDIDA TECH">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">A TU MEDIDA <span class="brand__text--accent">TECH</span></span>
+      </a>
+
+      <nav class="nav" aria-label="Secciones">
+        <a class="nav__link" href="#portafolio">Clientes</a>
+        <a class="nav__link" href="#servicios">Servicios</a>
+        <a class="nav__link" href="#about">Quiénes somos</a>
+        <a class="nav__link" href="#estrategia">Estrategia</a>
+        <a class="nav__link" href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="topbar__cta">
+        <a class="btn btn--ghost" href="#portafolio">Ver trabajos</a>
+        <a class="btn btn--primary" href="#contacto">Inicia tu proyecto</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section id="inicio" class="hero">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="orb orb--1"></div>
+        <div class="orb orb--2"></div>
+        <div class="gridlines"></div>
+      </div>
+
+      <div class="container hero__inner">
+        <div class="hero__copy" data-aos="fade-up" data-aos-duration="700">
+          <p class="kicker">Páginas web rápidas • fáciles de usar • pensadas para vender</p>
+          <h1>Transformo ideas en realidades digitales</h1>
+          <p class="lead">
+            Para negocios y profesionales que quieren verse <strong>más serios</strong>, atender mejor y vender más:
+            una página clara donde la gente entiende tu oferta y te escribe, agenda o compra.
+          </p>
+
+          <p class="muted">
+            Páginas web sencillas y profesionales desde <strong>$1,999 MXN</strong>. Mándanos tu idea y te propongo la mejor opción.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--glow" href="#contacto">Inicia tu proyecto</a>
+            <a class="btn btn--ghost" href="#estrategia">Ver estrategia</a>
+          </div>
+
+          <div class="hero__badges" aria-label="Beneficios">
+            <div class="badge">⚡ Carga rápida</div>
+            <div class="badge">🔍 Que te encuentren en Google</div>
+            <div class="badge">🧠 Textos y botones que guían</div>
+          </div>
+        </div>
+
+        <div class="hero__visual" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="100">
+          <div class="device">
+            <div class="device__top">
+              <span class="dot dot--red" aria-hidden="true"></span>
+              <span class="dot dot--yellow" aria-hidden="true"></span>
+              <span class="dot dot--green" aria-hidden="true"></span>
+              <span class="device__title">A TU MEDIDA TECH</span>
+            </div>
+            <div class="device__screen">
+              <div class="metric">
+                <span class="metric__label">Retención</span>
+                <span class="metric__value">+32%</span>
+              </div>
+              <div class="metric">
+                <span class="metric__label">Velocidad</span>
+                <span class="metric__value">90+ Lighthouse</span>
+              </div>
+              <div class="metric">
+                <span class="metric__label">Conversión</span>
+                <span class="metric__value">Más mensajes</span>
+              </div>
+              <div class="spark" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="hero__trust" data-aos="fade-up" data-aos-delay="200">
+            <p class="muted">Enfoque: producto, marca y ventas.</p>
+            <div class="logos" aria-label="Beneficios">
+              <span class="chip">Rápido</span>
+              <span class="chip">Se ve bien en celular</span>
+              <span class="chip">Diseño claro</span>
+              <span class="chip">Listo para Google</span>
+            </div>
+          </div>
+
+          <figure class="heroImage" aria-hidden="true">
+            <img src="../portada.jpg" alt="Personas trabajando en soluciones digitales" loading="lazy" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="portafolio" class="section">
+      <div class="container">
+        <div class="section__head" data-aos="fade-up">
+          <h2>Clientes y trabajos realizados</h2>
+          <p class="muted">Proyectos hechos para negocios reales: claridad, confianza, ventas y mejor atención al cliente.</p>
+        </div>
+
+        <div class="grid cards cards--bento" role="list">
+          <article class="card" role="listitem" data-aos="fade-up" data-aos-delay="0">
+            <div class="card__media">
+              <picture>
+                <source type="image/webp" srcset="https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=1200&q=80&fm=webp" />
+                <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=1200&q=80" alt="Plataforma gastronómica de pedidos en línea" />
+              </picture>
+              <span class="tag">Sr. &amp; Sra. Burger</span>
+              <a class="card__case" href="https://srysraburger.store" target="_blank" rel="noopener">Ver caso de éxito</a>
+            </div>
+            <div class="card__body">
+              <h3>Sr. &amp; Sra. Burger</h3>
+              <p>Plataforma de E-commerce gastronómico de alto rendimiento con menú interactivo, carrito optimizado para móvil e integración directa con WhatsApp para pedidos y envíos.</p>
+              <div class="card__meta">
+                <span class="pill">Menú interactivo</span><span class="pill">Carrito mobile-first</span>
+              </div>
+              <span class="focusLabel">Enfoque: Conversión de ventas rápida y UX gastronómica.</span>
+              <a class="card__link" href="https://srysraburger.store" target="_blank" rel="noopener">Ver prototipo</a>
+            </div>
+          </article>
+
+          <article class="card" role="listitem" data-aos="fade-up" data-aos-delay="80">
+            <div class="card__media">
+              <picture>
+                <source type="image/webp" srcset="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80&fm=webp" />
+                <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80" alt="Marca personal de maquillaje de lujo" />
+              </picture>
+              <span class="tag">Yuridia Makeup</span>
+              <a class="card__case" href="https://yuridiamakeup.lat" target="_blank" rel="noopener">Ver caso de éxito</a>
+            </div>
+            <div class="card__body">
+              <h3>Yuridia Makeup</h3>
+              <p>Sitio web premium de marca personal para el sector de belleza y lujo, con estética minimalista y sofisticada para proyectar autoridad, mostrar portafolios en alta resolución y vender servicios y cursos.</p>
+              <div class="card__meta">
+                <span class="pill">Marca personal</span><span class="pill">Portafolio visual</span>
+              </div>
+              <span class="focusLabel">Enfoque: Branding de lujo y autoridad visual.</span>
+              <a class="card__link" href="https://yuridiamakeup.lat" target="_blank" rel="noopener">Ver prototipo</a>
+            </div>
+          </article>
+
+          <article class="card" role="listitem" data-aos="fade-up" data-aos-delay="160">
+            <div class="card__media">
+              <picture>
+                <source type="image/webp" srcset="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80&fm=webp" />
+                <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Panel de analítica inmobiliaria" />
+              </picture>
+              <span class="tag">WebSights Analytics</span>
+              <a class="card__case" href="https://websightsanalytics.com" target="_blank" rel="noopener">Ver caso de éxito</a>
+            </div>
+            <div class="card__body">
+              <h3>WebSights Analytics</h3>
+              <p>Plataforma en tecnología Proptech para el mercado inmobiliario: gestión inteligente de catálogos de propiedades, filtros avanzados de búsqueda y panel administrativo para seguimiento de cierres.</p>
+              <div class="card__meta">
+                <span class="pill">Catálogo inmobiliario</span><span class="pill">Panel administrativo</span>
+              </div>
+              <span class="focusLabel">Enfoque: Gestión inmobiliaria (CRM) y tecnología Proptech.</span>
+              <a class="card__link" href="https://websightsanalytics.com" target="_blank" rel="noopener">Ver prototipo</a>
+            </div>
+          </article>
+
+          <article class="card" role="listitem" data-aos="fade-up" data-aos-delay="240">
+            <div class="card__media">
+              <picture>
+                <source type="image/webp" srcset="https://images.unsplash.com/photo-1451188502541-13943edb6acb?auto=format&fit=crop&w=1200&q=80&fm=webp" />
+                <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1451188502541-13943edb6acb?auto=format&fit=crop&w=1200&q=80" alt="Portal académico con artículos y foros" />
+              </picture>
+              <span class="tag">Debate Científico</span>
+              <a class="card__case" href="https://debatecientifico.lat" target="_blank" rel="noopener">Ver caso de éxito</a>
+            </div>
+            <div class="card__body">
+              <h3>Debate Científico</h3>
+              <p>Portal académico e institucional para difusión de conocimiento, con arquitectura de información robusta para gestionar artículos científicos, foros de discusión y repositorios de datos con alta legibilidad.</p>
+              <div class="card__meta">
+                <span class="pill">Portal académico</span><span class="pill">Foros y repositorios</span>
+              </div>
+              <span class="focusLabel">Enfoque: Autoridad informativa y arquitectura de contenido.</span>
+              <a class="card__link" href="https://debatecientifico.lat" target="_blank" rel="noopener">Ver prototipo</a>
+            </div>
+          </article>
+
+          <article class="card" role="listitem" data-aos="fade-up" data-aos-delay="300">
+            <div class="card__media">
+              <picture>
+                <source type="image/webp" srcset="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80&fm=webp" />
+                <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="Gestión operativa en restaurante" />
+              </picture>
+              <span class="tag">Gestia</span>
+              <a class="card__case" href="https://gestia.rest" target="_blank" rel="noopener">Ver caso de éxito</a>
+            </div>
+            <div class="card__body">
+              <h3>Gestia</h3>
+              <p>Solución SaaS para la gestión operativa de restaurantes: digitaliza inventarios, administración de mesas y flujo de caja, mejorando la eficiencia del personal con una interfaz de baja fricción.</p>
+              <div class="card__meta">
+                <span class="pill">Inventarios y mesas</span><span class="pill">Flujo de caja</span>
+              </div>
+              <span class="focusLabel">Enfoque: Eficiencia operativa y automatización administrativa.</span>
+              <a class="card__link" href="https://gestia.rest" target="_blank" rel="noopener">Ver prototipo</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios" class="section section--alt">
+      <div class="container">
+        <div class="section__head" data-aos="fade-up">
+          <h2>Servicios</h2>
+          <p class="muted">Mensaje simple: si tu negocio existe, también debe verse profesional en internet.</p>
+        </div>
+
+        <ul class="bullets" aria-label="Ejemplos de uso" data-aos="fade-up">
+          <li><strong>¿Tienes un local de comida?</strong> Vende en línea y recibe pedidos por WhatsApp o con pago.</li>
+          <li><strong>¿Eres psicóloga, dentista, doctor/a o nutrióloga?</strong> Permite que elijan servicio y reserven en línea.</li>
+          <li><strong>¿Tienes estética, barbería o spa?</strong> Agenda citas, muestra precios y evita mensajes confusos.</li>
+          <li><strong>¿Quieres “verte más pro”?</strong> Información clara (horarios, ubicación, servicios) y presencia moderna.</li>
+        </ul>
+
+        <div class="grid services" role="list">
+          <article class="service" role="listitem" data-aos="fade-up" data-aos-delay="0">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h16"/><path d="M16 12l4 4"/><path d="M20 12l-4 4"/></svg>
+            </div>
+            <h3>Diseño fácil de usar</h3>
+            <p>Tu cliente entiende qué vendes en segundos y encuentra rápido cómo pedir, reservar o comprar.</p>
+          </article>
+
+          <article class="service" role="listitem" data-aos="fade-up" data-aos-delay="80">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
+            </div>
+            <h3>Desarrollo de tu sitio o sistema</h3>
+            <p>Desde una página para captar clientes hasta un sistema para pedidos, reservas o catálogo.</p>
+          </article>
+
+          <article class="service" role="listitem" data-aos="fade-up" data-aos-delay="160">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M7 14l3-3 3 2 5-6"/></svg>
+            </div>
+            <h3>Que te encuentren en Google</h3>
+            <p>Dejo la base lista para que aparezcas mejor en búsquedas y la gente llegue con intención.</p>
+          </article>
+
+          <article class="service" role="listitem" data-aos="fade-up" data-aos-delay="240">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"/><path d="M12 16v6"/><path d="M4.9 4.9l4.2 4.2"/><path d="M14.9 14.9l4.2 4.2"/><path d="M2 12h6"/><path d="M16 12h6"/><path d="M4.9 19.1l4.2-4.2"/><path d="M14.9 9.1l4.2-4.2"/></svg>
+            </div>
+            <h3>Velocidad de carga</h3>
+            <p>Optimizo imágenes y el sitio para que cargue rápido, sobre todo en celular (menos gente se va).</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <div class="split">
+          <div class="split__copy" data-aos="fade-up">
+            <h2>Quiénes somos</h2>
+            <p class="lead">
+              Somos una organización de personas expertas en programación, creación de apps y páginas web,
+              enfocada en llevar herramientas digitales claras y útiles a las Pymes.
+            </p>
+            <p class="muted">
+              Durante muchos años, tener una página web profesional significaba invertir miles de dólares.
+              Hoy la tecnología nos permite construir sitios y sistemas de forma más eficiente, sin sacrificar calidad.
+            </p>
+            <p class="muted">
+              Elegimos trabajar con Pymes porque es un sector muchas veces olvidado: negocios que sostienen la economía,
+              pero a los que casi nadie les habla en su idioma. Nuestro objetivo es ayudarte a <strong>administrar, gestionar
+              y vender mejor</strong> usando herramientas digitales hechas a tu medida.
+            </p>
+          </div>
+
+          <div class="split__panel" data-aos="fade-up" data-aos-delay="120">
+            <div class="glass contactCard">
+              <div class="aboutAvatar">
+                <img src="../Perfil.jpg" alt="Equipo A TU MEDIDA TECH" />
+                <div>
+                  <p class="tiny">Equipo A TU MEDIDA TECH</p>
+                  <p class="muted tiny">Estudio especializado en Pymes</p>
+                </div>
+              </div>
+              <h3>Qué puedes esperar de nosotros</h3>
+              <ul class="bullets bullets--compact">
+                <li>Experiencia técnica para convertir ideas en productos digitales reales.</li>
+                <li>Procesos sencillos: hablamos sin tecnicismos y te guiamos paso a paso.</li>
+                <li>Enfoque en productividad: menos horas perdidas, más control de tu negocio.</li>
+                <li>Acompañamiento: no solo entregamos una web, te ayudamos a sacarle provecho.</li>
+              </ul>
+              <div class="divider"></div>
+              <p class="muted tiny">Si eres Pyme, este estudio está pensado para ti.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="metricas" class="section metrics section--alt">
+      <div class="container">
+        <div class="section__head" data-aos="fade-up">
+          <h2>Resultados que buscamos contigo</h2>
+          <p class="muted">Métricas pensadas para locales, servicios y profesionales que quieren dar el siguiente paso.</p>
+        </div>
+
+        <div class="metrics__grid" data-aos="fade-up" data-aos-delay="80">
+          <article class="metricCard">
+            <p class="metricCard__label">Más gente que se queda en tu sitio</p>
+            <p class="metricCard__value"><span class="metricCounter" data-target="200">0</span><span class="metricCard__suffix">%</span></p>
+            <p class="metricCard__note">Objetivo: +200% de retención frente a tu página actual.</p>
+          </article>
+
+          <article class="metricCard">
+            <p class="metricCard__label">Carga percibida por el cliente</p>
+            <p class="metricCard__value"><span class="metricCounter" data-target="1">0</span><span class="metricCard__suffix">s</span></p>
+            <p class="metricCard__note">Busco que la página se sienta casi instantánea en celular.</p>
+          </article>
+
+          <article class="metricCard">
+            <p class="metricCard__label">Mensajes, reservas o ventas</p>
+            <p class="metricCard__value"><span class="metricCounter" data-target="3">0</span><span class="metricCard__suffix">x</span></p>
+            <p class="metricCard__note">Meta: triplicar las oportunidades de contacto desde tu web.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="estrategia" class="section">
+      <div class="container">
+        <div class="split">
+          <div class="split__copy" data-aos="fade-up">
+            <h2>Que la gente se quede y te contacte</h2>
+            <p class="lead">
+              “A tu medida” no es un slogan: es cómo diseño para que tu cliente se quede,
+              entienda tu oferta en segundos y avance con confianza.
+            </p>
+
+            <ul class="bullets" aria-label="Pilares de retención">
+              <li><strong>Claridad inmediata:</strong> textos cortos, orden visual y botones visibles para “Pedir info / Reservar / Comprar”.</li>
+              <li><strong>Confianza:</strong> diseño consistente, reseñas/testimonios y mensajes claros (sin letras chiquitas).</li>
+              <li><strong>Velocidad real:</strong> la página abre rápido y la gente no se desespera ni se va.</li>
+              <li><strong>Ruta sencilla:</strong> cada sección guía a la acción: WhatsApp, llamada, formulario o compra.</li>
+            </ul>
+
+            <div class="cta-row">
+              <a class="btn btn--primary" href="#contacto">Solicitar propuesta</a>
+              <a class="btn btn--ghost" href="#testimonios">Ver testimonios</a>
+            </div>
+          </div>
+
+          <div class="split__panel" data-aos="fade-up" data-aos-delay="120">
+            <div class="glass">
+              <h3>Checklist para que te contacten o compren</h3>
+              <p class="muted">Lo aplico en cada entrega para que tu web sea clara y efectiva.</p>
+              <div class="checkgrid">
+                <div class="check">Botón visible (WhatsApp/Comprar)</div>
+                <div class="check">Oferta clara</div>
+                <div class="check">Beneficios en simple</div>
+                <div class="check">Reseñas / casos reales</div>
+                <div class="check">Carga rápida</div>
+                <div class="check">Formulario corto</div>
+              </div>
+              <div class="note">Tip: usar 1–2 colores de acento ayuda a que los botones destaquen y se vea más profesional.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonios" class="section section--alt">
+      <div class="container">
+        <div class="section__head" data-aos="fade-up">
+          <h2>Lo que dicen mis clientes</h2>
+          <p class="muted">Comentarios reales que ayudan a generar confianza.</p>
+        </div>
+
+        <div class="grid testimonials" role="list">
+          <figure class="quote" role="listitem" data-aos="fade-up" data-aos-delay="0">
+            <blockquote>“El rediseño quedó elegante y se siente premium. Subieron las consultas desde el primer mes.”</blockquote>
+            <figcaption>
+              <span class="avatar" aria-hidden="true"></span>
+              <div>
+                <div class="who">Clienta — Marca personal</div>
+                  <div class="muted">Diseño claro + página para captar clientes</div>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="quote" role="listitem" data-aos="fade-up" data-aos-delay="90">
+            <blockquote>“La web carga rápido y todo es claro. Ahora la gente entiende la oferta sin que lo expliquemos.”</blockquote>
+            <figcaption>
+              <span class="avatar" aria-hidden="true"></span>
+              <div>
+                <div class="who">Cliente — Servicio local</div>
+                  <div class="muted">Sitio rápido + más mensajes</div>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="quote" role="listitem" data-aos="fade-up" data-aos-delay="180">
+            <blockquote>“Excelente comunicación y entrega. El sitio se ve serio, ordenado y profesional.”</blockquote>
+            <figcaption>
+              <span class="avatar" aria-hidden="true"></span>
+              <div>
+                <div class="who">Cliente — Proyecto editorial</div>
+                  <div class="muted">Contenido ordenado + mejor presencia en Google</div>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="section">
+      <div class="container">
+        <div class="section__head" data-aos="fade-up">
+          <h2>Contacto</h2>
+          <p class="muted">Cuéntame tu idea y te respondo con una propuesta clara.</p>
+        </div>
+
+        <div class="contact">
+          <form class="form glass" id="contactForm" novalidate data-aos="fade-up">
+            <div class="form__row">
+              <label>
+                <span>Nombre</span>
+                <input name="name" autocomplete="name" placeholder="Tu nombre" required minlength="2" />
+              </label>
+              <label>
+                <span>Número / WhatsApp</span>
+                <input name="phone" type="tel" autocomplete="tel" placeholder="Tu número para que te contacte" required />
+              </label>
+            </div>
+
+            <label>
+              <span>¿Qué necesitas?</span>
+              <select name="projectType" required>
+                <option value="" selected disabled>Selecciona una opción…</option>
+                <option>Tengo un local de comida: quiero vender en línea</option>
+                <option>Soy psicóloga/dentista/doctor(a)/nutrióloga: quiero agenda y reservaciones</option>
+                <option>Tengo estética/barbería/spa: quiero citas y servicios claros</option>
+                <option>Quiero un sitio informativo (ubicación, horarios, servicios)</option>
+                <option>Quiero mejorar mi página (más clara y profesional)</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Cuéntame tu idea</span>
+              <textarea name="message" rows="4" placeholder="Ejemplo: Tengo una taquería y quiero que puedan ver el menú y hacer pedidos por WhatsApp o con pago en línea." required minlength="10"></textarea>
+            </label>
+
+            <div class="form__actions">
+              <button class="btn btn--primary btn--glow" type="submit">Enviar</button>
+              <p class="muted tiny">Al enviar, aceptas ser contactado para esta propuesta.</p>
+            </div>
+
+            <div class="form__status" id="formStatus" aria-live="polite"></div>
+          </form>
+
+          <aside class="contact__aside" data-aos="fade-up" data-aos-delay="120">
+            <div class="glass contactCard">
+              <h3>¿Qué recibes?</h3>
+              <ul class="bullets bullets--compact">
+                <li>Diseño moderno y profesional (se puede en modo oscuro si te gusta).</li>
+                <li>Se ve perfecto en celular y computadora.</li>
+                <li>Fotos optimizadas para que cargue rápido.</li>
+                <li>Base para aparecer en Google + lectura clara para todos.</li>
+              </ul>
+              <div class="divider"></div>
+              <p class="muted">Respuesta típica: 24–48h.</p>
+              <a class="btn btn--ghost" href="#inicio">Volver arriba</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__left">
+        <div class="brand brand--footer">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span class="brand__text">A TU MEDIDA <span class="brand__text--accent">TECH</span></span>
+        </div>
+        <p class="muted">Desarrollo web premium. Todos los derechos reservados.</p>
+      </div>
+
+      <div class="footer__right" aria-label="Redes">
+        <a class="social" href="https://www.facebook.com/profile.php?id=61577393532574" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cursor" aria-hidden="true"></div>
+
+  <!-- EmailJS (reemplaza las claves en script.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="./script.js" defer></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>

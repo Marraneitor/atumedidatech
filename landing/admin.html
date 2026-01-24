@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>A TU MEDIDA TECH — Admin</title>
+  <meta name="description" content="Panel simple para revisar mensajes enviados desde el sitio A TU MEDIDA TECH." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">A TU MEDIDA <span class="brand__text--accent">TECH</span> — Admin</span>
+      </div>
+      <div class="topbar__cta">
+        <a class="btn btn--ghost" href="./index.html">Volver al sitio</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>Mensajes recibidos</h2>
+        <p class="muted">Solo tú ves esta página en tu computadora. Los datos se guardan localmente en este navegador.</p>
+      </div>
+
+      <div id="adminEmpty" class="note" style="display:none;">
+        Aún no hay mensajes guardados en este navegador. Cuando alguien envíe el formulario desde esta computadora, aparecerá aquí.
+      </div>
+
+      <div id="adminList" class="grid" style="gap:16px;"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__left">
+        <div class="brand brand--footer">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span class="brand__text">A TU MEDIDA <span class="brand__text--accent">TECH</span></span>
+        </div>
+        <p class="muted">Panel local de mensajes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./admin.js" defer></script>
+</body>
+</html>
