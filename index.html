@@ -4,527 +4,535 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="color-scheme" content="dark" />
-  <title>A TU MEDIDA TECH — Desarrollo web premium</title>
-  <meta name="description" content="A TU MEDIDA TECH: páginas web modernas, rápidas y claras para que tus clientes entiendan tu oferta y te contacten o compren." />
+  <meta name="theme-color" content="#0a0e16" />
+  <title>A TU MEDIDA TECH — Software, páginas web y herramientas digitales a la medida</title>
+  <meta name="description" content="Desarrollo de páginas web personalizadas, sistemas y herramientas digitales a la medida para negocios. Escríbeme por WhatsApp al 922 139 3994." />
+
+  <meta property="og:title" content="A TU MEDIDA TECH — Desarrollo de software a la medida" />
+  <meta property="og:description" content="Páginas web personalizadas y herramientas digitales hechas para tu negocio. WhatsApp: 922 139 3994." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="portada.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
-  <link rel="stylesheet" href="./styles.css" />
-  <link rel="stylesheet" href="./modern-styles.css" />
+  <link rel="stylesheet" href="./main.css" />
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='30%25' cy='30%25'%3E%3Cstop offset='0' stop-color='%2300E5FF'/%3E%3Cstop offset='1' stop-color='%237C3AED'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%23070A12'/%3E%3Cpath d='M14 40c8-18 28-26 36-16 6 8-2 28-20 30-9 1-14-5-16-14z' fill='url(%23g)'/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0e16'/%3E%3Cpath d='M24 20 12 32l12 12M40 20l12 12-12 12' fill='none' stroke='%2338bdf8' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "A TU MEDIDA TECH",
+    "description": "Desarrollo de páginas web personalizadas y herramientas digitales a la medida.",
+    "telephone": "+52 922 139 3994",
+    "areaServed": "MX",
+    "sameAs": ["https://www.facebook.com/profile.php?id=61577393532574"]
+  }
+  </script>
 </head>
 <body>
   <a class="skip" href="#contenido">Saltar al contenido</a>
 
-  <header class="topbar">
-    <div class="container topbar__inner">
-      <a class="brand" href="#inicio" aria-label="A TU MEDIDA TECH">
-        <span class="brand__mark" aria-hidden="true"></span>
-        <span class="brand__text">A TU MEDIDA <span class="brand__text--accent">TECH</span></span>
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a class="brand" href="#inicio" aria-label="A TU MEDIDA TECH, ir al inicio">
+        <span class="brand__logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6 2 12l6 6"/><path d="m16 6 6 6-6 6"/></svg>
+        </span>
+        <span class="brand__name">A TU MEDIDA <b>TECH</b></span>
       </a>
 
-      <nav class="nav" aria-label="Secciones">
-        <a class="nav__link" href="#portafolio">Clientes</a>
+      <nav class="nav" id="nav" aria-label="Principal">
         <a class="nav__link" href="#servicios">Servicios</a>
-        <a class="nav__link" href="#about">Quiénes somos</a>
-        <a class="nav__link" href="#estrategia">Estrategia</a>
+        <a class="nav__link" href="#proyectos">Proyectos</a>
+        <a class="nav__link" href="#proceso">Proceso</a>
+        <a class="nav__link" href="#nosotros">Nosotros</a>
+        <a class="nav__link" href="#preguntas">Preguntas</a>
         <a class="nav__link" href="#contacto">Contacto</a>
+        <a class="btn btn--wa nav__cta" href="https://wa.me/529221393994?text=Hola%2C%20vi%20tu%20p%C3%A1gina%20y%20me%20interesa%20un%20proyecto." target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+          922 139 3994
+        </a>
       </nav>
 
-      <div class="topbar__cta">
-        <a class="btn btn--ghost" href="#portafolio">Ver trabajos</a>
-        <a class="btn btn--primary" href="#contacto">Inicia tu proyecto</a>
-      </div>
+      <button class="menu" id="menuBtn" type="button" aria-label="Abrir menú" aria-controls="nav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
   <main id="contenido">
-    <section id="inicio" class="hero">
-      <div class="hero__bg" aria-hidden="true">
-        <div class="orb orb--1"></div>
-        <div class="orb orb--2"></div>
-        <div class="gridlines"></div>
-      </div>
 
-      <div class="container hero__inner">
-        <div class="hero__copy" data-aos="fade-up" data-aos-duration="700">
-          <p class="kicker">Páginas web rápidas • fáciles de usar • pensadas para vender</p>
-          <h1>Transformo ideas en realidades digitales</h1>
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="inicio">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow"><span class="pulse" aria-hidden="true"></span> Disponible para nuevos proyectos</p>
+          <h1>Páginas web y herramientas digitales <span class="grad">hechas a la medida</span> de tu negocio.</h1>
           <p class="lead">
-            Para negocios y profesionales que quieren verse <strong>más serios</strong>, atender mejor y vender más:
-            una página clara donde la gente entiende tu oferta y te escribe, agenda o compra.
-          </p>
-
-          <p class="muted">
-            Páginas web sencillas y profesionales desde <strong>$1,999 MXN</strong>. Mándanos tu idea y te propongo la mejor opción.
+            Diseño y programo sitios web personalizados, tiendas en línea y sistemas internos
+            (citas, inventarios, pedidos, paneles) para que tu negocio se vea profesional y trabaje mejor.
+            Sin plantillas genéricas: código propio, pensado para ti.
           </p>
 
           <div class="hero__actions">
-            <a class="btn btn--primary btn--glow" href="#contacto">Inicia tu proyecto</a>
-            <a class="btn btn--ghost" href="#estrategia">Ver estrategia</a>
+            <a class="btn btn--wa btn--lg" href="https://wa.me/529221393994?text=Hola%2C%20me%20interesa%20cotizar%20un%20proyecto." target="_blank" rel="noopener">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+              Escríbeme por WhatsApp
+            </a>
+            <a class="btn btn--ghost btn--lg" href="tel:+529221393994">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-phone"/></svg>
+              Llamar al 922 139 3994
+            </a>
           </div>
 
-          <div class="hero__badges" aria-label="Beneficios">
-            <div class="badge">⚡ Carga rápida</div>
-            <div class="badge">🔍 Que te encuentren en Google</div>
-            <div class="badge">🧠 Textos y botones que guían</div>
-          </div>
+          <ul class="hero__facts" aria-label="Datos clave">
+            <li><strong>5</strong><span>proyectos en producción</span></li>
+            <li><strong>100%</strong><span>código a la medida</span></li>
+            <li><strong>Desde $1,999</strong><span>MXN por página web</span></li>
+          </ul>
         </div>
 
-        <div class="hero__visual" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="100">
-          <div class="device">
-            <div class="device__top">
-              <span class="dot dot--red" aria-hidden="true"></span>
-              <span class="dot dot--yellow" aria-hidden="true"></span>
-              <span class="dot dot--green" aria-hidden="true"></span>
-              <span class="device__title">A TU MEDIDA TECH</span>
+        <div class="hero__visual" aria-hidden="true">
+          <div class="editor">
+            <div class="editor__bar">
+              <span class="dot dot--r"></span><span class="dot dot--y"></span><span class="dot dot--g"></span>
+              <span class="editor__file">tu-negocio.ts</span>
             </div>
-            <div class="device__screen">
-              <div class="metric">
-                <span class="metric__label">Retención</span>
-                <span class="metric__value">+32%</span>
-              </div>
-              <div class="metric">
-                <span class="metric__label">Velocidad</span>
-                <span class="metric__value">90+ Lighthouse</span>
-              </div>
-              <div class="metric">
-                <span class="metric__label">Conversión</span>
-                <span class="metric__value">Más mensajes</span>
-              </div>
-              <div class="spark" aria-hidden="true"></div>
-            </div>
+            <pre class="editor__code"><code><span class="ln">1</span><span class="k">import</span> { <span class="f">crearSolucion</span> } <span class="k">from</span> <span class="s">"a-tu-medida"</span>;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="k">const</span> <span class="v">proyecto</span> = {
+<span class="ln">4</span>  sitioWeb:   <span class="s">"personalizado"</span>,
+<span class="ln">5</span>  sistema:    [<span class="s">"citas"</span>, <span class="s">"pedidos"</span>, <span class="s">"inventario"</span>],
+<span class="ln">6</span>  celular:    <span class="b">true</span>,
+<span class="ln">7</span>  google:     <span class="s">"optimizado"</span>,
+<span class="ln">8</span>  contacto:   <span class="s">"922 139 3994"</span>,
+<span class="ln">9</span>};
+<span class="ln">10</span>
+<span class="ln">11</span><span class="k">await</span> <span class="f">crearSolucion</span>(<span class="v">proyecto</span>);
+<span class="ln">12</span><span class="c">// ✓ Tu negocio, en línea y funcionando</span><span class="caret"></span></code></pre>
           </div>
 
-          <div class="hero__trust" data-aos="fade-up" data-aos-delay="200">
-            <p class="muted">Enfoque: producto, marca y ventas.</p>
-            <div class="logos" aria-label="Beneficios">
-              <span class="chip">Rápido</span>
-              <span class="chip">Se ve bien en celular</span>
-              <span class="chip">Diseño claro</span>
-              <span class="chip">Listo para Google</span>
-            </div>
+          <div class="floatcard floatcard--a">
+            <span class="floatcard__ico ok">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <div><b>Despliegue exitoso</b><small>sitio en línea</small></div>
           </div>
-
-          <figure class="heroImage" aria-hidden="true">
-            <img src="portada.jpg" alt="Personas trabajando en soluciones digitales" loading="lazy" />
-          </figure>
+          <div class="floatcard floatcard--b">
+            <span class="floatcard__ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+            </span>
+            <div><b>Responsive</b><small>celular · tablet · PC</small></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="portafolio" class="section">
-      <div class="container">
-        <div class="section__head" data-aos="fade-up">
-          <h2>Clientes y trabajos realizados</h2>
-          <p class="muted">Proyectos hechos para negocios reales: claridad, confianza, ventas y mejor atención al cliente.</p>
-        </div>
+    <!-- ========== STACK / TRUST STRIP ========== -->
+    <div class="strip" aria-label="Lo que incluye cada proyecto">
+      <div class="container strip__inner">
+        <span>Diseño responsive</span>
+        <span>Código propio</span>
+        <span>SEO técnico</span>
+        <span>Integración con WhatsApp</span>
+        <span>Pagos en línea</span>
+        <span>Paneles administrativos</span>
+        <span>Dominio y hosting</span>
+      </div>
+    </div>
 
-        <div class="grid cards cards--bento" role="list">
-          <article class="card" role="listitem" data-aos="fade-up" data-aos-delay="0">
-            <div class="card__media">
-              <picture>
-                <source type="image/webp" srcset="https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=1200&q=80&fm=webp" />
-                <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=1200&q=80" alt="Plataforma gastronómica de pedidos en línea" />
-              </picture>
-              <span class="tag">Sr. &amp; Sra. Burger</span>
-              <a class="card__case" href="https://srysraburger.store" target="_blank" rel="noopener">Ver caso de éxito</a>
-            </div>
-            <div class="card__body">
+    <!-- ========== SERVICIOS ========== -->
+    <section class="section" id="servicios">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="label">Servicios</p>
+          <h2>Lo que puedo construir para tu negocio</h2>
+          <p class="muted">Desde tu primera página web hasta el sistema que organiza tu operación diaria.</p>
+        </header>
+
+        <div class="services">
+          <article class="service reveal">
+            <span class="service__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+            <h3>Páginas web personalizadas</h3>
+            <p>Sitios profesionales con tu identidad, textos claros y botones que llevan al cliente a escribirte, agendar o comprar.</p>
+          </article>
+
+          <article class="service reveal">
+            <span class="service__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></span>
+            <h3>Tiendas y pedidos en línea</h3>
+            <p>Menús, catálogos y carritos optimizados para celular, con pedidos directo a tu WhatsApp o pago en línea.</p>
+          </article>
+
+          <article class="service reveal">
+            <span class="service__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></span>
+            <h3>Sistemas y paneles a la medida</h3>
+            <p>Control de inventarios, citas, clientes, ventas o mesas. Herramientas internas para dejar Excel y libretas atrás.</p>
+          </article>
+
+          <article class="service reveal">
+            <span class="service__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></span>
+            <h3>Automatizaciones e integraciones</h3>
+            <p>Conecto tu web con WhatsApp, correo, formularios, pagos y agendas para ahorrarte tiempo en tareas repetitivas.</p>
+          </article>
+
+          <article class="service reveal">
+            <span class="service__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+            <h3>Velocidad y posicionamiento</h3>
+            <p>Sitios rápidos y bien estructurados para Google, con imágenes optimizadas y buena experiencia en celular.</p>
+          </article>
+
+          <article class="service reveal">
+            <span class="service__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <h3>Mantenimiento y soporte</h3>
+            <p>Actualizaciones, cambios de contenido, dominio y hosting. No te dejo solo después de la entrega.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROYECTOS ========== -->
+    <section class="section section--alt" id="proyectos">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="label">Proyectos</p>
+          <h2>Trabajos en línea para negocios reales</h2>
+          <p class="muted">Cada proyecto se diseñó desde cero según las necesidades del cliente. Puedes visitarlos.</p>
+        </header>
+
+        <div class="projects">
+          <article class="project project--feature reveal">
+            <a class="project__media" href="https://srysraburger.store" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1200&q=75" alt="" />
+            </a>
+            <div class="project__body">
+              <p class="project__type">E-commerce gastronómico</p>
               <h3>Sr. &amp; Sra. Burger</h3>
-              <p>Plataforma de E-commerce gastronómico de alto rendimiento con menú interactivo, carrito optimizado para móvil e integración directa con WhatsApp para pedidos y envíos.</p>
-              <div class="card__meta">
-                <span class="pill">Menú interactivo</span><span class="pill">Carrito mobile-first</span>
-              </div>
-              <span class="focusLabel">Enfoque: Conversión de ventas rápida y UX gastronómica.</span>
-              <a class="card__link" href="https://srysraburger.store" target="_blank" rel="noopener">Ver prototipo</a>
+              <p>Menú interactivo, carrito optimizado para celular e integración directa con WhatsApp para pedidos y envíos.</p>
+              <ul class="tags"><li>Menú interactivo</li><li>Carrito mobile-first</li><li>Pedidos por WhatsApp</li></ul>
+              <a class="project__link" href="https://srysraburger.store" target="_blank" rel="noopener">srysraburger.store <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
           </article>
 
-          <article class="card" role="listitem" data-aos="fade-up" data-aos-delay="80">
-            <div class="card__media">
-              <picture>
-                <source type="image/webp" srcset="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80&fm=webp" />
-                <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80" alt="Marca personal de maquillaje de lujo" />
-              </picture>
-              <span class="tag">Yuridia Makeup</span>
-              <a class="card__case" href="https://yuridiamakeup.lat" target="_blank" rel="noopener">Ver caso de éxito</a>
-            </div>
-            <div class="card__body">
-              <h3>Yuridia Makeup</h3>
-              <p>Sitio web premium de marca personal para el sector de belleza y lujo, con estética minimalista y sofisticada para proyectar autoridad, mostrar portafolios en alta resolución y vender servicios y cursos.</p>
-              <div class="card__meta">
-                <span class="pill">Marca personal</span><span class="pill">Portafolio visual</span>
-              </div>
-              <span class="focusLabel">Enfoque: Branding de lujo y autoridad visual.</span>
-              <a class="card__link" href="https://yuridiamakeup.lat" target="_blank" rel="noopener">Ver prototipo</a>
-            </div>
-          </article>
-
-          <article class="card" role="listitem" data-aos="fade-up" data-aos-delay="160">
-            <div class="card__media">
-              <picture>
-                <source type="image/webp" srcset="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80&fm=webp" />
-                <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Panel de analítica inmobiliaria" />
-              </picture>
-              <span class="tag">WebSights Analytics</span>
-              <a class="card__case" href="https://websightsanalytics.com" target="_blank" rel="noopener">Ver caso de éxito</a>
-            </div>
-            <div class="card__body">
-              <h3>WebSights Analytics</h3>
-              <p>Plataforma en tecnología Proptech para el mercado inmobiliario: gestión inteligente de catálogos de propiedades, filtros avanzados de búsqueda y panel administrativo para seguimiento de cierres.</p>
-              <div class="card__meta">
-                <span class="pill">Catálogo inmobiliario</span><span class="pill">Panel administrativo</span>
-              </div>
-              <span class="focusLabel">Enfoque: Gestión inmobiliaria (CRM) y tecnología Proptech.</span>
-              <a class="card__link" href="https://websightsanalytics.com" target="_blank" rel="noopener">Ver prototipo</a>
-            </div>
-          </article>
-
-          <article class="card" role="listitem" data-aos="fade-up" data-aos-delay="240">
-            <div class="card__media">
-              <picture>
-                <source type="image/webp" srcset="https://images.unsplash.com/photo-1451188502541-13943edb6acb?auto=format&fit=crop&w=1200&q=80&fm=webp" />
-                <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1451188502541-13943edb6acb?auto=format&fit=crop&w=1200&q=80" alt="Portal académico con artículos y foros" />
-              </picture>
-              <span class="tag">Debate Científico</span>
-              <a class="card__case" href="https://debatecientifico.lat" target="_blank" rel="noopener">Ver caso de éxito</a>
-            </div>
-            <div class="card__body">
-              <h3>Debate Científico</h3>
-              <p>Portal académico e institucional para difusión de conocimiento, con arquitectura de información robusta para gestionar artículos científicos, foros de discusión y repositorios de datos con alta legibilidad.</p>
-              <div class="card__meta">
-                <span class="pill">Portal académico</span><span class="pill">Foros y repositorios</span>
-              </div>
-              <span class="focusLabel">Enfoque: Autoridad informativa y arquitectura de contenido.</span>
-              <a class="card__link" href="https://debatecientifico.lat" target="_blank" rel="noopener">Ver prototipo</a>
-            </div>
-          </article>
-
-          <article class="card" role="listitem" data-aos="fade-up" data-aos-delay="300">
-            <div class="card__media">
-              <picture>
-                <source type="image/webp" srcset="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80&fm=webp" />
-                <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="Gestión operativa en restaurante" />
-              </picture>
-              <span class="tag">Gestia</span>
-              <a class="card__case" href="https://gestia.rest" target="_blank" rel="noopener">Ver caso de éxito</a>
-            </div>
-            <div class="card__body">
+          <article class="project reveal">
+            <a class="project__media" href="https://gestia.rest" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=75" alt="" />
+            </a>
+            <div class="project__body">
+              <p class="project__type">SaaS para restaurantes</p>
               <h3>Gestia</h3>
-              <p>Solución SaaS para la gestión operativa de restaurantes: digitaliza inventarios, administración de mesas y flujo de caja, mejorando la eficiencia del personal con una interfaz de baja fricción.</p>
-              <div class="card__meta">
-                <span class="pill">Inventarios y mesas</span><span class="pill">Flujo de caja</span>
-              </div>
-              <span class="focusLabel">Enfoque: Eficiencia operativa y automatización administrativa.</span>
-              <a class="card__link" href="https://gestia.rest" target="_blank" rel="noopener">Ver prototipo</a>
+              <p>Gestión operativa: inventarios, mesas y flujo de caja en una interfaz simple para el personal.</p>
+              <ul class="tags"><li>Inventarios</li><li>Mesas</li><li>Flujo de caja</li></ul>
+              <a class="project__link" href="https://gestia.rest" target="_blank" rel="noopener">gestia.rest <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <a class="project__media" href="https://websightsanalytics.com" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=75" alt="" />
+            </a>
+            <div class="project__body">
+              <p class="project__type">Proptech · CRM inmobiliario</p>
+              <h3>WebSights Analytics</h3>
+              <p>Catálogo de propiedades con filtros avanzados y panel administrativo para seguimiento de cierres.</p>
+              <ul class="tags"><li>Catálogo</li><li>Filtros</li><li>Panel admin</li></ul>
+              <a class="project__link" href="https://websightsanalytics.com" target="_blank" rel="noopener">websightsanalytics.com <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <a class="project__media" href="https://yuridiamakeup.lat" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=75" alt="" />
+            </a>
+            <div class="project__body">
+              <p class="project__type">Marca personal · Belleza</p>
+              <h3>Yuridia Makeup</h3>
+              <p>Sitio premium con estética minimalista para mostrar portafolio en alta resolución y vender servicios y cursos.</p>
+              <ul class="tags"><li>Branding</li><li>Portafolio</li><li>Cursos</li></ul>
+              <a class="project__link" href="https://yuridiamakeup.lat" target="_blank" rel="noopener">yuridiamakeup.lat <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <a class="project__media" href="https://debatecientifico.lat" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+              <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1451188502541-13943edb6acb?auto=format&fit=crop&w=900&q=75" alt="" />
+            </a>
+            <div class="project__body">
+              <p class="project__type">Portal académico</p>
+              <h3>Debate Científico</h3>
+              <p>Arquitectura de contenido para artículos científicos, foros de discusión y repositorios con alta legibilidad.</p>
+              <ul class="tags"><li>Artículos</li><li>Foros</li><li>Repositorios</li></ul>
+              <a class="project__link" href="https://debatecientifico.lat" target="_blank" rel="noopener">debatecientifico.lat <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="servicios" class="section section--alt">
+    <!-- ========== PROCESO ========== -->
+    <section class="section" id="proceso">
       <div class="container">
-        <div class="section__head" data-aos="fade-up">
-          <h2>Servicios</h2>
-          <p class="muted">Mensaje simple: si tu negocio existe, también debe verse profesional en internet.</p>
-        </div>
+        <header class="section__head reveal">
+          <p class="label">Proceso</p>
+          <h2>Cómo trabajamos, paso a paso</h2>
+          <p class="muted">Un proceso claro, sin tecnicismos y con avances que puedes revisar.</p>
+        </header>
 
-        <ul class="bullets" aria-label="Ejemplos de uso" data-aos="fade-up">
-          <li><strong>¿Tienes un local de comida?</strong> Vende en línea y recibe pedidos por WhatsApp o con pago.</li>
-          <li><strong>¿Eres psicóloga, dentista, doctor/a o nutrióloga?</strong> Permite que elijan servicio y reserven en línea.</li>
-          <li><strong>¿Tienes estética, barbería o spa?</strong> Agenda citas, muestra precios y evita mensajes confusos.</li>
-          <li><strong>¿Quieres “verte más pro”?</strong> Información clara (horarios, ubicación, servicios) y presencia moderna.</li>
-        </ul>
-
-        <div class="grid services" role="list">
-          <article class="service" role="listitem" data-aos="fade-up" data-aos-delay="0">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h16"/><path d="M16 12l4 4"/><path d="M20 12l-4 4"/></svg>
-            </div>
-            <h3>Diseño fácil de usar</h3>
-            <p>Tu cliente entiende qué vendes en segundos y encuentra rápido cómo pedir, reservar o comprar.</p>
-          </article>
-
-          <article class="service" role="listitem" data-aos="fade-up" data-aos-delay="80">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
-            </div>
-            <h3>Desarrollo de tu sitio o sistema</h3>
-            <p>Desde una página para captar clientes hasta un sistema para pedidos, reservas o catálogo.</p>
-          </article>
-
-          <article class="service" role="listitem" data-aos="fade-up" data-aos-delay="160">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M7 14l3-3 3 2 5-6"/></svg>
-            </div>
-            <h3>Que te encuentren en Google</h3>
-            <p>Dejo la base lista para que aparezcas mejor en búsquedas y la gente llegue con intención.</p>
-          </article>
-
-          <article class="service" role="listitem" data-aos="fade-up" data-aos-delay="240">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"/><path d="M12 16v6"/><path d="M4.9 4.9l4.2 4.2"/><path d="M14.9 14.9l4.2 4.2"/><path d="M2 12h6"/><path d="M16 12h6"/><path d="M4.9 19.1l4.2-4.2"/><path d="M14.9 9.1l4.2-4.2"/></svg>
-            </div>
-            <h3>Velocidad de carga</h3>
-            <p>Optimizo imágenes y el sitio para que cargue rápido, sobre todo en celular (menos gente se va).</p>
-          </article>
-        </div>
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step__num">01</span>
+            <h3>Platicamos tu idea</h3>
+            <p>Me cuentas por WhatsApp o llamada qué necesitas, cómo funciona tu negocio y qué quieres lograr.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num">02</span>
+            <h3>Propuesta y cotización</h3>
+            <p>Te envío una propuesta clara con alcance, precio y fecha de entrega. Sin costos ocultos.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num">03</span>
+            <h3>Diseño y desarrollo</h3>
+            <p>Construyo tu proyecto y te comparto avances para que opines y ajustemos a tu gusto.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num">04</span>
+            <h3>Entrega y soporte</h3>
+            <p>Publicamos tu sitio, te explico cómo usarlo y sigo disponible para cambios y mejoras.</p>
+          </li>
+        </ol>
       </div>
     </section>
 
-    <section id="about" class="section">
-      <div class="container">
-        <div class="split">
-          <div class="split__copy" data-aos="fade-up">
-            <h2>Quiénes somos</h2>
-            <p class="lead">
-              Somos una organización de personas expertas en programación, creación de apps y páginas web,
-              enfocada en llevar herramientas digitales claras y útiles a las Pymes.
-            </p>
-            <p class="muted">
-              Durante muchos años, tener una página web profesional significaba invertir miles de dólares.
-              Hoy la tecnología nos permite construir sitios y sistemas de forma más eficiente, sin sacrificar calidad.
-            </p>
-            <p class="muted">
-              Elegimos trabajar con Pymes porque es un sector muchas veces olvidado: negocios que sostienen la economía,
-              pero a los que casi nadie les habla en su idioma. Nuestro objetivo es ayudarte a <strong>administrar, gestionar
-              y vender mejor</strong> usando herramientas digitales hechas a tu medida.
-            </p>
-          </div>
-
-          <div class="split__panel" data-aos="fade-up" data-aos-delay="120">
-            <div class="glass contactCard">
-              <div class="aboutAvatar">
-                <img src="Perfil.jpg" alt="Equipo A TU MEDIDA TECH" />
-                <div>
-                  <p class="tiny">Equipo A TU MEDIDA TECH</p>
-                  <p class="muted tiny">Estudio especializado en Pymes</p>
-                </div>
-              </div>
-              <h3>Qué puedes esperar de nosotros</h3>
-              <ul class="bullets bullets--compact">
-                <li>Experiencia técnica para convertir ideas en productos digitales reales.</li>
-                <li>Procesos sencillos: hablamos sin tecnicismos y te guiamos paso a paso.</li>
-                <li>Enfoque en productividad: menos horas perdidas, más control de tu negocio.</li>
-                <li>Acompañamiento: no solo entregamos una web, te ayudamos a sacarle provecho.</li>
-              </ul>
-              <div class="divider"></div>
-              <p class="muted tiny">Si eres Pyme, este estudio está pensado para ti.</p>
-            </div>
+    <!-- ========== NOSOTROS ========== -->
+    <section class="section section--alt" id="nosotros">
+      <div class="container about">
+        <div class="about__media reveal">
+          <img src="Perfil.jpg" alt="Equipo de A TU MEDIDA TECH" loading="lazy" />
+          <div class="about__badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6 2 12l6 6"/><path d="m16 6 6 6-6 6"/></svg>
+            Desarrollo de software
           </div>
         </div>
-      </div>
-    </section>
 
-    <section id="metricas" class="section metrics section--alt">
-      <div class="container">
-        <div class="section__head" data-aos="fade-up">
-          <h2>Resultados que buscamos contigo</h2>
-          <p class="muted">Métricas pensadas para locales, servicios y profesionales que quieren dar el siguiente paso.</p>
-        </div>
+        <div class="about__copy reveal">
+          <p class="label">Nosotros</p>
+          <h2>Tecnología a la medida para Pymes y profesionales</h2>
+          <p class="lead">
+            Somos un estudio de desarrollo enfocado en crear herramientas digitales claras y útiles para negocios
+            que quieren administrar, gestionar y vender mejor.
+          </p>
+          <p class="muted">
+            Durante años, tener una página web o un sistema propio significaba invertir miles de dólares.
+            Hoy podemos construir soluciones profesionales de forma eficiente, sin sacrificar calidad,
+            y hablándote en tu idioma.
+          </p>
 
-        <div class="metrics__grid" data-aos="fade-up" data-aos-delay="80">
-          <article class="metricCard">
-            <p class="metricCard__label">Más gente que se queda en tu sitio</p>
-            <p class="metricCard__value"><span class="metricCounter" data-target="200">0</span><span class="metricCard__suffix">%</span></p>
-            <p class="metricCard__note">Objetivo: +200% de retención frente a tu página actual.</p>
-          </article>
-
-          <article class="metricCard">
-            <p class="metricCard__label">Carga percibida por el cliente</p>
-            <p class="metricCard__value"><span class="metricCounter" data-target="1">0</span><span class="metricCard__suffix">s</span></p>
-            <p class="metricCard__note">Busco que la página se sienta casi instantánea en celular.</p>
-          </article>
-
-          <article class="metricCard">
-            <p class="metricCard__label">Mensajes, reservas o ventas</p>
-            <p class="metricCard__value"><span class="metricCounter" data-target="3">0</span><span class="metricCard__suffix">x</span></p>
-            <p class="metricCard__note">Meta: triplicar las oportunidades de contacto desde tu web.</p>
-          </article>
+          <ul class="checks">
+            <li>Trato directo con quien programa tu proyecto</li>
+            <li>Explicaciones sencillas, sin tecnicismos</li>
+            <li>Soluciones pensadas para tu forma de trabajar</li>
+            <li>Acompañamiento después de la entrega</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section id="estrategia" class="section">
+    <!-- ========== TESTIMONIOS ========== -->
+    <section class="section" id="testimonios">
       <div class="container">
-        <div class="split">
-          <div class="split__copy" data-aos="fade-up">
-            <h2>Que la gente se quede y te contacte</h2>
-            <p class="lead">
-              “A tu medida” no es un slogan: es cómo diseño para que tu cliente se quede,
-              entienda tu oferta en segundos y avance con confianza.
-            </p>
+        <header class="section__head reveal">
+          <p class="label">Testimonios</p>
+          <h2>Lo que dicen nuestros clientes</h2>
+        </header>
 
-            <ul class="bullets" aria-label="Pilares de retención">
-              <li><strong>Claridad inmediata:</strong> textos cortos, orden visual y botones visibles para “Pedir info / Reservar / Comprar”.</li>
-              <li><strong>Confianza:</strong> diseño consistente, reseñas/testimonios y mensajes claros (sin letras chiquitas).</li>
-              <li><strong>Velocidad real:</strong> la página abre rápido y la gente no se desespera ni se va.</li>
-              <li><strong>Ruta sencilla:</strong> cada sección guía a la acción: WhatsApp, llamada, formulario o compra.</li>
-            </ul>
-
-            <div class="cta-row">
-              <a class="btn btn--primary" href="#contacto">Solicitar propuesta</a>
-              <a class="btn btn--ghost" href="#testimonios">Ver testimonios</a>
-            </div>
-          </div>
-
-          <div class="split__panel" data-aos="fade-up" data-aos-delay="120">
-            <div class="glass">
-              <h3>Checklist para que te contacten o compren</h3>
-              <p class="muted">Lo aplico en cada entrega para que tu web sea clara y efectiva.</p>
-              <div class="checkgrid">
-                <div class="check">Botón visible (WhatsApp/Comprar)</div>
-                <div class="check">Oferta clara</div>
-                <div class="check">Beneficios en simple</div>
-                <div class="check">Reseñas / casos reales</div>
-                <div class="check">Carga rápida</div>
-                <div class="check">Formulario corto</div>
-              </div>
-              <div class="note">Tip: usar 1–2 colores de acento ayuda a que los botones destaquen y se vea más profesional.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="testimonios" class="section section--alt">
-      <div class="container">
-        <div class="section__head" data-aos="fade-up">
-          <h2>Lo que dicen mis clientes</h2>
-          <p class="muted">Comentarios reales que ayudan a generar confianza.</p>
-        </div>
-
-        <div class="grid testimonials" role="list">
-          <figure class="quote" role="listitem" data-aos="fade-up" data-aos-delay="0">
+        <div class="quotes">
+          <figure class="quote reveal">
             <blockquote>“El rediseño quedó elegante y se siente premium. Subieron las consultas desde el primer mes.”</blockquote>
-            <figcaption>
-              <span class="avatar" aria-hidden="true"></span>
-              <div>
-                <div class="who">Clienta — Marca personal</div>
-                  <div class="muted">Diseño claro + página para captar clientes</div>
-              </div>
-            </figcaption>
+            <figcaption><span class="quote__avatar" aria-hidden="true">M</span><span><b>Clienta</b><small>Marca personal</small></span></figcaption>
           </figure>
-
-          <figure class="quote" role="listitem" data-aos="fade-up" data-aos-delay="90">
+          <figure class="quote reveal">
             <blockquote>“La web carga rápido y todo es claro. Ahora la gente entiende la oferta sin que lo expliquemos.”</blockquote>
-            <figcaption>
-              <span class="avatar" aria-hidden="true"></span>
-              <div>
-                <div class="who">Cliente — Servicio local</div>
-                  <div class="muted">Sitio rápido + más mensajes</div>
-              </div>
-            </figcaption>
+            <figcaption><span class="quote__avatar" aria-hidden="true">S</span><span><b>Cliente</b><small>Servicio local</small></span></figcaption>
           </figure>
-
-          <figure class="quote" role="listitem" data-aos="fade-up" data-aos-delay="180">
+          <figure class="quote reveal">
             <blockquote>“Excelente comunicación y entrega. El sitio se ve serio, ordenado y profesional.”</blockquote>
-            <figcaption>
-              <span class="avatar" aria-hidden="true"></span>
-              <div>
-                <div class="who">Cliente — Proyecto editorial</div>
-                  <div class="muted">Contenido ordenado + mejor presencia en Google</div>
-              </div>
-            </figcaption>
+            <figcaption><span class="quote__avatar" aria-hidden="true">E</span><span><b>Cliente</b><small>Proyecto editorial</small></span></figcaption>
           </figure>
         </div>
       </div>
     </section>
 
-    <section id="contacto" class="section">
-      <div class="container">
-        <div class="section__head" data-aos="fade-up">
-          <h2>Contacto</h2>
-          <p class="muted">Cuéntame tu idea y te respondo con una propuesta clara.</p>
-        </div>
+    <!-- ========== PREGUNTAS ========== -->
+    <section class="section section--alt" id="preguntas">
+      <div class="container faq-wrap">
+        <header class="section__head reveal">
+          <p class="label">Preguntas frecuentes</p>
+          <h2>Resolvemos tus dudas</h2>
+          <p class="muted">¿Tienes otra pregunta? Escríbeme al <a class="link" href="https://wa.me/529221393994" target="_blank" rel="noopener">922 139 3994</a>.</p>
+        </header>
 
+        <div class="faq reveal">
+          <details>
+            <summary>¿Cuánto cuesta una página web?</summary>
+            <p>Las páginas web sencillas y profesionales empiezan desde <b>$1,999 MXN</b>. Tiendas en línea y sistemas a la medida se cotizan según lo que necesites; te doy un precio cerrado antes de empezar.</p>
+          </details>
+          <details>
+            <summary>¿Cuánto tiempo tarda mi proyecto?</summary>
+            <p>Depende del alcance. En la propuesta te indico una fecha de entrega concreta y durante el desarrollo te comparto avances.</p>
+          </details>
+          <details>
+            <summary>¿Necesito tener dominio y hosting?</summary>
+            <p>No es necesario. Si aún no los tienes, te ayudo a conseguir tu dominio (por ejemplo tunegocio.com) y dejo todo configurado.</p>
+          </details>
+          <details>
+            <summary>¿Se verá bien en celular?</summary>
+            <p>Sí. Todos los proyectos se diseñan primero para celular y se adaptan a tablet y computadora.</p>
+          </details>
+          <details>
+            <summary>¿Qué pasa si después quiero hacer cambios?</summary>
+            <p>Ofrezco soporte y mantenimiento. Puedes pedirme cambios de contenido, nuevas secciones o nuevas funciones cuando las necesites.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACTO ========== -->
+    <section class="section contact-section" id="contacto">
+      <div class="container">
         <div class="contact">
-          <form class="form glass" id="contactForm" novalidate data-aos="fade-up">
+          <div class="contact__info reveal">
+            <p class="label">Contacto</p>
+            <h2>Hablemos de tu proyecto</h2>
+            <p class="lead">Cuéntame tu idea y te respondo con una propuesta clara. La primera asesoría es sin costo.</p>
+
+            <div class="phonecard">
+              <span class="phonecard__label">WhatsApp y llamadas</span>
+              <a class="phonecard__number" href="tel:+529221393994">922 139 3994</a>
+              <div class="phonecard__actions">
+                <a class="btn btn--wa" href="https://wa.me/529221393994?text=Hola%2C%20me%20interesa%20cotizar%20un%20proyecto." target="_blank" rel="noopener">
+                  <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+                  WhatsApp
+                </a>
+                <a class="btn btn--ghost" href="tel:+529221393994">
+                  <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-phone"/></svg>
+                  Llamar
+                </a>
+                <button class="btn btn--ghost" type="button" id="copyPhone" data-phone="9221393994">
+                  <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  <span>Copiar</span>
+                </button>
+              </div>
+            </div>
+
+            <ul class="contact__list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                Respuesta en menos de 24 horas
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                <a class="link" href="https://www.facebook.com/profile.php?id=61577393532574" target="_blank" rel="noopener">Síguenos en Facebook</a>
+              </li>
+            </ul>
+          </div>
+
+          <form class="form reveal" id="contactForm" novalidate>
+            <h3 class="form__title">Solicita tu cotización</h3>
             <div class="form__row">
-              <label>
+              <label class="field">
                 <span>Nombre</span>
                 <input name="name" autocomplete="name" placeholder="Tu nombre" required minlength="2" />
               </label>
-              <label>
-                <span>Número / WhatsApp</span>
-                <input name="phone" type="tel" autocomplete="tel" placeholder="Tu número para que te contacte" required />
+              <label class="field">
+                <span>Teléfono / WhatsApp</span>
+                <input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="10 dígitos" required />
               </label>
             </div>
 
-            <label>
+            <label class="field">
               <span>¿Qué necesitas?</span>
               <select name="projectType" required>
                 <option value="" selected disabled>Selecciona una opción…</option>
-                <option>Tengo un local de comida: quiero vender en línea</option>
-                <option>Soy psicóloga/dentista/doctor(a)/nutrióloga: quiero agenda y reservaciones</option>
-                <option>Tengo estética/barbería/spa: quiero citas y servicios claros</option>
-                <option>Quiero un sitio informativo (ubicación, horarios, servicios)</option>
-                <option>Quiero mejorar mi página (más clara y profesional)</option>
+                <option>Página web para mi negocio</option>
+                <option>Tienda o pedidos en línea</option>
+                <option>Sistema de citas o reservaciones</option>
+                <option>Sistema a la medida (inventario, ventas, clientes…)</option>
+                <option>Mejorar mi página actual</option>
+                <option>Otro / no estoy seguro</option>
               </select>
             </label>
 
-            <label>
+            <label class="field">
               <span>Cuéntame tu idea</span>
-              <textarea name="message" rows="4" placeholder="Ejemplo: Tengo una taquería y quiero que puedan ver el menú y hacer pedidos por WhatsApp o con pago en línea." required minlength="10"></textarea>
+              <textarea name="message" rows="4" placeholder="Ejemplo: Tengo una taquería y quiero que vean el menú y hagan pedidos por WhatsApp." required minlength="10"></textarea>
             </label>
 
             <div class="form__actions">
-              <button class="btn btn--primary btn--glow" type="submit">Enviar</button>
-              <p class="muted tiny">Al enviar, aceptas ser contactado para esta propuesta.</p>
+              <button class="btn btn--primary" type="submit">Enviar solicitud</button>
+              <button class="btn btn--wa" type="button" id="sendWa">
+                <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+                Enviar por WhatsApp
+              </button>
             </div>
-
-            <div class="form__status" id="formStatus" aria-live="polite"></div>
+            <p class="form__status" id="formStatus" aria-live="polite"></p>
           </form>
-
-          <aside class="contact__aside" data-aos="fade-up" data-aos-delay="120">
-            <div class="glass contactCard">
-              <h3>¿Qué recibes?</h3>
-              <ul class="bullets bullets--compact">
-                <li>Diseño moderno y profesional (se puede en modo oscuro si te gusta).</li>
-                <li>Se ve perfecto en celular y computadora.</li>
-                <li>Fotos optimizadas para que cargue rápido.</li>
-                <li>Base para aparecer en Google + lectura clara para todos.</li>
-              </ul>
-              <div class="divider"></div>
-              <p class="muted">Respuesta típica: 24–48h.</p>
-              <a class="btn btn--ghost" href="#inicio">Volver arriba</a>
-            </div>
-          </aside>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- ========== FOOTER ========== -->
   <footer class="footer">
-    <div class="container footer__inner">
-      <div class="footer__left">
-        <div class="brand brand--footer">
-          <span class="brand__mark" aria-hidden="true"></span>
-          <span class="brand__text">A TU MEDIDA <span class="brand__text--accent">TECH</span></span>
-        </div>
-        <p class="muted">Desarrollo web premium. Todos los derechos reservados.</p>
+    <div class="container footer__grid">
+      <div>
+        <a class="brand" href="#inicio">
+          <span class="brand__logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6 2 12l6 6"/><path d="m16 6 6 6-6 6"/></svg>
+          </span>
+          <span class="brand__name">A TU MEDIDA <b>TECH</b></span>
+        </a>
+        <p class="muted footer__tag">Páginas web personalizadas y herramientas digitales a la medida.</p>
       </div>
 
-      <div class="footer__right" aria-label="Redes">
-        <a class="social" href="https://www.facebook.com/profile.php?id=61577393532574" target="_blank" rel="noopener">Facebook</a>
+      <nav class="footer__col" aria-label="Secciones">
+        <h4>Secciones</h4>
+        <a href="#servicios">Servicios</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#preguntas">Preguntas</a>
+      </nav>
+
+      <div class="footer__col">
+        <h4>Contacto</h4>
+        <a href="https://wa.me/529221393994" target="_blank" rel="noopener">WhatsApp: 922 139 3994</a>
+        <a href="tel:+529221393994">Llamar: 922 139 3994</a>
+        <a href="https://www.facebook.com/profile.php?id=61577393532574" target="_blank" rel="noopener">Facebook</a>
       </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>© <span id="year">2026</span> A TU MEDIDA TECH. Todos los derechos reservados.</p>
     </div>
   </footer>
 
-  <div class="cursor" aria-hidden="true"></div>
+  <!-- Botón flotante de WhatsApp -->
+  <a class="wa-float" href="https://wa.me/529221393994?text=Hola%2C%20vi%20tu%20p%C3%A1gina%20y%20me%20interesa%20un%20proyecto." target="_blank" rel="noopener" aria-label="Escríbeme por WhatsApp al 922 139 3994">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+    <span class="wa-float__text">¿Cotizamos tu proyecto?</span>
+  </a>
 
-  <!-- EmailJS (reemplaza las claves en script.js) -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="./script.js" defer></script>
-  <script src="./app.js" defer></script>
+  <!-- Iconos reutilizables -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.28-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41Z"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></symbol>
+  </svg>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3.11.0/dist/email.min.js" defer></script>
+  <script src="./main.js" defer></script>
 </body>
 </html>
