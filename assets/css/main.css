@@ -126,11 +126,11 @@ button{cursor:pointer}
 .menu[aria-expanded="true"] span:nth-child(1){top:21px;transform:rotate(45deg)}
 .menu[aria-expanded="true"] span:nth-child(2){top:21px;transform:rotate(-45deg)}
 
-@media (max-width:1100px){
+@media (max-width:1280px){
   .nav__link{padding:8px 9px}
   .prefs-desktop:first-child .select__ico{display:none}
 }
-@media (max-width:980px){
+@media (max-width:1180px){
   .menu{display:block}
   .prefs-desktop{display:none}
   .nav{
@@ -508,4 +508,4 @@ button{cursor:pointer}
 }
 .projects__more{display:flex;justify-content:center;margin-top:40px}
 .projects__more .btn[hidden]{display:none}
-@media (max-width:980px){.header__actions{margin-left:auto}}
+@media (max-width:1180px){.header__actions{margin-left:auto}}
