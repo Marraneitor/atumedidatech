@@ -267,7 +267,6 @@ export function Footer() {
   const { t } = usePrefs();
   const year = new Date().getFullYear();
   const links: [string, string][] = [
-    [t.nav.services, '#servicios'],
     [t.nav.work, '#portafolio'],
     [t.nav.why, '#nosotros'],
     [t.nav.pricing, '#precios'],

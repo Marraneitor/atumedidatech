@@ -28,8 +28,8 @@ Técnica, confiable y cercana. Calidad de agencia con trato directo. Nunca "plan
 ## Espaciado y retícula
 - Escala de Tailwind en múltiplos de 4/8 px. Sin valores sueltos tipo 13 px.
 - Textos alineados a la izquierda. El centrado solo para frases de una línea.
-- Retícula de 12 columnas en escritorio (Servicios, Portafolio, Por qué).
-- Portafolio: una fila por sección (`SECTIONS` en `lib/projects.ts`), cada una con carrusel de scroll nativo e imán (`snap`), flechas y barra de progreso. Nada de autoplay. Modelos IA primero, en tarjetas verticales 3:4.
+- Retícula de 12 columnas en escritorio (Portafolio, Por qué).
+- Portafolio: una fila por sección (`SECTIONS` en `lib/projects.ts`), cada una con carrusel infinito que se arrastra con el mouse o el dedo (inercia al soltar, rueda horizontal del trackpad, sin flechas ni autoplay). Las copias repetidas llevan `aria-hidden` y no reciben foco. Modelos IA primero, en tarjetas verticales 3:4.
 
 ## Profundidad
 - Una estrategia: **fondo sutil + borde fino** (`surface`). Nada de sombras en tarjetas.

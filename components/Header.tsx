@@ -6,9 +6,8 @@ import { SITE, type Lang } from '@/lib/config';
 import { usePrefs } from '@/lib/prefs';
 import { EASE, Icon, Logo, WhatsAppIcon } from './ui';
 
-const LINKS = ['services', 'work', 'why', 'pricing', 'contact'] as const;
+const LINKS = ['work', 'why', 'pricing', 'contact'] as const;
 const HREF: Record<(typeof LINKS)[number], string> = {
-  services: '#servicios',
   work: '#portafolio',
   why: '#nosotros',
   pricing: '#precios',
