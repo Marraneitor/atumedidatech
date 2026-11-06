@@ -72,7 +72,7 @@ function ContactForm() {
 
   return (
     <form onSubmit={sendEmail} noValidate className="surface rounded-[28px] p-6 sm:p-8">
-      <h3 className="font-display text-xl font-bold tracking-tight">{fm.title}</h3>
+      <h3 className="font-display text-xl font-bold tracking-[-0.012em]">{fm.title}</h3>
       <div className="mt-6 space-y-5">
         <div>
           <label htmlFor="cf-name" className="mb-2 block text-sm font-medium text-ink/90">
@@ -215,7 +215,7 @@ export default function Contact() {
         <div className="relative grid gap-12 px-6 py-16 sm:px-12 sm:py-20 lg:grid-cols-[1fr_1.05fr] lg:gap-16 lg:px-16 lg:py-24">
           <div className="flex flex-col">
             <Reveal>
-              <h2 className="font-display text-[2.4rem] leading-[1.04] font-extrabold tracking-[-0.03em] text-balance sm:text-6xl">
+              <h2 className="font-display text-[2.4rem] leading-[1.04] font-extrabold tracking-[-0.022em] text-balance sm:text-6xl">
                 {t.cta.t1} <span className="text-gradient">{t.cta.t2}</span>
               </h2>
             </Reveal>
@@ -239,7 +239,7 @@ export default function Contact() {
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="font-mono text-[11px] tracking-[.08em] text-dim uppercase">WhatsApp</p>
-                  <a href={`tel:${SITE.contact.phoneLink}`} className="font-display text-lg font-bold tracking-tight whitespace-nowrap tabular-nums sm:text-2xl">
+                  <a href={`tel:${SITE.contact.phoneLink}`} className="font-display text-lg font-bold tracking-[-0.012em] whitespace-nowrap tabular-nums sm:text-2xl">
                     {SITE.contact.phoneDisplay}
                   </a>
                 </div>

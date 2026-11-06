@@ -89,7 +89,7 @@ export function Logo({ className = '' }: { className?: string }) {
     <span className={`flex items-center gap-2.5 ${className}`}>
       <LogoMark className="size-9 drop-shadow-[0_6px_18px_rgba(56,189,248,.35)]" />
       <span className="flex flex-col leading-none">
-        <span className="font-display text-[15px] font-extrabold tracking-tight text-ink">A TU MEDIDA</span>
+        <span className="font-display text-[15px] font-extrabold tracking-[-0.012em] text-ink">A TU MEDIDA</span>
         <span className="mt-1 font-mono text-[10px] font-medium tracking-[.42em] text-accent">TECH</span>
       </span>
     </span>
@@ -131,7 +131,7 @@ export function SectionHead({ eyebrow, title, sub, center = false }: { eyebrow: 
         </span>
       </Reveal>
       <Reveal delay={0.06}>
-        <h2 className="mt-4 font-display text-[2rem] leading-[1.08] font-bold tracking-tight text-balance sm:text-5xl">{title}</h2>
+        <h2 className="mt-4 font-display text-[2rem] leading-[1.08] font-bold tracking-[-0.012em] text-balance sm:text-5xl">{title}</h2>
       </Reveal>
       {sub && (
         <Reveal delay={0.12}>

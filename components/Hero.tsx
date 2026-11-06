@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { usePrefs } from '@/lib/prefs';
 import { EASE, Icon, Laptop, MagneticButton, Phone, WhatsAppIcon } from './ui';
 
@@ -18,15 +18,16 @@ function Words({ text, gradient = false, offset = 0 }: { text: string; gradient?
   return (
     <>
       {text.split(' ').map((w, i) => (
-        <span key={i} aria-hidden className="inline-block overflow-hidden pb-[0.1em] align-top">
-          <span
-            className={`inline-block animate-rise ${gradient ? 'text-gradient pr-[0.04em]' : ''}`}
-            style={{ animationDelay: `${0.05 + (offset + i) * 0.05}s` }}
-          >
-            {w}
-          </span>
-          {' '}
-        </span>
+        <Fragment key={i}>
+          <span aria-hidden className="inline-block overflow-hidden pb-[0.1em] align-top">
+            <span
+              className={`inline-block animate-rise ${gradient ? 'text-gradient pr-[0.04em]' : ''}`}
+              style={{ animationDelay: `${0.05 + (offset + i) * 0.05}s` }}
+            >
+              {w}
+            </span>
+          </span>{' '}
+        </Fragment>
       ))}
     </>
   );
@@ -104,7 +105,7 @@ export default function Hero() {
         <h1
           key={lang}
           aria-label={`${t.hero.t1} ${t.hero.t2}`}
-          className="mt-7 max-w-6xl font-display text-[2.6rem] leading-[1.04] font-extrabold tracking-[-0.03em] text-balance sm:text-6xl lg:text-[4.6rem] xl:text-[5.2rem]"
+          className="mt-7 max-w-6xl font-display text-[2.6rem] leading-[1.04] font-extrabold tracking-[-0.022em] text-balance sm:text-6xl lg:text-[4.6rem] xl:text-[5.2rem]"
         >
           <Words text={t.hero.t1} />
           <br />

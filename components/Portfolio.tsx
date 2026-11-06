@@ -42,7 +42,7 @@ function Showcase({ p, wide, delay }: { p: Project; wide: boolean; delay: number
         <div className="flex flex-1 flex-col gap-2 border-t border-line p-6 sm:p-7">
           <span className="font-mono text-[11px] tracking-[.08em] text-accent uppercase">{p.type[lang]}</span>
           <div className="flex items-start justify-between gap-4">
-            <h3 className="font-display text-2xl font-bold tracking-tight">{p.name}</h3>
+            <h3 className="font-display text-2xl font-bold tracking-[-0.012em]">{p.name}</h3>
             <span className="grid size-10 shrink-0 place-items-center rounded-full border border-line transition-all duration-500 group-hover:rotate-45 group-hover:border-accent group-hover:bg-accent group-hover:text-bg">
               <Icon name="arrowUpRight" className="size-4" />
             </span>
@@ -88,7 +88,7 @@ function Tile({ p }: { p: Project }) {
         </div>
         <div className="flex flex-1 flex-col p-5">
           <span className="font-mono text-[10.5px] tracking-[.08em] text-accent uppercase">{p.type[lang]}</span>
-          <h3 className="mt-1.5 font-display text-lg font-bold tracking-tight">{p.name}</h3>
+          <h3 className="mt-1.5 font-display text-lg font-bold tracking-[-0.012em]">{p.name}</h3>
           <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted">{p.desc[lang]}</p>
         </div>
       </a>
@@ -120,7 +120,7 @@ export default function Portfolio() {
         </div>
 
         <Reveal className="mt-20 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <h3 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">{t.work.others}</h3>
+          <h3 className="font-display text-2xl font-bold tracking-[-0.012em] sm:text-3xl">{t.work.others}</h3>
           <div role="group" aria-label={t.work.eyebrow} className="no-scrollbar -mx-5 flex gap-1 overflow-x-auto px-5 sm:mx-0 sm:px-0">
             <div className="surface flex gap-1 rounded-full p-1">
               {filters.map((c) => (

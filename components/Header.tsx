@@ -179,7 +179,7 @@ export default function Header() {
               <ul className="space-y-1">
                 {LINKS.map((k) => (
                   <motion.li key={k} variants={{ hide: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } } }}>
-                    <a href={HREF[k]} onClick={() => setOpen(false)} className="flex items-center justify-between border-b border-line py-4 font-display text-3xl font-semibold tracking-tight">
+                    <a href={HREF[k]} onClick={() => setOpen(false)} className="flex items-center justify-between border-b border-line py-4 font-display text-3xl font-semibold tracking-[-0.012em]">
                       {t.nav[k]}
                       <Icon name="arrow" className="size-5 text-dim" />
                     </a>

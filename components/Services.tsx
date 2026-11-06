@@ -45,7 +45,7 @@ function Card({
           <span className="grid size-11 place-items-center rounded-2xl border border-accent/20 bg-accent/10 text-accent">
             <Icon name={icon} className="size-5" />
           </span>
-          <h3 className="mt-5 font-display text-2xl font-bold tracking-tight">{title}</h3>
+          <h3 className="mt-5 font-display text-2xl font-bold tracking-[-0.012em]">{title}</h3>
           <p className="mt-2 leading-relaxed text-muted">{desc}</p>
           <ul className="mt-5 space-y-2.5 text-[15px]">
             {bullets.map((b) => (
@@ -140,7 +140,7 @@ function NfcVisual({ label, name }: { label: string; name: string }) {
             </span>
           </div>
           <div>
-            <p className="font-display text-lg font-bold tracking-tight">{name}</p>
+            <p className="font-display text-lg font-bold tracking-[-0.012em]">{name}</p>
             <p className="font-mono text-[10px] tracking-[.08em] text-muted uppercase">{label}</p>
             <div className="mt-2 flex gap-1 text-amber-300">
               {Array.from({ length: 5 }).map((_, i) => (

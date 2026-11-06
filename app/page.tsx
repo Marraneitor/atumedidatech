@@ -7,11 +7,13 @@ import Portfolio from '@/components/Portfolio';
 import Why, { Marquee } from '@/components/Why';
 import Pricing from '@/components/Pricing';
 import Contact, { Footer, WaFloat } from '@/components/Contact';
+import WaterRipple from '@/components/WaterRipple';
 
 export default function Page() {
   return (
     <PrefsProvider>
       <MotionConfig reducedMotion="user">
+        <WaterRipple />
         <Header />
         <main>
           <Hero />

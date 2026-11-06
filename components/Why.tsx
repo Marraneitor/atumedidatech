@@ -72,7 +72,7 @@ export default function Why() {
               {w.stats.map((s, i) => (
                 <div key={i} className="flex flex-col gap-1 bg-bg-2 p-5 sm:p-6">
                   <dt className="text-sm leading-snug text-muted">{s.l}</dt>
-                  <dd className="order-first font-display text-4xl font-extrabold tracking-tight text-ink">
+                  <dd className="order-first font-display text-4xl font-extrabold tracking-[-0.012em] text-ink">
                     <Counter to={s.v} suffix={s.s} />
                   </dd>
                 </div>
@@ -89,7 +89,7 @@ export default function Why() {
                 0{i + 1}
               </span>
               <div>
-                <h3 className="flex items-center gap-3 font-display text-2xl font-bold tracking-tight sm:text-[1.75rem]">
+                <h3 className="flex items-center gap-3 font-display text-2xl font-bold tracking-[-0.012em] sm:text-[1.75rem]">
                   <Icon name={it.icon} className="size-5 shrink-0 text-accent" />
                   {it.t}
                 </h3>

@@ -22,7 +22,7 @@ Técnica, confiable y cercana. Calidad de agencia con trato directo. Nunca "plan
 
 ## Tipografía
 - Dos familias: **Plus Jakarta Sans** (títulos, `font-display`) e **Inter** (texto y etiquetas).
-- Títulos grandes: interlineado 1.04–1.1 y `tracking-[-0.03em]`. Etiquetas en mayúsculas: `tracking-[.08em]`.
+- Títulos grandes: interlineado 1.04–1.1 y `tracking-[-0.022em]`; subtítulos y nombres `tracking-[-0.012em]`. Nunca más cerrado: Jakarta pega las palabras. Los `h1`–`h3` llevan `word-spacing: .06em` en `globals.css`. Etiquetas en mayúsculas: `tracking-[.08em]`.
 - Párrafos de 65 caracteres como máximo (`max-w-[58ch]`/`65ch`) y `text-pretty`. Títulos con `text-balance`.
 
 ## Espaciado y retícula
@@ -44,6 +44,7 @@ Técnica, confiable y cercana. Calidad de agencia con trato directo. Nunca "plan
 - Animar solo `transform` y `opacity`, nunca `filter: blur`.
 - El titular del inicio entra con CSS (`animate-rise`), no con JS, para que el LCP no espere a la hidratación.
 - `prefers-reduced-motion`: sin desplazamientos ni parallax, solo fundidos.
+- Fondo de agua (`components/WaterRipple.tsx`): gotas y ondas en un canvas fijo detrás del contenido, al mover el mouse o tocar la pantalla. Malla a 1/6 de resolución, solo corre mientras hay ondas, se pausa con la pestaña oculta y se apaga con movimiento reducido. Es el único efecto de "carácter": no sumar otros que sigan al cursor.
 
 ## Evitar siempre
 - Degradados morado/azul, emojis como íconos, tarjetas idénticas de ícono + título + párrafo.

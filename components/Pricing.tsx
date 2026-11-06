@@ -32,7 +32,7 @@ export default function Pricing() {
                   {featured && (
                     <span className="absolute -top-3 left-7 rounded-full bg-gradient-to-r from-sky-300 to-accent-2 px-3 py-1 text-xs font-bold text-[#03111c]">{p.popular}</span>
                   )}
-                  <h3 className="font-display text-xl font-bold tracking-tight">{plan.name}</h3>
+                  <h3 className="font-display text-xl font-bold tracking-[-0.012em]">{plan.name}</h3>
                   <p className="mt-2 min-h-[3rem] text-[15px] leading-relaxed text-muted">{plan.desc}</p>
                   <div className="mt-6 flex items-baseline gap-2">
                     {featured && <span className="text-sm text-muted">{p.from}</span>}
@@ -43,7 +43,7 @@ export default function Pricing() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: DUR.mid, ease: EASE }}
-                        className={`font-display font-extrabold tracking-tight tabular-nums ${featured ? 'text-gradient text-5xl' : 'text-3xl'}`}
+                        className={`font-display font-extrabold tracking-[-0.012em] tabular-nums ${featured ? 'text-gradient text-5xl' : 'text-3xl'}`}
                       >
                         {priceText}
                       </motion.span>
