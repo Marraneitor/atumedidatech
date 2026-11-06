@@ -100,17 +100,17 @@ export default function Header() {
     <>
       <motion.div aria-hidden style={{ scaleX: progress }} className="fixed inset-x-0 top-0 z-[70] h-[2px] origin-left bg-gradient-to-r from-sky-300 via-accent to-accent-2" />
       <motion.header
-        initial={{ y: -90, opacity: 0 }}
+        initial={false}
         animate={{ y: hidden ? -90 : 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: EASE }}
         className="fixed inset-x-0 top-0 z-[60] px-3 pt-3 sm:px-5"
       >
         <div
           className={`mx-auto flex h-16 max-w-7xl items-center gap-3 rounded-2xl px-3 transition-all duration-500 sm:px-4 ${
-            scrolled || open ? 'glass bg-bg/70 shadow-[0_10px_40px_-15px_rgba(0,0,0,.8)]' : 'border border-transparent'
+            scrolled || open ? 'glass-float' : 'border border-transparent'
           }`}
         >
-          <a href="#inicio" aria-label="A TU MEDIDA TECH" className="shrink-0" onClick={() => setOpen(false)}>
+          <a href="#inicio" className="shrink-0" onClick={() => setOpen(false)}>
             <Logo />
           </a>
 

@@ -1,12 +1,11 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
+import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { SITE } from '@/lib/config';
 import { DICTS } from '@/lib/i18n';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['500', '600', '700', '800'], variable: '--font-jakarta', display: 'swap' });
-const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-jbmono', display: 'swap' });
 
 const t = DICTS.es;
 
@@ -62,7 +61,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${inter.variable} ${jakarta.variable} ${mono.variable}`}>
+    <html lang="es-MX" className={`${inter.variable} ${jakarta.variable}`}>
       <body>
         {children}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

@@ -38,7 +38,7 @@ function Card({
       <div
         onPointerMove={spot}
         onPointerLeave={spotOff}
-        className="spotlight glass flex h-full flex-col overflow-hidden rounded-[28px] transition-transform duration-500 hover:-translate-y-1"
+        className="spotlight surface flex h-full flex-col overflow-hidden rounded-[28px] transition-transform duration-500 hover:-translate-y-1"
       >
         <div className="relative h-60 overflow-hidden border-b border-line bg-gradient-to-b from-white/[.03] to-transparent sm:h-72">{visual}</div>
         <div className="flex flex-1 flex-col p-6 sm:p-8">
@@ -96,7 +96,7 @@ function QrVisual({ label }: { label: string }) {
           <img src="/assets/img/qr-atumedida.svg" alt="QR atumedidatech.online" className="size-24 sm:size-28" />
           <span className="absolute inset-x-0 top-1/2 h-8 animate-scan bg-gradient-to-b from-transparent via-accent/50 to-transparent" />
         </div>
-        <span className="font-mono text-[11px] tracking-[.18em] text-muted uppercase">{label}</span>
+        <span className="font-mono text-[11px] tracking-[.08em] text-muted uppercase">{label}</span>
       </div>
     </div>
   );
@@ -122,7 +122,7 @@ function NfcVisual({ label, name }: { label: string; name: string }) {
     >
       <motion.div
         style={{ rotateX: rx, rotateY: ry, transformStyle: 'preserve-3d', '--shine': shine } as React.CSSProperties & Record<string, unknown>}
-        className="relative aspect-[1.586] w-[72%] max-w-[300px] overflow-hidden rounded-2xl border border-white/15 bg-[linear-gradient(135deg,#0f172a_0%,#0b1220_45%,#1e1b4b_100%)] p-5 shadow-[0_30px_60px_-20px_rgba(109,124,255,.6)]"
+        className="relative aspect-[1.586] w-[72%] max-w-[300px] overflow-hidden rounded-2xl border border-white/15 bg-[linear-gradient(135deg,#0f172a_0%,#0b1220_50%,#0c2540_100%)] p-5 shadow-[0_24px_48px_-20px_rgba(56,189,248,.45)]"
       >
         <motion.div
           aria-hidden
@@ -141,7 +141,7 @@ function NfcVisual({ label, name }: { label: string; name: string }) {
           </div>
           <div>
             <p className="font-display text-lg font-bold tracking-tight">{name}</p>
-            <p className="font-mono text-[10px] tracking-[.2em] text-muted uppercase">{label}</p>
+            <p className="font-mono text-[10px] tracking-[.08em] text-muted uppercase">{label}</p>
             <div className="mt-2 flex gap-1 text-amber-300">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Icon key={i} name="star" className="size-3.5 fill-current" />
@@ -159,7 +159,7 @@ function AutoVisual({ lang }: { lang: Lang }) {
   const bars = [38, 52, 44, 66, 58, 80, 92];
   return (
     <div className="absolute inset-0 grid grid-cols-1 gap-4 p-6 sm:grid-cols-[1.1fr_1fr] sm:p-8">
-      <div className="glass hidden flex-col rounded-2xl p-5 sm:flex">
+      <div className="surface hidden flex-col rounded-2xl p-5 sm:flex">
         <div className="flex items-baseline justify-between">
           <span className="font-display text-3xl font-bold">+38%</span>
           <span className="text-xs text-muted">{d.kpi}</span>
@@ -189,7 +189,7 @@ function AutoVisual({ lang }: { lang: Lang }) {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: EASE, delay: 0.3 + i * 0.15 }}
-            className="glass flex items-center gap-3 rounded-2xl bg-bg/40 p-3 pr-4"
+            className="surface flex items-center gap-3 rounded-2xl bg-bg/40 p-3 pr-4"
           >
             <span className={`grid size-9 shrink-0 place-items-center rounded-xl ${b.c}`}>
               <Icon name={b.icon} className="size-[18px]" />

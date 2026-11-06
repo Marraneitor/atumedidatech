@@ -1,9 +1,11 @@
 'use client';
 
 import { motion, useMotionValue, useSpring, useReducedMotion, type HTMLMotionProps } from 'framer-motion';
-import { useCallback, useRef } from 'react';
+import { useCallback, useId, useRef } from 'react';
 
+/* Tokens de movimiento (DESIGN.md): curva de salida y tres duraciones */
 export const EASE = [0.16, 1, 0.3, 1] as const;
+export const DUR = { fast: 0.12, mid: 0.22, slow: 0.38, reveal: 0.6 } as const;
 
 /* ---------- Íconos (trazo 1.75, 24px) ---------- */
 const paths: Record<string, React.ReactNode> = {
@@ -54,11 +56,38 @@ export function FacebookIcon({ className = 'size-5' }: { className?: string }) {
 }
 
 /* ---------- Logo ---------- */
+/* Logo en línea: sin petición extra, pinta con el HTML */
+export function LogoMark({ className = 'size-9' }: { className?: string }) {
+  const uid = 'lm' + useId().replace(/[^a-zA-Z0-9_-]/g, '');
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden="true" className={className}>
+      <defs>
+        <linearGradient id={uid + "bg"} x1="6" y1="4" x2="44" y2="46" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#38BDF8" />
+          <stop offset=".55" stopColor="#0EA5E9" />
+          <stop offset="1" stopColor="#1D4ED8" />
+        </linearGradient>
+        <linearGradient id={uid + "sh"} x1="24" y1="0" x2="24" y2="26" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#fff" stopOpacity=".35" />
+          <stop offset="1" stopColor="#fff" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <rect x="1" y="1" width="46" height="46" rx="13" fill={`url(#${uid}bg)`} />
+      <rect x="1" y="1" width="46" height="46" rx="13" fill={`url(#${uid}sh)`} />
+      <rect x="1.5" y="1.5" width="45" height="45" rx="12.5" fill="none" stroke="#fff" strokeOpacity=".22" />
+      <path d="M24 12.5 14 37.5M24 12.5l10 25" fill="none" stroke="#fff" strokeWidth="4.2" strokeLinecap="round" />
+      <rect x="16.2" y="26.4" width="15.6" height="3.8" rx="1.3" fill="#fff" />
+      <path d="M19.4 26.4v1.7M22.4 26.4v1.2M25.6 26.4v1.7M28.6 26.4v1.2" stroke="#0369A1" strokeWidth="1.1" strokeLinecap="round" />
+      <circle cx="24" cy="11.4" r="3.6" fill="#fff" />
+      <circle cx="24" cy="11.4" r="1.4" fill="#0284C7" />
+    </svg>
+  );
+}
+
 export function Logo({ className = '' }: { className?: string }) {
   return (
     <span className={`flex items-center gap-2.5 ${className}`}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/assets/img/logo-mark.svg" alt="" width={36} height={36} className="size-9 drop-shadow-[0_6px_18px_rgba(56,189,248,.35)]" />
+      <LogoMark className="size-9 drop-shadow-[0_6px_18px_rgba(56,189,248,.35)]" />
       <span className="flex flex-col leading-none">
         <span className="font-display text-[15px] font-extrabold tracking-tight text-ink">A TU MEDIDA</span>
         <span className="mt-1 font-mono text-[10px] font-medium tracking-[.42em] text-accent">TECH</span>
@@ -71,7 +100,7 @@ export function Logo({ className = '' }: { className?: string }) {
 export function Reveal({
   children,
   delay = 0,
-  y = 28,
+  y = 16,
   className,
   as = 'div',
   ...rest
@@ -81,10 +110,10 @@ export function Reveal({
   return (
     <M
       className={className}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y, filter: 'blur(8px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: '0px 0px -12% 0px' }}
-      transition={{ duration: 0.9, ease: EASE, delay }}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+      transition={{ duration: DUR.reveal, ease: EASE, delay }}
       {...rest}
     >
       {children}
@@ -96,7 +125,7 @@ export function SectionHead({ eyebrow, title, sub, center = false }: { eyebrow: 
   return (
     <div className={`max-w-3xl ${center ? 'mx-auto text-center' : ''}`}>
       <Reveal>
-        <span className={`inline-flex items-center gap-2 font-mono text-xs font-medium tracking-[.14em] text-accent uppercase ${center ? 'justify-center' : ''}`}>
+        <span className={`inline-flex items-center gap-2 font-mono text-xs font-medium tracking-[.08em] text-accent uppercase ${center ? 'justify-center' : ''}`}>
           <span className="h-px w-6 bg-gradient-to-r from-transparent to-accent" />
           {eyebrow}
         </span>
@@ -141,7 +170,7 @@ export function MagneticButton({ href, children, variant = 'primary', className 
   const styles = {
     primary:
       'bg-gradient-to-r from-sky-300 via-accent to-accent-2 text-[#03111c] shadow-[0_10px_40px_-8px_rgba(56,189,248,.65)] hover:shadow-[0_14px_50px_-6px_rgba(56,189,248,.85)]',
-    ghost: 'glass text-ink hover:bg-white/10',
+    ghost: 'surface text-ink hover:bg-white/10',
     wa: 'bg-wa text-[#03200f] shadow-[0_10px_40px_-10px_rgba(37,211,102,.7)]',
   }[variant];
 
@@ -184,7 +213,7 @@ export function Laptop({ src, alt, className = '', priority = false }: { src: st
       <div className="relative rounded-[14px] bg-gradient-to-b from-[#3a3f4b] to-[#1c1f27] p-[1.2%] shadow-[0_40px_80px_-30px_rgba(0,0,0,.9),inset_0_0_0_1px_rgba(255,255,255,.08)]">
         <div className="relative aspect-[16/10] overflow-hidden rounded-[8px] bg-black">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" className="size-full object-cover object-top" />
+          <img src={src} alt={alt} width={960} height={600} loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : 'auto'} decoding="async" className="size-full object-cover object-top" />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-white/10" />
         </div>
         <span className="absolute top-[0.45%] left-1/2 size-1 -translate-x-1/2 rounded-full bg-black/70" />
@@ -202,7 +231,7 @@ export function Phone({ src, alt, className = '', children }: { src?: string; al
       <div className="relative size-full overflow-hidden rounded-[15%/7%] bg-black">
         {src ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={src} alt={alt ?? ''} loading="lazy" decoding="async" className="size-full object-cover object-top" />
+          <img src={src} alt={alt ?? ''} width={585} height={1266} loading="lazy" decoding="async" className="size-full object-cover object-top" />
         ) : (
           children
         )}

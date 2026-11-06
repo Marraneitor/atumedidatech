@@ -9,24 +9,40 @@ import { EASE, FacebookIcon, Icon, Logo, MagneticButton, Reveal, WhatsAppIcon } 
 
 type Status = { kind: 'idle' | 'sending' | 'ok' | 'err' | 'invalid' };
 
+type Errors = { name?: string; phone?: string };
+
 function ContactForm() {
   const { t, wa, f, lang, currency } = usePrefs();
   const fm = t.form;
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
   const [data, setData] = useState({ name: '', phone: '', type: 0, msg: '' });
+  const [errors, setErrors] = useState<Errors>({});
 
-  const valid = () => data.name.trim().length > 1 && data.phone.replace(/\D/g, '').length >= 8;
-  const text = () => f(t.wa.form, { name: data.name.trim(), type: fm.types[data.type], msg: data.msg.trim(), phone: data.phone.trim() }).replace(/\n\n/g, '\n');
+  // Validación al salir del campo; el mensaje dice cómo corregir
+  const check = (field: keyof Errors, v = data[field]) => {
+    const bad = field === 'name' ? v.trim().length < 2 : v.replace(/\D/g, '').length < 8;
+    setErrors((e) => ({ ...e, [field]: bad ? (field === 'name' ? fm.errName : fm.errPhone) : undefined }));
+    return !bad;
+  };
+  const validAll = () => {
+    const a = check('name');
+    const b = check('phone');
+    if (!a) document.getElementById('cf-name')?.focus();
+    else if (!b) document.getElementById('cf-phone')?.focus();
+    return a && b;
+  };
+  const text = () =>
+    f(t.wa.form, { name: data.name.trim(), type: fm.types[data.type], msg: data.msg.trim(), phone: data.phone.trim() }).replace(/\n\n/g, '\n');
 
   const sendWa = () => {
-    if (!valid()) return setStatus({ kind: 'invalid' });
+    if (!validAll()) return setStatus({ kind: 'invalid' });
     setStatus({ kind: 'idle' });
     window.open(wa(text()), '_blank', 'noopener');
   };
 
   const sendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!valid()) return setStatus({ kind: 'invalid' });
+    if (!validAll()) return setStatus({ kind: 'invalid' });
     setStatus({ kind: 'sending' });
     try {
       const emailjs = (await import('@emailjs/browser')).default;
@@ -48,74 +64,131 @@ function ContactForm() {
     }
   };
 
-  const field =
-    'w-full rounded-2xl border border-line bg-white/[.03] px-4 py-3.5 text-[15px] text-ink placeholder:text-dim transition focus:border-accent focus:bg-white/[.05] focus:outline-none focus:ring-4 focus:ring-accent/15';
+  const field = (bad?: string) =>
+    `w-full rounded-2xl border bg-white/[.03] px-4 py-3.5 text-base text-ink placeholder:text-dim transition focus:bg-white/[.05] focus:outline-none focus:ring-4 ${
+      bad ? 'border-amber-300/80 focus:ring-amber-300/20' : 'border-white/20 focus:border-accent focus:ring-accent/20'
+    }`;
   const msg = { ok: fm.ok, err: fm.err, invalid: fm.invalid, sending: fm.sending, idle: '' }[status.kind];
 
   return (
-    <form onSubmit={sendEmail} noValidate className="glass rounded-[28px] p-6 sm:p-8">
+    <form onSubmit={sendEmail} noValidate className="surface rounded-[28px] p-6 sm:p-8">
       <h3 className="font-display text-xl font-bold tracking-tight">{fm.title}</h3>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <label className="block">
-          <span className="mb-2 block text-sm font-medium text-muted">{fm.name}</span>
-          <input className={field} autoComplete="name" placeholder={fm.namePh} value={data.name} onChange={(e) => setData({ ...data, name: e.target.value })} required />
-        </label>
-        <label className="block">
-          <span className="mb-2 block text-sm font-medium text-muted">{fm.phone}</span>
-          <input className={field} type="tel" inputMode="tel" autoComplete="tel" placeholder={fm.phonePh} value={data.phone} onChange={(e) => setData({ ...data, phone: e.target.value })} required />
-        </label>
-      </div>
-      <fieldset className="mt-5">
-        <legend className="mb-2.5 text-sm font-medium text-muted">{fm.type}</legend>
-        <div className="flex flex-wrap gap-2">
-          {fm.types.map((ty, i) => (
-            <button
-              key={ty}
-              type="button"
-              aria-pressed={data.type === i}
-              onClick={() => setData({ ...data, type: i })}
-              className={`h-10 rounded-full border px-4 text-sm font-medium transition ${
-                data.type === i ? 'border-accent bg-accent/15 text-ink' : 'border-line bg-white/[.03] text-muted hover:border-white/20 hover:text-ink'
-              }`}
-            >
-              {ty}
-            </button>
-          ))}
+      <div className="mt-6 space-y-5">
+        <div>
+          <label htmlFor="cf-name" className="mb-2 block text-sm font-medium text-ink/90">
+            {fm.name}
+          </label>
+          <input
+            id="cf-name"
+            className={field(errors.name)}
+            autoComplete="name"
+            placeholder={fm.namePh}
+            value={data.name}
+            onChange={(e) => {
+              setData({ ...data, name: e.target.value });
+              if (errors.name) check('name', e.target.value);
+            }}
+            onBlur={() => data.name && check('name')}
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? 'cf-name-err' : undefined}
+            required
+          />
+          <FieldError id="cf-name-err" text={errors.name} />
         </div>
-      </fieldset>
-      <label className="mt-5 block">
-        <span className="mb-2 block text-sm font-medium text-muted">{fm.msg}</span>
-        <textarea rows={3} className={`${field} resize-none`} placeholder={fm.msgPh} value={data.msg} onChange={(e) => setData({ ...data, msg: e.target.value })} />
-      </label>
+        <div>
+          <label htmlFor="cf-phone" className="mb-2 block text-sm font-medium text-ink/90">
+            {fm.phone}
+          </label>
+          <input
+            id="cf-phone"
+            className={field(errors.phone)}
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            placeholder={fm.phonePh}
+            value={data.phone}
+            onChange={(e) => {
+              setData({ ...data, phone: e.target.value });
+              if (errors.phone) check('phone', e.target.value);
+            }}
+            onBlur={() => data.phone && check('phone')}
+            aria-invalid={!!errors.phone}
+            aria-describedby={errors.phone ? 'cf-phone-err' : 'cf-phone-help'}
+            required
+          />
+          {errors.phone ? (
+            <FieldError id="cf-phone-err" text={errors.phone} />
+          ) : (
+            <p id="cf-phone-help" className="mt-2 text-sm text-dim">
+              {fm.phoneHelp}
+            </p>
+          )}
+        </div>
+        <fieldset>
+          <legend className="mb-2.5 text-sm font-medium text-ink/90">{fm.type}</legend>
+          <div className="flex flex-wrap gap-2">
+            {fm.types.map((ty, i) => (
+              <button
+                key={ty}
+                type="button"
+                aria-pressed={data.type === i}
+                onClick={() => setData({ ...data, type: i })}
+                className={`inline-flex h-11 items-center gap-1.5 rounded-full border px-4 text-sm font-medium transition-colors duration-150 ${
+                  data.type === i ? 'border-accent bg-accent/15 text-ink' : 'border-white/20 bg-white/[.03] text-muted hover:border-white/35 hover:text-ink'
+                }`}
+              >
+                {data.type === i && <Icon name="check" className="size-3.5 text-accent" />}
+                {ty}
+              </button>
+            ))}
+          </div>
+        </fieldset>
+        <div>
+          <label htmlFor="cf-msg" className="mb-2 block text-sm font-medium text-ink/90">
+            {fm.msg}
+          </label>
+          <textarea
+            id="cf-msg"
+            rows={3}
+            className={`${field()} resize-none`}
+            placeholder={fm.msgPh}
+            value={data.msg}
+            onChange={(e) => setData({ ...data, msg: e.target.value })}
+          />
+        </div>
+      </div>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <button type="button" onClick={sendWa} className="inline-flex h-12 items-center sm:flex-1 justify-center gap-2.5 rounded-full bg-wa px-6 text-[15px] font-semibold text-[#03200f] transition hover:brightness-110">
+        <button
+          type="button"
+          onClick={sendWa}
+          className="inline-flex h-12 items-center justify-center gap-2.5 rounded-full bg-wa px-6 text-[15px] font-semibold text-[#03200f] transition hover:brightness-110 active:translate-y-px sm:flex-1"
+        >
           <WhatsAppIcon className="size-[18px]" />
           {fm.wa}
         </button>
         <button
           type="submit"
           disabled={status.kind === 'sending'}
-          className="inline-flex h-12 items-center sm:flex-1 justify-center gap-2.5 rounded-full border border-line bg-white/[.04] px-6 text-[15px] font-semibold transition hover:bg-white/10 disabled:opacity-60"
+          className="inline-flex h-12 items-center justify-center gap-2.5 rounded-full border border-white/20 bg-white/[.04] px-6 text-[15px] font-semibold transition hover:bg-white/10 active:translate-y-px disabled:opacity-60 sm:flex-1"
         >
           <Icon name="mail" className="size-[18px]" />
           {status.kind === 'sending' ? fm.sending : fm.email}
         </button>
       </div>
-      <AnimatePresence mode="wait">
-        {msg && status.kind !== 'sending' && (
-          <motion.p
-            key={status.kind}
-            role="status"
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            className={`mt-4 text-sm ${status.kind === 'ok' ? 'text-wa' : 'text-amber-300'}`}
-          >
-            {msg}
-          </motion.p>
-        )}
-      </AnimatePresence>
+      <p role="status" aria-live="polite" className={`mt-4 min-h-5 text-sm ${status.kind === 'ok' ? 'text-wa' : 'text-amber-300'}`}>
+        {status.kind !== 'sending' ? msg : ''}
+      </p>
     </form>
+  );
+}
+
+function FieldError({ id, text }: { id: string; text?: string }) {
+  if (!text) return null;
+  return (
+    <p id={id} className="mt-2 flex items-start gap-1.5 text-sm text-amber-300">
+      <Icon name="close" className="mt-0.5 size-3.5 shrink-0" />
+      {text}
+    </p>
   );
 }
 
@@ -134,8 +207,8 @@ export default function Contact() {
     <section id="contacto" className="relative px-3 py-16 sm:px-5 sm:py-24">
       <div className="relative mx-auto max-w-[1400px] overflow-hidden rounded-[36px] border border-white/10 bg-[#070b16]">
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-1/3 -left-1/4 size-[70vmax] animate-aurora rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,.28),transparent)] blur-3xl" />
-          <div className="absolute -right-1/4 -bottom-1/3 size-[60vmax] animate-aurora-slow rounded-full bg-[radial-gradient(closest-side,rgba(109,124,255,.32),transparent)] blur-3xl" />
+          <div className="absolute -top-1/3 -left-1/4 size-[70vmax] animate-aurora rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,.24),transparent)]" />
+          <div className="absolute -right-1/4 -bottom-1/3 size-[60vmax] animate-aurora-slow rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,.26),transparent)]" />
           <div className="bg-grid absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,#000_20%,transparent_70%)] opacity-60" />
         </div>
 
@@ -160,12 +233,12 @@ export default function Contact() {
               </MagneticButton>
             </Reveal>
             <Reveal delay={0.2} className="mt-auto pt-12">
-              <div className="glass flex items-center gap-4 rounded-2xl p-4">
+              <div className="surface flex items-center gap-4 rounded-2xl p-4">
                 <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-wa/15 text-wa">
                   <WhatsAppIcon className="size-6" />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="font-mono text-[11px] tracking-[.16em] text-dim uppercase">WhatsApp</p>
+                  <p className="font-mono text-[11px] tracking-[.08em] text-dim uppercase">WhatsApp</p>
                   <a href={`tel:${SITE.contact.phoneLink}`} className="font-display text-lg font-bold tracking-tight whitespace-nowrap tabular-nums sm:text-2xl">
                     {SITE.contact.phoneDisplay}
                   </a>
@@ -208,7 +281,7 @@ export function Footer() {
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">{t.footer.tagline}</p>
         </div>
         <div>
-          <p className="font-mono text-[11px] tracking-[.18em] text-dim uppercase">{t.footer.explore}</p>
+          <p className="font-mono text-[11px] tracking-[.08em] text-dim uppercase">{t.footer.explore}</p>
           <ul className="mt-4 space-y-2.5 text-sm">
             {links.map(([l, h]) => (
               <li key={h}>
@@ -218,7 +291,7 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <p className="font-mono text-[11px] tracking-[.18em] text-dim uppercase">{t.footer.contact}</p>
+          <p className="font-mono text-[11px] tracking-[.08em] text-dim uppercase">{t.footer.contact}</p>
           <ul className="mt-4 space-y-2.5 text-sm">
             <li>
               <a href={`https://wa.me/${SITE.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-muted transition hover:text-ink">
@@ -229,7 +302,7 @@ export function Footer() {
               <a href={SITE.url} className="text-muted transition hover:text-ink">atumedidatech.online</a>
             </li>
           </ul>
-          <p className="mt-6 font-mono text-[11px] tracking-[.18em] text-dim uppercase">{t.footer.social}</p>
+          <p className="mt-6 font-mono text-[11px] tracking-[.08em] text-dim uppercase">{t.footer.social}</p>
           <div className="mt-3 flex gap-2">
             <a href={SITE.contact.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="grid size-10 place-items-center rounded-full border border-line text-muted transition hover:border-white/25 hover:text-ink">
               <FacebookIcon />
@@ -240,7 +313,7 @@ export function Footer() {
           </div>
         </div>
         <div>
-          <p className="font-mono text-[11px] tracking-[.18em] text-dim uppercase">
+          <p className="font-mono text-[11px] tracking-[.08em] text-dim uppercase">
             {t.prefs.lang} · {t.prefs.currency}
           </p>
           <div className="mt-4 max-w-xs">
@@ -277,7 +350,6 @@ export function WaFloat() {
           whileTap={{ scale: 0.94 }}
           className="fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-50 grid size-14 place-items-center rounded-full bg-wa text-[#03200f] shadow-[0_12px_40px_-8px_rgba(37,211,102,.7)] sm:right-6 sm:bottom-6"
         >
-          <span className="absolute inset-0 animate-ping-slow rounded-full bg-wa/40" />
           <WhatsAppIcon className="relative size-7" />
         </motion.a>
       )}

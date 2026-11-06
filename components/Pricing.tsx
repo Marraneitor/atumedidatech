@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePrefs } from '@/lib/prefs';
-import { EASE, Icon, Reveal, SectionHead, spotOff, useSpotlight } from './ui';
+import { DUR, EASE, Icon, Reveal, SectionHead, spotOff, useSpotlight } from './ui';
 
 export default function Pricing() {
   const { t, price, wa, f, currency } = usePrefs();
@@ -13,7 +13,7 @@ export default function Pricing() {
   return (
     <section id="precios" className="relative py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <SectionHead eyebrow={p.eyebrow} title={p.title} sub={p.sub} center />
+        <SectionHead eyebrow={p.eyebrow} title={p.title} sub={p.sub} />
         <div className="mt-16 grid items-stretch gap-5 lg:grid-cols-3">
           {p.plans.map((plan, i) => {
             const featured = i === 0;
@@ -25,8 +25,8 @@ export default function Pricing() {
                   onPointerLeave={spotOff}
                   className={`spotlight relative flex h-full flex-col rounded-[28px] p-7 sm:p-8 ${
                     featured
-                      ? 'border border-accent/40 bg-[linear-gradient(180deg,rgba(56,189,248,.14),rgba(109,124,255,.05)_60%,rgba(255,255,255,.02))] shadow-[0_30px_80px_-30px_rgba(56,189,248,.55)]'
-                      : 'glass'
+                      ? 'border border-accent/40 bg-accent/[.06] '
+                      : 'surface'
                   }`}
                 >
                   {featured && (
@@ -39,10 +39,10 @@ export default function Pricing() {
                     <AnimatePresence mode="wait" initial={false}>
                       <motion.span
                         key={featured ? currency + priceText : priceText}
-                        initial={{ opacity: 0, y: 10, filter: 'blur(6px)' }}
-                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                        exit={{ opacity: 0, y: -10, filter: 'blur(6px)' }}
-                        transition={{ duration: 0.4, ease: EASE }}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: DUR.mid, ease: EASE }}
                         className={`font-display font-extrabold tracking-tight tabular-nums ${featured ? 'text-gradient text-5xl' : 'text-3xl'}`}
                       >
                         {priceText}
@@ -76,7 +76,7 @@ export default function Pricing() {
           })}
         </div>
         <Reveal>
-          <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-dim">{p.note}</p>
+          <p className="mt-10 max-w-[65ch] text-sm text-dim">{p.note}</p>
         </Reveal>
       </div>
     </section>

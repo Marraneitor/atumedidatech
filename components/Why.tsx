@@ -4,7 +4,7 @@ import { animate, motion, useInView, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { usePrefs } from '@/lib/prefs';
 import { PROJECTS } from '@/lib/projects';
-import { EASE, Icon, Reveal, SectionHead, spotOff, useSpotlight } from './ui';
+import { EASE, Icon, Reveal, SectionHead } from './ui';
 
 function Counter({ to, suffix }: { to: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -31,11 +31,11 @@ export function Marquee() {
   const row = [...names, ...names];
   return (
     <section aria-label={t.clients} className="relative border-y border-line bg-bg-2/60 py-9">
-      <p className="mb-6 text-center font-mono text-[11px] tracking-[.22em] text-dim uppercase">{t.clients}</p>
+      <p className="mb-6 text-center font-mono text-[11px] tracking-[.08em] text-dim uppercase">{t.clients}</p>
       <div className="mask-fade-x overflow-hidden">
         <div className="flex w-max animate-marquee gap-12 hover:[animation-play-state:paused]">
           {row.map((n, i) => (
-            <span key={i} aria-hidden={i >= names.length} className="flex items-center gap-12 font-display text-xl font-semibold whitespace-nowrap text-white/35 transition-colors hover:text-white/80 sm:text-2xl">
+            <span key={i} aria-hidden={i >= names.length} className="flex items-center gap-12 font-display text-xl font-semibold whitespace-nowrap text-white/55 transition-colors hover:text-white sm:text-2xl">
               {n}
               <span className="size-1.5 rounded-full bg-accent/50" />
             </span>
@@ -49,7 +49,6 @@ export function Marquee() {
 export default function Why() {
   const { t } = usePrefs();
   const w = t.why;
-  const spot = useSpotlight<HTMLElement>();
   const items = [
     { k: 'fast', icon: 'bolt', ...w.fast },
     { k: 'ux', icon: 'cursor', ...w.ux },
@@ -57,46 +56,48 @@ export default function Why() {
     { k: 'support', icon: 'life', ...w.support },
   ];
   return (
-    <section id="nosotros" className="relative overflow-hidden py-20 sm:py-28">
-      <div aria-hidden className="pointer-events-none absolute top-1/3 left-1/2 -z-10 h-[520px] w-[900px] -translate-x-1/2 rounded-full bg-accent-2/10 blur-[120px]" />
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <SectionHead eyebrow={w.eyebrow} title={w.title} sub={w.sub} center />
-
-        <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((it, i) => (
-            <Reveal key={it.k} delay={i * 0.08}>
-              <div onPointerMove={spot} onPointerLeave={spotOff} className="spotlight glass group h-full rounded-3xl p-7">
-                <div className="relative grid size-14 place-items-center">
-                  <span className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent/25 to-accent-2/10 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-6" />
-                  <span className="absolute inset-0 rounded-2xl border border-accent/25" />
-                  <Icon name={it.icon} className="relative size-6 text-accent" />
+    <section id="nosotros" className="relative py-20 sm:py-28">
+      <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16">
+        {/* Columna fija: la idea y las cifras */}
+        <div className="lg:col-span-5">
+          <div className="lg:sticky lg:top-28">
+            <SectionHead eyebrow={w.eyebrow} title={w.title} sub={w.sub} />
+            <motion.dl
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: EASE }}
+              className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line"
+            >
+              {w.stats.map((s, i) => (
+                <div key={i} className="flex flex-col gap-1 bg-bg-2 p-5 sm:p-6">
+                  <dt className="text-sm leading-snug text-muted">{s.l}</dt>
+                  <dd className="order-first font-display text-4xl font-extrabold tracking-tight text-ink">
+                    <Counter to={s.v} suffix={s.s} />
+                  </dd>
                 </div>
-                <h3 className="mt-6 font-display text-xl font-bold tracking-tight">{it.t}</h3>
-                <p className="mt-2.5 leading-relaxed text-muted">{it.d}</p>
+              ))}
+            </motion.dl>
+          </div>
+        </div>
+
+        {/* Lista numerada: cuatro razones, sin tarjetas repetidas */}
+        <ol className="lg:col-span-7 lg:pt-2">
+          {items.map((it, i) => (
+            <Reveal as="li" key={it.k} delay={i * 0.05} className="group grid grid-cols-[auto_1fr] gap-x-6 border-t border-line py-8 first:border-t-0 first:pt-0 sm:gap-x-10 sm:py-10 lg:first:pt-0">
+              <span className="font-display text-sm font-semibold text-dim tabular-nums transition-colors duration-200 group-hover:text-accent">
+                0{i + 1}
+              </span>
+              <div>
+                <h3 className="flex items-center gap-3 font-display text-2xl font-bold tracking-tight sm:text-[1.75rem]">
+                  <Icon name={it.icon} className="size-5 shrink-0 text-accent" />
+                  {it.t}
+                </h3>
+                <p className="mt-3 max-w-[52ch] text-base leading-relaxed text-muted sm:text-lg">{it.d}</p>
               </div>
             </Reveal>
           ))}
-        </div>
-
-        <motion.dl
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: EASE }}
-          className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-line bg-line lg:grid-cols-4"
-        >
-          {w.stats.map((s, i) => (
-            <div key={i} className="bg-[#0a0e18] p-6 text-center sm:p-8">
-              <dt className="sr-only">{s.l}</dt>
-              <dd className="font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
-                <span className="text-gradient">
-                  <Counter to={s.v} suffix={s.s} />
-                </span>
-              </dd>
-              <dd className="mt-2 text-sm text-muted">{s.l}</dd>
-            </div>
-          ))}
-        </motion.dl>
+        </ol>
       </div>
     </section>
   );

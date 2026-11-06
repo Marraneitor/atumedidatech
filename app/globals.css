@@ -4,19 +4,27 @@
   --color-bg: #05070d;
   --color-bg-2: #0a0e18;
   --color-ink: #eef2f8;
-  --color-muted: #94a3b8;
-  --color-dim: #64748b;
-  --color-line: rgb(255 255 255 / 0.08);
-  --color-accent: #38bdf8;
-  --color-accent-2: #6d7cff;
-  --color-accent-3: #a78bfa;
+  /* Roles de color (ver DESIGN.md). Un solo acento: el azul del logo. */
+  --color-muted: #a3b0c2;      /* texto secundario · 8.6:1 sobre bg */
+  --color-dim: #8b98ad;        /* notas y etiquetas · 6.4:1 sobre bg */
+  --color-line: rgb(255 255 255 / 0.09);
+  --color-surface: rgb(255 255 255 / 0.03);
+  --color-accent: #38bdf8;     /* acciones y datos clave */
+  --color-accent-2: #3b82f6;   /* azul profundo del logo, solo en degradados de marca */
   --color-wa: #25d366;
 
+  /* Dos familias: Plus Jakarta Sans (títulos) + Inter (texto y etiquetas) */
   --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --font-display: var(--font-jakarta), var(--font-inter), system-ui, sans-serif;
-  --font-mono: var(--font-jbmono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-mono: var(--font-inter), system-ui, sans-serif;
 
+  /* Movimiento: salida para entrar, duraciones cortas */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-rise: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @keyframes rise { from { transform: translateY(105%); } }
+  @keyframes fade-up { from { opacity: 0; transform: translateY(12px); } }
 
   --animate-marquee: marquee 40s linear infinite;
   --animate-aurora: aurora 18s ease-in-out infinite alternate;
@@ -65,17 +73,24 @@
 }
 
 @utility text-gradient {
-  background: linear-gradient(100deg, #a5f3fc 0%, #38bdf8 40%, #6d7cff 75%, #a78bfa 100%);
+  background: linear-gradient(100deg, #e0f2fe 0%, #7dd3fc 30%, #38bdf8 62%, #3b82f6 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-@utility glass {
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.02));
-  border: 1px solid rgb(255 255 255 / 0.08);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  backdrop-filter: blur(18px) saturate(140%);
+/* El cristal (desenfoque) se reserva para lo que flota sobre contenido: encabezado, menú y avisos */
+@utility glass-float {
+  background: rgb(10 14 24 / 0.82);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+/* Única estrategia de profundidad para tarjetas: fondo sutil + borde fino (sin sombras ni desenfoque) */
+@utility surface {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
 }
 
 /* Tarjeta con luz que sigue al cursor (las variables --mx/--my las pone JS) */
@@ -131,6 +146,8 @@
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
 }

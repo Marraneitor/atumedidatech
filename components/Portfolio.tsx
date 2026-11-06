@@ -23,10 +23,10 @@ function Showcase({ p, wide, delay }: { p: Project; wide: boolean; delay: number
         rel="noopener noreferrer"
         onPointerMove={spot}
         onPointerLeave={spotOff}
-        className="spotlight glass group flex h-full flex-col overflow-hidden rounded-[28px]"
+        className="spotlight surface group flex h-full flex-col overflow-hidden rounded-[28px]"
       >
         <div className="relative overflow-hidden bg-[radial-gradient(120%_90%_at_50%_0%,rgba(56,189,248,.16),transparent_60%)] px-[9%] pt-10 pb-8 sm:pt-14">
-          <span className="absolute top-5 left-5 inline-flex items-center gap-1.5 rounded-full border border-wa/25 bg-wa/10 px-2.5 py-1 font-mono text-[10px] tracking-[.16em] text-wa uppercase">
+          <span className="absolute top-5 left-5 inline-flex items-center gap-1.5 rounded-full border border-wa/25 bg-wa/10 px-2.5 py-1 font-mono text-[10px] tracking-[.08em] text-wa uppercase">
             <span className="size-1.5 animate-pulse rounded-full bg-wa" />
             {t.work.live}
           </span>
@@ -40,7 +40,7 @@ function Showcase({ p, wide, delay }: { p: Project; wide: boolean; delay: number
           </div>
         </div>
         <div className="flex flex-1 flex-col gap-2 border-t border-line p-6 sm:p-7">
-          <span className="font-mono text-[11px] tracking-[.14em] text-accent uppercase">{p.type[lang]}</span>
+          <span className="font-mono text-[11px] tracking-[.08em] text-accent uppercase">{p.type[lang]}</span>
           <div className="flex items-start justify-between gap-4">
             <h3 className="font-display text-2xl font-bold tracking-tight">{p.name}</h3>
             <span className="grid size-10 shrink-0 place-items-center rounded-full border border-line transition-all duration-500 group-hover:rotate-45 group-hover:border-accent group-hover:bg-accent group-hover:text-bg">
@@ -65,7 +65,7 @@ function Tile({ p }: { p: Project }) {
       exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.2 } }}
       transition={{ duration: 0.6, ease: EASE }}
     >
-      <a href={p.url} target="_blank" rel="noopener noreferrer" className="group glass flex h-full flex-col overflow-hidden rounded-3xl transition-colors hover:border-white/20">
+      <a href={p.url} target="_blank" rel="noopener noreferrer" className="group surface flex h-full flex-col overflow-hidden rounded-3xl transition-colors hover:border-white/20">
         <div className="relative overflow-hidden">
           <div className="flex h-7 items-center gap-1.5 border-b border-line bg-[#0e121c] px-3.5">
             <span className="size-2 rounded-full bg-white/15" /><span className="size-2 rounded-full bg-white/15" /><span className="size-2 rounded-full bg-white/15" />
@@ -87,7 +87,7 @@ function Tile({ p }: { p: Project }) {
           </span>
         </div>
         <div className="flex flex-1 flex-col p-5">
-          <span className="font-mono text-[10.5px] tracking-[.12em] text-accent uppercase">{p.type[lang]}</span>
+          <span className="font-mono text-[10.5px] tracking-[.08em] text-accent uppercase">{p.type[lang]}</span>
           <h3 className="mt-1.5 font-display text-lg font-bold tracking-tight">{p.name}</h3>
           <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted">{p.desc[lang]}</p>
         </div>
@@ -121,13 +121,13 @@ export default function Portfolio() {
 
         <Reveal className="mt-20 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <h3 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">{t.work.others}</h3>
-          <div role="tablist" className="no-scrollbar -mx-5 flex gap-1 overflow-x-auto px-5 sm:mx-0 sm:px-0">
-            <div className="glass flex gap-1 rounded-full p-1">
+          <div role="group" aria-label={t.work.eyebrow} className="no-scrollbar -mx-5 flex gap-1 overflow-x-auto px-5 sm:mx-0 sm:px-0">
+            <div className="surface flex gap-1 rounded-full p-1">
               {filters.map((c) => (
                 <button
                   key={c}
-                  role="tab"
-                  aria-selected={filter === c}
+                  type="button"
+                  aria-pressed={filter === c}
                   onClick={() => { setFilter(c); setExpanded(false); }}
                   className={`relative flex h-10 items-center gap-2 rounded-full px-4 text-sm font-medium whitespace-nowrap transition-colors ${filter === c ? 'text-bg' : 'text-muted hover:text-ink'}`}
                 >
@@ -153,7 +153,7 @@ export default function Portfolio() {
             <button
               type="button"
               onClick={() => setExpanded((e) => !e)}
-              className="glass inline-flex h-12 items-center gap-2 rounded-full px-6 text-sm font-semibold transition hover:bg-white/10"
+              className="surface inline-flex h-12 items-center gap-2 rounded-full px-6 text-sm font-semibold transition hover:bg-white/10"
             >
               {expanded ? t.work.less : f(t.work.more, { n: list.length })}
               <Icon name="arrow" className={`size-4 transition-transform duration-300 ${expanded ? '-rotate-90' : 'rotate-90'}`} />

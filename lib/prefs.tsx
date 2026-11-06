@@ -73,7 +73,7 @@ export function PrefsProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    document.documentElement.lang = lang;
+    document.documentElement.lang = { es: 'es-MX', en: 'en', pt: 'pt-BR' }[lang];
     document.title = DICTS[lang].meta.title;
   }, [lang]);
 
