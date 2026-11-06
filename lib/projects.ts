@@ -197,3 +197,22 @@ export const PROJECTS: Project[] = [
     },
   },
 ];
+
+/* SECCIONES DEL PORTAFOLIO — cada fila del carrusel, en este orden.
+   Un proyecto puede aparecer en más de una sección. Los textos de cada sección
+   están en lib/i18n.ts (work.sections). */
+export type SectionId = 'ai' | 'landing' | 'marketing' | 'crm' | 'pos' | 'chatbot' | 'store';
+export const SECTIONS: { id: SectionId; ids: string[] }[] = [
+  { id: 'ai', ids: [] }, // usa AI_MODELS
+  { id: 'landing', ids: ['denti7', 'hotelmadrid', 'oxford', 'yuridia', 'funeraria', 'littlecakes'] },
+  { id: 'marketing', ids: ['prettythings', 'debate', 'gps', 'yuridia'] },
+  { id: 'crm', ids: ['websights', 'cobranza', 'streamly'] },
+  { id: 'pos', ids: ['gestia', 'burgermanager', 'sigi'] },
+  { id: 'chatbot', ids: ['chatbot', 'streamly', 'homework'] },
+  { id: 'store', ids: ['beautymina', 'srsburger', 'littlecakes'] },
+];
+
+/* MODELOS IA PARA MARKETING — foto vertical en public/assets/img/modelos/<id>.webp (900x1200, 3:4).
+   Mientras la lista esté vacía, la sección no se muestra. */
+export type AiModel = { id: string; name: string; use: L };
+export const AI_MODELS: AiModel[] = [];
