@@ -6,8 +6,9 @@ import { SITE, type Lang } from '@/lib/config';
 import { usePrefs } from '@/lib/prefs';
 import { EASE, Icon, Logo, WhatsAppIcon } from './ui';
 
-const LINKS = ['work', 'why', 'pricing', 'contact'] as const;
+const LINKS = ['services', 'work', 'why', 'pricing', 'contact'] as const;
 const HREF: Record<(typeof LINKS)[number], string> = {
+  services: '#soluciones',
   work: '#portafolio',
   why: '#nosotros',
   pricing: '#precios',
@@ -119,7 +120,7 @@ export default function Header() {
                 <li key={k}>
                   <a
                     href={HREF[k]}
-                    className={`relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors xl:px-4 ${active === HREF[k] ? 'text-ink' : 'text-muted hover:text-ink'}`}
+                    className={`relative rounded-full px-2.5 py-2 text-sm font-medium whitespace-nowrap transition-colors xl:px-4 ${active === HREF[k] ? 'text-ink' : 'text-muted hover:text-ink'}`}
                   >
                     {active === HREF[k] && (
                       <motion.span layoutId="nav-pill" className="absolute inset-0 -z-10 rounded-full bg-white/[.07]" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />
@@ -194,7 +195,7 @@ export default function Header() {
                   className="flex h-14 items-center justify-center gap-2.5 rounded-full bg-wa text-base font-semibold text-[#03200f]"
                 >
                   <WhatsAppIcon />
-                  {SITE.contact.phoneDisplay}
+                  {SITE.contact.waDisplay}
                 </a>
               </motion.div>
             </motion.nav>

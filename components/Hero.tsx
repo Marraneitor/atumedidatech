@@ -47,15 +47,18 @@ export default function Hero() {
     <section id="inicio" className="relative isolate overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
       <Background />
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <span className="surface inline-flex animate-fade-up items-center gap-2.5 rounded-full py-1.5 pr-4 pl-2 text-[13px] text-muted">
-          <span className="size-2 rounded-full bg-wa shadow-[0_0_0_4px_rgba(37,211,102,.15)]" />
-          {t.hero.badge}
+        {/* Insignia de estatus: tecnología de grandes empresas, accesible */}
+        <span className="inline-flex max-w-full animate-fade-up items-center gap-2 rounded-full border border-accent/30 bg-accent/[.08] py-1.5 pr-4 pl-1.5 text-[13px] font-medium text-ink">
+          <span className="grid size-6 shrink-0 place-items-center rounded-full bg-accent text-bg">
+            <Icon name="bolt" className="size-3.5" strokeWidth={2.2} />
+          </span>
+          <span className="leading-snug">{t.hero.badge}</span>
         </span>
 
         <h1
           key={lang}
           aria-label={`${t.hero.t1} ${t.hero.t2}`}
-          className="mt-7 max-w-6xl font-display text-[2.6rem] leading-[1.04] font-extrabold tracking-[-0.022em] text-balance sm:text-6xl lg:text-[4.6rem] xl:text-[5.2rem]"
+          className="mt-7 max-w-6xl font-display text-[2.3rem] leading-[1.06] font-extrabold tracking-[-0.022em] text-balance sm:text-[3.4rem] lg:text-[4.2rem] xl:text-[4.6rem]"
         >
           <Words text={t.hero.t1} />
           <br />
@@ -72,7 +75,7 @@ export default function Hero() {
                 <WhatsAppIcon className="size-[18px]" />
                 {t.hero.cta1}
               </MagneticButton>
-              <MagneticButton href="#portafolio" variant="ghost" className="sm:min-h-14 sm:px-8 sm:text-base">
+              <MagneticButton href="#soluciones" variant="ghost" className="sm:min-h-14 sm:px-8 sm:text-base">
                 {t.hero.cta2}
                 <Icon name="arrow" className="size-4 rotate-90" />
               </MagneticButton>

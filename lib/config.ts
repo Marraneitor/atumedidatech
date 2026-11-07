@@ -8,8 +8,10 @@ export type Lang = 'es' | 'en' | 'pt';
 export const SITE = {
   url: 'https://atumedidatech.online',
   contact: {
-    whatsapp: '529221393994', // con código de país, sin + ni espacios
-    phoneDisplay: '+52 922 139 3994',
+    whatsapp: '529223220389', // WhatsApp de Sofía, quien contesta los mensajes (código de país, sin + ni espacios)
+    waDisplay: '+52 922 322 0389',
+    waAgent: 'Sofía',
+    phoneDisplay: '+52 922 139 3994', // teléfono para llamadas
     phoneLink: '+529221393994',
     facebook: 'https://www.facebook.com/profile.php?id=61577393532574',
   },

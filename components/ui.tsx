@@ -29,6 +29,18 @@ const paths: Record<string, React.ReactNode> = {
   mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></>,
   calendar: <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18M8 3v4m8-4v4" /></>,
   chart: <path d="M4 20V10m6 10V4m6 16v-7m4 7H2" />,
+  video: <><rect x="2.5" y="6" width="13" height="12" rx="2" /><path d="m15.5 10.5 6-3.5v10l-6-3.5" /></>,
+  receipt: <><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z" /><path d="M9 8h6M9 12h6M9 16h3" /></>,
+  users: <><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20a6.5 6.5 0 0 1 13 0" /><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14.4A6.5 6.5 0 0 1 21.5 20" /></>,
+  megaphone: <><path d="M3 10v4a1 1 0 0 0 1 1h3l7 4V5L7 9H4a1 1 0 0 0-1 1Z" /><path d="M18 9a4 4 0 0 1 0 6M7 15l1.5 5" /></>,
+  leak: <><path d="M4 6h16M6 6l1.5 9h9L18 6" /><path d="M12 18.5v.01M10 21v.01M14 21v.01" /></>,
+  unlink: <><path d="M9 15 7 17a3 3 0 0 1-4.2-4.2L5 10.6M15 9l2-2a3 3 0 0 1 4.2 4.2L19 13.4" /><path d="M4 4l3 3M20 20l-3-3M9 4v2M15 18v2" /></>,
+  shield: <><path d="M12 3 4.5 6v5.5c0 4.5 3.2 8.2 7.5 9.5 4.3-1.3 7.5-5 7.5-9.5V6L12 3Z" /><path d="m8.8 12 2.2 2.2 4.2-4.4" /></>,
+  search: <><circle cx="11" cy="11" r="7" /><path d="m20 20-3.9-3.9" /></>,
+  rocket: <><path d="M14 4c3-1 6-1 6-1s0 3-1 6l-6 6-4-4 5-7Z" /><path d="M9 11 5.5 10.5 3 13l4 1M13 15l.5 3.5L11 21l-1-4M6 18l-2 2" /></>,
+  code: <path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16" />,
+  compass: <><circle cx="12" cy="12" r="9" /><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z" /></>,
+  minus: <path d="M6 12h12" />,
 };
 
 export function Icon({ name, className = 'size-5', ...rest }: { name: keyof typeof paths | string; className?: string } & React.SVGProps<SVGSVGElement>) {

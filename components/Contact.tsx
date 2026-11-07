@@ -193,11 +193,11 @@ function FieldError({ id, text }: { id: string; text?: string }) {
 }
 
 export default function Contact() {
-  const { t, wa } = usePrefs();
+  const { t, wa, f } = usePrefs();
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(SITE.contact.phoneDisplay);
+      await navigator.clipboard.writeText(SITE.contact.waDisplay);
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch { /* sin portapapeles */ }
@@ -222,6 +222,31 @@ export default function Contact() {
             <Reveal delay={0.08}>
               <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">{t.cta.sub}</p>
             </Reveal>
+            {/* Contraste: el costo de seguir igual frente al éxito con A TU MEDIDA TECH */}
+            <Reveal delay={0.1} className="mt-8 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-2xl border border-line bg-white/[.02] p-5">
+                <p className="text-xs font-medium tracking-[.08em] text-dim uppercase">{t.cta.loseT}</p>
+                <ul className="mt-3 space-y-2.5 text-[15px] text-muted">
+                  {t.cta.lose.map((x) => (
+                    <li key={x} className="flex items-start gap-2.5">
+                      <Icon name="minus" className="mt-1 size-3.5 shrink-0 text-amber-300/80" strokeWidth={2.4} />
+                      {x}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-2xl border border-accent/35 bg-accent/[.07] p-5">
+                <p className="text-xs font-medium tracking-[.08em] text-accent uppercase">{t.cta.winT}</p>
+                <ul className="mt-3 space-y-2.5 text-[15px] text-ink">
+                  {t.cta.win.map((x) => (
+                    <li key={x} className="flex items-start gap-2.5">
+                      <Icon name="check" className="mt-1 size-3.5 shrink-0 text-accent" strokeWidth={2.6} />
+                      {x}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
             <Reveal delay={0.14} className="mt-9 flex flex-col gap-3 sm:flex-row">
               <MagneticButton href={wa(t.wa.general)} variant="wa" external>
                 <WhatsAppIcon />
@@ -238,9 +263,9 @@ export default function Contact() {
                   <WhatsAppIcon className="size-6" />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="font-mono text-[11px] tracking-[.08em] text-dim uppercase">WhatsApp</p>
-                  <a href={`tel:${SITE.contact.phoneLink}`} className="font-display text-lg font-bold tracking-[-0.012em] whitespace-nowrap tabular-nums sm:text-2xl">
-                    {SITE.contact.phoneDisplay}
+                  <p className="font-mono text-[11px] tracking-[.08em] text-dim uppercase">WhatsApp · {f(t.cta.agent, { name: SITE.contact.waAgent })}</p>
+                  <a href={wa(t.wa.general)} target="_blank" rel="noopener noreferrer" className="font-display text-lg font-bold tracking-[-0.012em] whitespace-nowrap tabular-nums sm:text-2xl">
+                    {SITE.contact.waDisplay}
                   </a>
                 </div>
                 <button type="button" onClick={copy} aria-label={t.cta.copy} className="relative grid size-11 shrink-0 place-items-center rounded-full border border-line transition hover:bg-white/10">
@@ -267,6 +292,8 @@ export function Footer() {
   const { t } = usePrefs();
   const year = new Date().getFullYear();
   const links: [string, string][] = [
+    [t.nav.services, '#soluciones'],
+    [t.nav.steps, '#pasos'],
     [t.nav.work, '#portafolio'],
     [t.nav.why, '#nosotros'],
     [t.nav.pricing, '#precios'],
@@ -294,7 +321,12 @@ export function Footer() {
           <ul className="mt-4 space-y-2.5 text-sm">
             <li>
               <a href={`https://wa.me/${SITE.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-muted transition hover:text-ink">
-                {SITE.contact.phoneDisplay}
+                WhatsApp {SITE.contact.waDisplay}
+              </a>
+            </li>
+            <li>
+              <a href={`tel:${SITE.contact.phoneLink}`} className="text-muted transition hover:text-ink">
+                {t.cta.call}: {SITE.contact.phoneDisplay}
               </a>
             </li>
             <li>
