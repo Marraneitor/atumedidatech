@@ -46,6 +46,8 @@ export function Marquee() {
   );
 }
 
+const GUARANTEE_ICONS = ['bolt', 'phone', 'cog', 'shield'] as const;
+
 export default function Why() {
   const { t } = usePrefs();
   const w = t.why;
@@ -98,6 +100,22 @@ export default function Why() {
             </Reveal>
           ))}
         </ol>
+      </div>
+
+      {/* Barra de garantías: promesas concretas, sin frases corporativas */}
+      <div className="mx-auto mt-16 max-w-7xl px-5 sm:mt-20 sm:px-8">
+        <Reveal>
+          <ul className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-accent/25 bg-accent/15 sm:grid-cols-2 lg:grid-cols-4">
+            {w.guarantees.map((g, i) => (
+              <li key={g} className="flex items-center gap-3 bg-bg-2 p-5">
+                <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent/10 text-accent">
+                  <Icon name={GUARANTEE_ICONS[i]} className="size-5" />
+                </span>
+                <span className="font-display text-base font-semibold tracking-[-0.012em] text-ink">{g}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );

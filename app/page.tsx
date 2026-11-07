@@ -2,6 +2,9 @@ import { MotionConfig } from 'framer-motion';
 import { PrefsProvider } from '@/lib/prefs';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import Problem from '@/components/Problem';
+import Services from '@/components/Services';
+import Steps from '@/components/Steps';
 import Portfolio from '@/components/Portfolio';
 import Why, { Marquee } from '@/components/Why';
 import Pricing from '@/components/Pricing';
@@ -17,6 +20,9 @@ export default function Page() {
         <main>
           <Hero />
           <Marquee />
+          <Problem />
+          <Services />
+          <Steps />
           <Portfolio />
           <Why />
           <Pricing />

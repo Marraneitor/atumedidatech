@@ -222,6 +222,31 @@ export default function Contact() {
             <Reveal delay={0.08}>
               <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">{t.cta.sub}</p>
             </Reveal>
+            {/* Contraste: el costo de seguir igual frente al éxito con A TU MEDIDA TECH */}
+            <Reveal delay={0.1} className="mt-8 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-2xl border border-line bg-white/[.02] p-5">
+                <p className="text-xs font-medium tracking-[.08em] text-dim uppercase">{t.cta.loseT}</p>
+                <ul className="mt-3 space-y-2.5 text-[15px] text-muted">
+                  {t.cta.lose.map((x) => (
+                    <li key={x} className="flex items-start gap-2.5">
+                      <Icon name="minus" className="mt-1 size-3.5 shrink-0 text-amber-300/80" strokeWidth={2.4} />
+                      {x}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-2xl border border-accent/35 bg-accent/[.07] p-5">
+                <p className="text-xs font-medium tracking-[.08em] text-accent uppercase">{t.cta.winT}</p>
+                <ul className="mt-3 space-y-2.5 text-[15px] text-ink">
+                  {t.cta.win.map((x) => (
+                    <li key={x} className="flex items-start gap-2.5">
+                      <Icon name="check" className="mt-1 size-3.5 shrink-0 text-accent" strokeWidth={2.6} />
+                      {x}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
             <Reveal delay={0.14} className="mt-9 flex flex-col gap-3 sm:flex-row">
               <MagneticButton href={wa(t.wa.general)} variant="wa" external>
                 <WhatsAppIcon />
@@ -267,6 +292,8 @@ export function Footer() {
   const { t } = usePrefs();
   const year = new Date().getFullYear();
   const links: [string, string][] = [
+    [t.nav.services, '#soluciones'],
+    [t.nav.steps, '#pasos'],
     [t.nav.work, '#portafolio'],
     [t.nav.why, '#nosotros'],
     [t.nav.pricing, '#precios'],

@@ -52,10 +52,11 @@ const jsonLd = {
   priceRange: 'MXN 999+',
   knowsLanguage: ['es', 'en', 'pt'],
   makesOffer: [
-    'Desarrollo Web Premium',
-    'Menús Inteligentes QR',
-    'Tarjetas Digitales NFC',
-    'Automatización Digital',
+    'Páginas web a medida',
+    'Comerciales y producción audiovisual',
+    'Menús QR y tarjetas NFC',
+    'Sistemas POS (punto de venta)',
+    'Sistemas CRM',
   ].map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
 };
 
