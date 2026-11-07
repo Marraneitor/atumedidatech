@@ -5,7 +5,7 @@ import { Icon, Reveal, SectionHead } from './ui';
 
 /* Confianza: por qué el precio es bajo, garantías por escrito y preguntas frecuentes */
 const REASON_ICONS = ['spark', 'code', 'users'] as const;
-const GUARANTEE_ICONS = ['receipt', 'shield', 'calendar', 'mail', 'globe'] as const;
+const GUARANTEE_ICONS = ['receipt', 'shield', 'check', 'life', 'mail', 'globe'] as const;
 
 export default function Trust() {
   const { t } = usePrefs();
