@@ -193,11 +193,11 @@ function FieldError({ id, text }: { id: string; text?: string }) {
 }
 
 export default function Contact() {
-  const { t, wa } = usePrefs();
+  const { t, wa, f } = usePrefs();
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(SITE.contact.phoneDisplay);
+      await navigator.clipboard.writeText(SITE.contact.waDisplay);
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch { /* sin portapapeles */ }
@@ -263,9 +263,9 @@ export default function Contact() {
                   <WhatsAppIcon className="size-6" />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="font-mono text-[11px] tracking-[.08em] text-dim uppercase">WhatsApp</p>
-                  <a href={`tel:${SITE.contact.phoneLink}`} className="font-display text-lg font-bold tracking-[-0.012em] whitespace-nowrap tabular-nums sm:text-2xl">
-                    {SITE.contact.phoneDisplay}
+                  <p className="font-mono text-[11px] tracking-[.08em] text-dim uppercase">WhatsApp · {f(t.cta.agent, { name: SITE.contact.waAgent })}</p>
+                  <a href={wa(t.wa.general)} target="_blank" rel="noopener noreferrer" className="font-display text-lg font-bold tracking-[-0.012em] whitespace-nowrap tabular-nums sm:text-2xl">
+                    {SITE.contact.waDisplay}
                   </a>
                 </div>
                 <button type="button" onClick={copy} aria-label={t.cta.copy} className="relative grid size-11 shrink-0 place-items-center rounded-full border border-line transition hover:bg-white/10">
@@ -321,7 +321,12 @@ export function Footer() {
           <ul className="mt-4 space-y-2.5 text-sm">
             <li>
               <a href={`https://wa.me/${SITE.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-muted transition hover:text-ink">
-                {SITE.contact.phoneDisplay}
+                WhatsApp {SITE.contact.waDisplay}
+              </a>
+            </li>
+            <li>
+              <a href={`tel:${SITE.contact.phoneLink}`} className="text-muted transition hover:text-ink">
+                {t.cta.call}: {SITE.contact.phoneDisplay}
               </a>
             </li>
             <li>

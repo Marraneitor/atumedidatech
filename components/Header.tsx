@@ -195,7 +195,7 @@ export default function Header() {
                   className="flex h-14 items-center justify-center gap-2.5 rounded-full bg-wa text-base font-semibold text-[#03200f]"
                 >
                   <WhatsAppIcon />
-                  {SITE.contact.phoneDisplay}
+                  {SITE.contact.waDisplay}
                 </a>
               </motion.div>
             </motion.nav>

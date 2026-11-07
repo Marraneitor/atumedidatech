@@ -149,6 +149,32 @@ const es = {
       { name: 'Sistema o app a la medida', desc: 'Software para operar tu negocio: ventas, inventario, citas, cobranza o IA.', f: ['Análisis de tu proceso actual', 'Usuarios, permisos y reportes', 'Funciona en la nube y en celular', 'Integraciones e inteligencia artificial', 'Capacitación y soporte'], cta: 'Platicar mi idea' },
     ],
   },
+  trust: {
+    eyebrow: 'Sin riesgo para ti',
+    title: '¿Por qué cobramos menos? No es magia ni baja calidad',
+    sub: 'La misma calidad profesional, en menos tiempo y por menos dinero. Y para que no tengas que creernos a ciegas, pagas por etapas.',
+    reasons: [
+      { t: 'Usamos IA en nuestro proceso', d: 'Diseño inicial, textos, pruebas y edición de video que antes tomaban días hoy toman horas. Ese ahorro te lo pasamos a ti.' },
+      { t: 'Bases propias ya probadas', d: 'No empezamos desde cero: partimos de sistemas que ya funcionan y los adaptamos a tu marca y a tu negocio.' },
+      { t: 'Equipo pequeño y directo', d: 'Sin oficinas lujosas ni intermediarios. Hablas con quien construye tu proyecto.' },
+    ],
+    gTitle: 'Nuestras garantías, por escrito',
+    guarantees: [
+      { t: 'Nunca pagas todo por adelantado', d: '50% para iniciar y 50% cuando apruebas la entrega.' },
+      { t: 'Si el primer avance no te convence, te devolvemos tu dinero', d: 'Si al ver el primer avance decides no seguir, te regresamos el 100% del anticipo.' },
+      { t: 'Si nos atrasamos, te cuesta menos', d: 'Más de 5 días hábiles de retraso por nuestra causa: 10% de descuento en el pago final.' },
+      { t: 'Todo por escrito, antes de empezar', d: 'Contrato simple con alcance, precio, fechas y rondas de cambios.' },
+      { t: 'Tu dominio y tus accesos son tuyos', d: 'Dominio, código, accesos y videos quedan a tu nombre, siempre.' },
+    ],
+    faqTitle: 'Preguntas frecuentes',
+    faq: [
+      { q: '¿Y si no me gusta?', a: 'Ves un primer avance en los primeros días. Si no te convence la dirección y decides no seguir, te devolvemos el 100% del anticipo.' },
+      { q: '¿El dominio es mío?', a: 'Sí. El dominio, el código, los accesos y los videos quedan a tu nombre.' },
+      { q: '¿Puedo pagar en partes?', a: 'Sí. Siempre trabajamos por etapas: 50% para iniciar y 50% al aprobar. En proyectos grandes podemos dividirlo en más pagos.' },
+      { q: '¿Qué pasa después de entregar?', a: 'Incluimos soporte directo por WhatsApp y te enseñamos a usar lo que construimos. Después puedes contratar un plan mensual opcional.' },
+      { q: '¿Por qué son tan accesibles?', a: 'Porque usamos IA y bases propias para trabajar más rápido, y somos un equipo pequeño sin intermediarios. No es menos calidad, es menos tiempo.' },
+    ],
+  },
   cta: {
     t1: 'Tu competencia ya se está digitalizando.',
     t2: 'Tú puedes hacerlo hoy.',
@@ -161,6 +187,7 @@ const es = {
     call: 'Llamar ahora',
     copy: 'Copiar número',
     copied: '¡Copiado!',
+    agent: 'Te atiende {name}',
   },
   form: {
     title: 'O déjanos tus datos',
@@ -349,6 +376,32 @@ const en: Dict = {
       { name: 'Custom software or app', desc: 'Software to run your business: sales, inventory, bookings, collections or AI.', f: ['Analysis of your current process', 'Users, permissions and reports', 'Runs in the cloud and on mobile', 'Integrations and artificial intelligence', 'Training and support'], cta: 'Talk about my idea' },
     ],
   },
+  trust: {
+    eyebrow: 'No risk for you',
+    title: 'Why do we charge less? It’s not magic or low quality',
+    sub: 'The same professional quality, in less time and for less money. And so you don’t have to take our word for it, you pay in stages.',
+    reasons: [
+      { t: 'We use AI in our process', d: 'Initial design, copy, testing and video editing that used to take days now take hours. We pass those savings on to you.' },
+      { t: 'Proven in-house foundations', d: 'We don’t start from scratch: we build on systems that already work and adapt them to your brand and business.' },
+      { t: 'A small, direct team', d: 'No fancy offices or middlemen. You talk to the person building your project.' },
+    ],
+    gTitle: 'Our guarantees, in writing',
+    guarantees: [
+      { t: 'You never pay everything upfront', d: '50% to start and 50% when you approve the delivery.' },
+      { t: 'If the first draft doesn’t convince you, you get your money back', d: 'If you decide not to continue after seeing the first draft, we refund 100% of the deposit.' },
+      { t: 'If we’re late, it costs you less', d: 'More than 5 business days late on our side: 10% off the final payment.' },
+      { t: 'Everything in writing, before we start', d: 'A simple contract with scope, price, dates and revision rounds.' },
+      { t: 'Your domain and accounts are yours', d: 'Domain, code, accounts and videos stay in your name, always.' },
+    ],
+    faqTitle: 'Frequently asked questions',
+    faq: [
+      { q: 'What if I don’t like it?', a: 'You see a first draft within the first few days. If you don’t like the direction and decide not to continue, we refund 100% of the deposit.' },
+      { q: 'Is the domain mine?', a: 'Yes. The domain, code, accounts and videos are in your name.' },
+      { q: 'Can I pay in installments?', a: 'Yes. We always work in stages: 50% to start and 50% on approval. Larger projects can be split into more payments.' },
+      { q: 'What happens after delivery?', a: 'Direct WhatsApp support is included and we teach you how to use what we built. Afterwards you can add an optional monthly plan.' },
+      { q: 'Why are you so affordable?', a: 'We use AI and our own foundations to work faster, and we’re a small team without middlemen. It’s not less quality, it’s less time.' },
+    ],
+  },
   cta: {
     t1: 'Your competitors are already going digital.',
     t2: 'You can start today.',
@@ -361,6 +414,7 @@ const en: Dict = {
     call: 'Call now',
     copy: 'Copy number',
     copied: 'Copied!',
+    agent: '{name} will help you',
   },
   form: {
     title: 'Or leave us your details',
@@ -547,6 +601,32 @@ const pt: Dict = {
       { name: 'Sistema ou app sob medida', desc: 'Software para operar seu negócio: vendas, estoque, agenda, cobranças ou IA.', f: ['Análise do seu processo atual', 'Usuários, permissões e relatórios', 'Funciona na nuvem e no celular', 'Integrações e inteligência artificial', 'Treinamento e suporte'], cta: 'Conversar sobre minha ideia' },
     ],
   },
+  trust: {
+    eyebrow: 'Sem risco para você',
+    title: 'Por que cobramos menos? Não é mágica nem baixa qualidade',
+    sub: 'A mesma qualidade profissional, em menos tempo e por menos dinheiro. E para você não precisar acreditar às cegas, paga por etapas.',
+    reasons: [
+      { t: 'Usamos IA no nosso processo', d: 'Design inicial, textos, testes e edição de vídeo que levavam dias hoje levam horas. Repassamos essa economia para você.' },
+      { t: 'Bases próprias já testadas', d: 'Não começamos do zero: partimos de sistemas que já funcionam e adaptamos à sua marca e ao seu negócio.' },
+      { t: 'Equipe pequena e direta', d: 'Sem escritórios luxuosos nem intermediários. Você fala com quem constrói o seu projeto.' },
+    ],
+    gTitle: 'Nossas garantias, por escrito',
+    guarantees: [
+      { t: 'Você nunca paga tudo adiantado', d: '50% para começar e 50% quando aprova a entrega.' },
+      { t: 'Se a primeira prévia não convencer, devolvemos seu dinheiro', d: 'Se ao ver a primeira prévia você decidir não seguir, devolvemos 100% do sinal.' },
+      { t: 'Se atrasarmos, custa menos', d: 'Mais de 5 dias úteis de atraso por nossa causa: 10% de desconto no pagamento final.' },
+      { t: 'Tudo por escrito, antes de começar', d: 'Contrato simples com escopo, preço, datas e rodadas de ajustes.' },
+      { t: 'Seu domínio e seus acessos são seus', d: 'Domínio, código, acessos e vídeos ficam no seu nome, sempre.' },
+    ],
+    faqTitle: 'Perguntas frequentes',
+    faq: [
+      { q: 'E se eu não gostar?', a: 'Você vê uma primeira prévia nos primeiros dias. Se não gostar da direção e decidir não seguir, devolvemos 100% do sinal.' },
+      { q: 'O domínio é meu?', a: 'Sim. O domínio, o código, os acessos e os vídeos ficam no seu nome.' },
+      { q: 'Posso pagar em partes?', a: 'Sim. Sempre trabalhamos por etapas: 50% para começar e 50% na aprovação. Projetos maiores podem ser divididos em mais pagamentos.' },
+      { q: 'O que acontece depois da entrega?', a: 'Incluímos suporte direto pelo WhatsApp e ensinamos você a usar o que construímos. Depois você pode contratar um plano mensal opcional.' },
+      { q: 'Por que vocês são tão acessíveis?', a: 'Porque usamos IA e bases próprias para trabalhar mais rápido, e somos uma equipe pequena sem intermediários. Não é menos qualidade, é menos tempo.' },
+    ],
+  },
   cta: {
     t1: 'Seus concorrentes já estão se digitalizando.',
     t2: 'Você pode começar hoje.',
@@ -559,6 +639,7 @@ const pt: Dict = {
     call: 'Ligar agora',
     copy: 'Copiar número',
     copied: 'Copiado!',
+    agent: 'Quem atende é a {name}',
   },
   form: {
     title: 'Ou deixe seus dados',
