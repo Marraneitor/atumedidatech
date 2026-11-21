@@ -41,6 +41,7 @@ const paths: Record<string, React.ReactNode> = {
   code: <path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16" />,
   compass: <><circle cx="12" cy="12" r="9" /><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z" /></>,
   minus: <path d="M6 12h12" />,
+  chat: <path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.1A8 8 0 1 1 20 12Z" />,
 };
 
 export function Icon({ name, className = 'size-5', ...rest }: { name: keyof typeof paths | string; className?: string } & React.SVGProps<SVGSVGElement>) {

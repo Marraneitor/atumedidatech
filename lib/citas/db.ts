@@ -33,6 +33,11 @@ export const db = {
   async get<T = Row>(sql: string, ...p: unknown[]): Promise<T | undefined> {
     return (await db.all<T>(sql, ...p))[0];
   },
+  /** Varias sentencias en una sola transacción (y un solo viaje a Turso). */
+  async batch(stmts: [string, ...unknown[]][]) {
+    if (!stmts.length) return;
+    await client.batch(stmts.map(([sql, ...p]) => ({ sql, args: toArgs(p) })), 'write');
+  },
   async run(sql: string, ...p: unknown[]) {
     const rs = await client.execute({ sql, args: toArgs(p) });
     return { id: rs.lastInsertRowid == null ? 0 : Number(rs.lastInsertRowid), changes: rs.rowsAffected };
@@ -66,6 +71,15 @@ CREATE TABLE IF NOT EXISTS atm_activity (
 CREATE TABLE IF NOT EXISTS atm_visits (
   id INTEGER PRIMARY KEY AUTOINCREMENT, session TEXT, path TEXT, referrer TEXT, device TEXT,
   created_at TEXT DEFAULT (${NOW}));
+CREATE TABLE IF NOT EXISTS atm_chats (
+  jid TEXT PRIMARY KEY, name TEXT DEFAULT '', phone TEXT DEFAULT '', stage TEXT DEFAULT '', data TEXT DEFAULT '{}',
+  paused_until INTEGER DEFAULT 0, lead_id INTEGER, last_ts INTEGER DEFAULT 0, last_text TEXT DEFAULT '', last_from TEXT DEFAULT '',
+  msgs INTEGER DEFAULT 0, created_ts INTEGER DEFAULT 0, seen_ts INTEGER DEFAULT 0);
+CREATE TABLE IF NOT EXISTS atm_chat_messages (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, jid TEXT NOT NULL, sender TEXT NOT NULL, body TEXT DEFAULT '', ts INTEGER NOT NULL,
+  UNIQUE(jid, ts, sender, body));
+CREATE INDEX IF NOT EXISTS atm_idx_chatmsg ON atm_chat_messages(jid, ts);
+CREATE INDEX IF NOT EXISTS atm_idx_chats_last ON atm_chats(last_ts);
 CREATE TABLE IF NOT EXISTS atm_sessions (token TEXT PRIMARY KEY, created_at TEXT DEFAULT (${NOW}));
 CREATE INDEX IF NOT EXISTS atm_idx_appt_date ON atm_appointments(date);
 CREATE INDEX IF NOT EXISTS atm_idx_visits_date ON atm_visits(created_at);

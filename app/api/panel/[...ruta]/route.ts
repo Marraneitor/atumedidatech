@@ -280,6 +280,49 @@ async function handle(req: Request, parts: string[]): Promise<Response> {
     }
   }
 
+  /* ---------- Conversaciones del chatbot ---------- */
+  if (r === 'chats') {
+    if (m === 'GET' && !id) {
+      const u = new URL(req.url);
+      const q = `%${(u.searchParams.get('q') || '').trim().toLowerCase()}%`;
+      const items = await db.all(
+        `SELECT c.jid,c.name,c.phone,c.stage,c.data,c.paused_until,c.lead_id,c.last_ts,c.last_text,c.last_from,c.msgs,c.created_ts,
+          (SELECT COUNT(*) FROM atm_chat_messages x WHERE x.jid=c.jid AND x.sender='cliente' AND x.ts>c.seen_ts) unread
+         FROM atm_chats c WHERE lower(c.name) LIKE ? OR c.phone LIKE ? OR lower(c.last_text) LIKE ? OR lower(c.data) LIKE ?
+         ORDER BY c.last_ts DESC LIMIT 300`, q, q, q, q);
+      const last = await getSetting<number>('bot_last_sync');
+      const today0 = Date.parse(`${nowMx().date}T00:00:00-06:00`);
+      const n = async (sql: string, ...p: unknown[]) => Number((await db.get<{ n: number }>(sql, ...p))?.n || 0);
+      const [hoyIn, hoyBot, hoyHumano, hoyChats] = await Promise.all([
+        n("SELECT COUNT(*) n FROM atm_chat_messages WHERE sender='cliente' AND ts>=?", today0),
+        n("SELECT COUNT(*) n FROM atm_chat_messages WHERE sender='bot' AND ts>=?", today0),
+        n("SELECT COUNT(*) n FROM atm_chat_messages WHERE sender='humano' AND ts>=?", today0),
+        n('SELECT COUNT(DISTINCT jid) n FROM atm_chat_messages WHERE ts>=?', today0),
+      ]);
+      return json({ items, lastSync: last, connected: !!process.env.BOT_SYNC_KEY, stats: { hoyIn, hoyBot, hoyHumano, hoyChats } });
+    }
+    const jid = decodeURIComponent(id || '');
+    const chat = await db.get<{ jid: string; name: string; phone: string; lead_id: number | null; data: string }>('SELECT * FROM atm_chats WHERE jid=?', jid);
+    if (!chat) return fail('No encontramos esa conversación.', 404);
+    if (m === 'GET') {
+      const msgs = (await db.all('SELECT id,sender,body,ts FROM atm_chat_messages WHERE jid=? ORDER BY ts DESC, id DESC LIMIT 600', jid)).reverse();
+      await db.run('UPDATE atm_chats SET seen_ts=last_ts WHERE jid=?', jid);
+      return json({ chat, messages: msgs });
+    }
+    if (m === 'POST' && sub === 'prospecto') {
+      if (chat.lead_id && (await db.get('SELECT id FROM atm_leads WHERE id=?', chat.lead_id))) return json({ ok: true, id: chat.lead_id });
+      let d: Record<string, string> = {};
+      try { d = JSON.parse(chat.data || '{}'); } catch { /* sin datos */ }
+      const lid = await findOrCreateLead({
+        name: d.nombre || chat.name || (chat.phone ? `WhatsApp ${chat.phone.slice(-10)}` : 'Contacto de WhatsApp'),
+        phone: chat.phone, business: d.consultorio || d.negocio || '', city: d.ciudad || '', source: 'whatsapp',
+      });
+      await db.run('UPDATE atm_chats SET lead_id=? WHERE jid=?', lid, jid);
+      await logActivity(lid, 'nota', 'Agregado desde una conversación del chatbot de WhatsApp');
+      return json({ ok: true, id: lid });
+    }
+  }
+
   /* ---------- Tipos de reunión ---------- */
   if (r === 'tipos') {
     if (m === 'GET') return json({ items: await db.all('SELECT * FROM atm_meeting_types ORDER BY sort,id'), mediums: MEDIUM_LABEL });

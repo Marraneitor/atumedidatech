@@ -7,11 +7,13 @@ import Resumen from './Resumen';
 import Agenda from './Agenda';
 import Prospectos from './Prospectos';
 import Ajustes from './Ajustes';
+import Conversaciones from './Conversaciones';
 
 const TABS = [
   { id: 'resumen', label: 'Resumen', icon: 'chart' },
   { id: 'agenda', label: 'Agenda', icon: 'calendar' },
   { id: 'prospectos', label: 'Prospectos', icon: 'users' },
+  { id: 'chats', label: 'Conversaciones', short: 'Chats', icon: 'chat' },
   { id: 'ajustes', label: 'Horarios y ajustes', short: 'Ajustes', icon: 'cog' },
 ] as const;
 type Tab = (typeof TABS)[number]['id'];
@@ -104,11 +106,12 @@ export default function Panel() {
           {tab === 'resumen' && <Resumen ctx={ctx} />}
           {tab === 'agenda' && <Agenda ctx={ctx} />}
           {tab === 'prospectos' && <Prospectos ctx={ctx} />}
+          {tab === 'chats' && <Conversaciones ctx={ctx} />}
           {tab === 'ajustes' && <Ajustes ctx={ctx} />}
         </main>
       </div>
 
-      <nav className="glass-float fixed inset-x-0 bottom-0 z-50 grid grid-cols-4 border-x-0 border-b-0 pb-[env(safe-area-inset-bottom)] lg:hidden" aria-label="Secciones">
+      <nav className="glass-float fixed inset-x-0 bottom-0 z-50 grid grid-cols-5 border-x-0 border-b-0 pb-[env(safe-area-inset-bottom)] lg:hidden" aria-label="Secciones">
         {TABS.map((t) => (
           <button key={t.id} type="button" onClick={() => go(t.id)} aria-current={tab === t.id ? 'page' : undefined} className={`flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium ${tab === t.id ? 'text-accent' : 'text-muted'}`}>
             <Icon name={t.icon} className="size-5" />
