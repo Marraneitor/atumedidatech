@@ -7,7 +7,7 @@ const es = {
     title: 'A TU MEDIDA TECH · Páginas web, comerciales, sistemas POS y CRM a la medida',
     desc: 'Atraemos clientes con páginas web y comerciales en video, y ordenamos tu operación con sistemas POS y CRM. Un solo equipo para negocios de México y el mundo. Páginas web desde $999 MXN.',
   },
-  nav: { services: 'Soluciones', steps: 'Cómo trabajamos', work: 'Portafolio', why: 'Por qué nosotros', pricing: 'Precios', contact: 'Contacto', cta: 'Cotizar', menu: 'Menú', close: 'Cerrar' },
+  nav: { services: 'Soluciones', steps: 'Cómo trabajamos', work: 'Portafolio', why: 'Por qué nosotros', pricing: 'Precios', contact: 'Contacto', cta: 'Cotizar', book: 'Agendar llamada', menu: 'Menú', close: 'Cerrar' },
   prefs: { lang: 'Idioma', currency: 'Divisa' },
   hero: {
     badge: 'Tecnología de grandes empresas, adaptada a tu negocio',
@@ -235,7 +235,7 @@ const en: Dict = {
     title: 'A TU MEDIDA TECH · Websites, video ads, POS systems and CRMs built for you',
     desc: 'We bring you customers with websites and video ads, and organize your operation with POS and CRM systems. One team for businesses in Mexico and worldwide. Websites from MXN 999.',
   },
-  nav: { services: 'Solutions', steps: 'How we work', work: 'Work', why: 'Why us', pricing: 'Pricing', contact: 'Contact', cta: 'Get a quote', menu: 'Menu', close: 'Close' },
+  nav: { services: 'Solutions', steps: 'How we work', work: 'Work', why: 'Why us', pricing: 'Pricing', contact: 'Contact', cta: 'Get a quote', book: 'Book a call', menu: 'Menu', close: 'Close' },
   prefs: { lang: 'Language', currency: 'Currency' },
   hero: {
     badge: 'Big-company technology, sized for your business',
@@ -461,7 +461,7 @@ const pt: Dict = {
     title: 'A TU MEDIDA TECH · Sites, comerciais em vídeo, sistemas PDV e CRM sob medida',
     desc: 'Atraímos clientes com sites e comerciais em vídeo, e organizamos sua operação com sistemas PDV e CRM. Uma só equipe para negócios no México e no mundo. Sites a partir de MXN 999.',
   },
-  nav: { services: 'Soluções', steps: 'Como trabalhamos', work: 'Portfólio', why: 'Por que nós', pricing: 'Preços', contact: 'Contato', cta: 'Orçamento', menu: 'Menu', close: 'Fechar' },
+  nav: { services: 'Soluções', steps: 'Como trabalhamos', work: 'Portfólio', why: 'Por que nós', pricing: 'Preços', contact: 'Contato', cta: 'Orçamento', book: 'Agendar conversa', menu: 'Menu', close: 'Fechar' },
   prefs: { lang: 'Idioma', currency: 'Moeda' },
   hero: {
     badge: 'Tecnologia de grandes empresas, adaptada ao seu negócio',
