@@ -8,18 +8,18 @@ export default function Pricing() {
   const { t, price, wa, f, currency } = usePrefs();
   const p = t.pricing;
   const spot = useSpotlight<HTMLElement>();
-  const landing = price('landing');
 
   return (
     <section id="precios" className="relative py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHead eyebrow={p.eyebrow} title={p.title} sub={p.sub} />
-        <div className="mt-16 grid items-stretch gap-5 lg:grid-cols-3">
+        <div className="mt-16 grid items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3">
           {p.plans.map((plan, i) => {
             const featured = i === 0;
-            const priceText = featured ? landing : p.quote;
+            const priceText = plan.key ? price(plan.key) : p.quote;
+            const extra = plan.extraKey ? f(plan.extra, { price: price(plan.extraKey) }) : '';
             return (
-              <Reveal key={plan.name} delay={i * 0.08} className={featured ? 'lg:-my-4' : ''}>
+              <Reveal key={plan.name} delay={(i % 3) * 0.08} className={i === p.plans.length - 1 && p.plans.length % 3 === 1 ? 'md:col-span-2 lg:col-span-3' : ''}>
                 <div
                   onPointerMove={spot}
                   onPointerLeave={spotOff}
@@ -34,21 +34,23 @@ export default function Pricing() {
                   )}
                   <h3 className="font-display text-xl font-bold tracking-[-0.012em]">{plan.name}</h3>
                   <p className="mt-2 min-h-[3rem] text-[15px] leading-relaxed text-muted">{plan.desc}</p>
-                  <div className="mt-6 flex items-baseline gap-2">
-                    {featured && <span className="text-sm text-muted">{p.from}</span>}
+                  <div className="mt-6 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                    {plan.from && <span className="text-sm text-muted">{p.from}</span>}
                     <AnimatePresence mode="wait" initial={false}>
                       <motion.span
-                        key={featured ? currency + priceText : priceText}
+                        key={currency + priceText}
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: DUR.mid, ease: EASE }}
-                        className={`font-display font-extrabold tracking-[-0.012em] tabular-nums ${featured ? 'text-gradient text-5xl' : 'text-3xl'}`}
+                        className={`font-display font-extrabold tracking-[-0.012em] tabular-nums ${featured ? 'text-gradient text-5xl' : plan.key ? 'text-4xl' : 'text-3xl'}`}
                       >
                         {priceText}
                       </motion.span>
                     </AnimatePresence>
+                    {plan.unit && <span className="text-sm text-muted">{plan.unit}</span>}
                   </div>
+                  {extra && <p className="mt-2 text-sm font-medium text-accent">{extra}</p>}
                   <ul className="mt-7 space-y-3 border-t border-line pt-7 text-[15px]">
                     {plan.f.map((x) => (
                       <li key={x} className="flex items-start gap-3">
@@ -60,7 +62,7 @@ export default function Pricing() {
                     ))}
                   </ul>
                   <a
-                    href={wa(f(t.wa.plan, { name: plan.name, price: priceText }))}
+                    href={wa(f(t.wa.plan, { name: plan.name, price: [priceText, plan.unit].filter(Boolean).join(' ') }))}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`group mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full text-[15px] font-semibold transition ${
@@ -76,7 +78,8 @@ export default function Pricing() {
           })}
         </div>
         <Reveal>
-          <p className="mt-10 max-w-[65ch] text-sm text-dim">{p.note}</p>
+          <p className="mt-10 max-w-[65ch] text-[15px] text-muted">{p.pref}</p>
+          <p className="mt-3 max-w-[65ch] text-sm text-dim">{p.note}</p>
         </Reveal>
       </div>
     </section>
