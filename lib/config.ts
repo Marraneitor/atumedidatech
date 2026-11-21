@@ -26,7 +26,14 @@ export const SITE = {
   /* Precios base en pesos mexicanos (MXN). Se convierten solos a la divisa elegida. */
   baseCurrency: 'MXN',
   prices: {
-    landing: 999, // Página web — "desde"
+    landing: 999, // Página web (landing) — "desde"
+    web_db: 1800, // Página con base de datos
+    chatbot: 3500, // Chatbot de WhatsApp, pago único
+    chatbot_month: 120, // Chatbot: mensualidad sin plazos forzosos
+    social: 1000, // Redes sociales: 3 videos/semana + 12 fotos al mes, una red
+    social_extra: 500, // Cada red social extra, al mes
+    reel: 100, // Reel de 1 minuto
+    nfc: 100, // Tarjeta NFC personalizada (mínimo 5, envío aparte)
   } as Record<string, number>,
 
   /* Precio fijo por divisa (opcional). Si pones un valor aquí se usa en lugar de la conversión.
