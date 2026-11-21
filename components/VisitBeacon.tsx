@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 export default function VisitBeacon() {
   useEffect(() => {
     const path = location.pathname;
-    if (path.startsWith('/panel')) return;
+    if (path.startsWith('/panel') || path.startsWith('/pantalla')) return;
     let session = '';
     try {
       session = sessionStorage.getItem('atm_s') || '';

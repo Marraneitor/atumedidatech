@@ -159,3 +159,6 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Protector de pantalla (/pantalla): columnas que suben sin fin */
+@keyframes wall-up { to { transform: translateY(-50%); } }
