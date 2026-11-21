@@ -44,7 +44,7 @@ export default function Hero() {
   const words1 = t.hero.t1.split(' ').length;
 
   return (
-    <section id="inicio" className="relative isolate overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
+    <section id="inicio" className="relative isolate overflow-hidden pt-44 pb-20 sm:pt-48 sm:pb-28 xl:pt-40">
       <Background />
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         {/* Insignia de estatus: tecnología de grandes empresas, accesible */}

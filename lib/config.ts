@@ -34,6 +34,10 @@ export const SITE = {
     social_extra: 500, // Cada red social extra, al mes
     reel: 100, // Reel de 1 minuto
     nfc: 100, // Tarjeta NFC personalizada (mínimo 5, envío aparte)
+    plus: 9000, // Paquete Plus: implementación, pago único
+    plus_month: 7000, // Paquete Plus: operación mensual
+    plus_ref: 36000, // Paquete Plus: referencia de agencias tradicionales, implementación
+    plus_month_ref: 28000, // Paquete Plus: referencia de agencias tradicionales, mensual
   } as Record<string, number>,
 
   /* Precio fijo por divisa (opcional). Si pones un valor aquí se usa en lugar de la conversión.
