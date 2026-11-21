@@ -292,11 +292,11 @@ export function Footer() {
   const { t } = usePrefs();
   const year = new Date().getFullYear();
   const links: [string, string][] = [
-    [t.nav.services, '#soluciones'],
-    [t.nav.steps, '#pasos'],
     [t.nav.work, '#portafolio'],
-    [t.nav.why, '#nosotros'],
+    [t.nav.services, '#soluciones'],
+    [t.nav.packages, '#paquetes'],
     [t.nav.pricing, '#precios'],
+    [t.nav.why, '#nosotros'],
     [t.nav.contact, '#contacto'],
   ];
   return (

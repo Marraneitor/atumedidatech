@@ -26,6 +26,12 @@
   @keyframes rise { from { transform: translateY(105%); } }
   @keyframes fade-up { from { opacity: 0; transform: translateY(12px); } }
 
+  /* Cambio de pestaña: el panel entra desde el lado hacia el que navegas */
+  --animate-tab-next: tab-next 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-tab-prev: tab-prev 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+  @keyframes tab-next { from { opacity: 0; transform: translateX(40px); } }
+  @keyframes tab-prev { from { opacity: 0; transform: translateX(-40px); } }
+
   --animate-marquee: marquee 40s linear infinite;
   --animate-aurora: aurora 18s ease-in-out infinite alternate;
   --animate-aurora-slow: aurora 26s ease-in-out infinite alternate-reverse;

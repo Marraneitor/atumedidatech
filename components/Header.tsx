@@ -4,16 +4,8 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring } fr
 import { useEffect, useState } from 'react';
 import { SITE, type Lang } from '@/lib/config';
 import { usePrefs } from '@/lib/prefs';
+import { TabBar, TABS, useTabs } from './Tabs';
 import { EASE, Icon, Logo, WhatsAppIcon } from './ui';
-
-const LINKS = ['services', 'work', 'why', 'pricing', 'contact'] as const;
-const HREF: Record<(typeof LINKS)[number], string> = {
-  services: '#soluciones',
-  work: '#portafolio',
-  why: '#nosotros',
-  pricing: '#precios',
-  contact: '#contacto',
-};
 
 export function PrefSelects({ compact = false, stack = false }: { compact?: boolean; stack?: boolean }) {
   const { lang, setLang, currency, setCurrency, t } = usePrefs();
@@ -59,33 +51,11 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<string>('');
-
-  useMotionValueEvent(scrollY, 'change', (y) => {
-    const prev = scrollY.getPrevious() ?? 0;
-    setScrolled(y > 24);
-    if (open || y < 640) setHidden(false);
-    else if (y > prev + 1) setHidden(true);
-    else if (y < prev - 1) setHidden(false);
-  });
-
-  // Sección activa en el menú
-  useEffect(() => {
-    const ids = ['inicio', ...Object.values(HREF).map((h) => h.slice(1))];
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id === 'inicio' ? '' : '#' + e.target.id)),
-      { rootMargin: '-45% 0px -50% 0px' },
-    );
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) io.observe(el);
-    });
-    return () => io.disconnect();
-  }, []);
+  const { go } = useTabs();
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
-    const mq = window.matchMedia('(min-width: 1024px)');
+    const mq = window.matchMedia('(min-width: 1280px)');
     const onMq = () => mq.matches && setOpen(false);
     mq.addEventListener('change', onMq);
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
@@ -114,31 +84,17 @@ export default function Header() {
             <Logo />
           </a>
 
-          <nav className="ml-auto hidden lg:block" aria-label="Principal">
-            <ul className="flex items-center gap-1">
-              {LINKS.map((k) => (
-                <li key={k}>
-                  <a
-                    href={HREF[k]}
-                    className={`relative rounded-full px-2.5 py-2 text-sm font-medium whitespace-nowrap transition-colors xl:px-4 ${active === HREF[k] ? 'text-ink' : 'text-muted hover:text-ink'}`}
-                  >
-                    {active === HREF[k] && (
-                      <motion.span layoutId="nav-pill" className="absolute inset-0 -z-10 rounded-full bg-white/[.07]" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />
-                    )}
-                    {t.nav[k]}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <nav className="ml-auto hidden xl:block" aria-label="Principal">
+            <TabBar />
           </nav>
 
-          <div className="ml-auto flex items-center gap-2 lg:ml-3">
+          <div className="ml-auto flex items-center gap-2 xl:ml-3">
             <div className="hidden lg:block">
               <PrefSelects compact />
             </div>
             <a
               href="/citas"
-              className="hidden h-10 items-center gap-2 rounded-full border border-line bg-white/[.04] px-4 text-sm font-semibold text-ink transition hover:border-white/20 hover:bg-white/[.08] xl:inline-flex"
+              className="hidden h-10 items-center gap-2 rounded-full border border-line bg-white/[.04] px-4 text-sm font-semibold text-ink transition hover:border-white/20 hover:bg-white/[.08] 2xl:inline-flex"
             >
               <Icon name="calendar" className="size-4 text-accent" />
               {t.nav.book}
@@ -158,12 +114,15 @@ export default function Header() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? t.nav.close : t.nav.menu}
-              className="grid size-11 place-items-center rounded-full border border-line bg-white/[.04] lg:hidden"
+              className="grid size-11 place-items-center rounded-full border border-line bg-white/[.04] xl:hidden"
             >
               <Icon name={open ? 'close' : 'menu'} className="size-5" />
             </button>
           </div>
         </div>
+        <nav className="mx-auto mt-2 max-w-7xl xl:hidden" aria-label="Principal">
+          <TabBar className="glass-float w-fit max-w-full" />
+        </nav>
       </motion.header>
 
       <AnimatePresence>
@@ -173,7 +132,7 @@ export default function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.25 } }}
-            className="fixed inset-0 z-[55] bg-bg/90 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-[55] bg-bg/90 backdrop-blur-xl xl:hidden"
           >
             <motion.nav
               initial="hide"
@@ -184,12 +143,19 @@ export default function Header() {
               aria-label="Móvil"
             >
               <ul className="space-y-1">
-                {LINKS.map((k) => (
-                  <motion.li key={k} variants={{ hide: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } } }}>
-                    <a href={HREF[k]} onClick={() => setOpen(false)} className="flex items-center justify-between border-b border-line py-4 font-display text-3xl font-semibold tracking-[-0.012em]">
-                      {t.nav[k]}
+                {TABS.map((k) => (
+                  <motion.li key={k.id} variants={{ hide: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } } }}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setOpen(false);
+                        go(k.id);
+                      }}
+                      className="flex w-full items-center justify-between border-b border-line py-4 text-left font-display text-3xl font-semibold tracking-[-0.012em]"
+                    >
+                      {t.nav[k.nav]}
                       <Icon name="arrow" className="size-5 text-dim" />
-                    </a>
+                    </button>
                   </motion.li>
                 ))}
               </ul>

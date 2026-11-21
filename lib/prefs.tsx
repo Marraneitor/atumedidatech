@@ -12,6 +12,8 @@ type Prefs = {
   t: Dict;
   f: typeof fill;
   price: (key: string) => string;
+  /** Formatea un monto en MXN a la divisa elegida (con el mismo redondeo que price). */
+  money: (mxn: number) => string;
   wa: (text: string) => string;
 };
 
@@ -86,11 +88,9 @@ export function PrefsProvider({ children }: { children: React.ReactNode }) {
     store.set('atm_cur', c);
   }, []);
 
-  const price = useCallback(
-    (key: string) => {
-      const base = SITE.prices[key] ?? 0;
+  const fmt = useCallback(
+    (base: number, override?: number) => {
       const cfg = SITE.currencies[currency] ?? SITE.currencies.MXN;
-      const override = SITE.priceOverrides[key]?.[currency];
       const value = override ?? (currency === SITE.baseCurrency ? base : prettyRound(base * (rates[currency] ?? cfg.rate)));
       let s = new Intl.NumberFormat(cfg.locale, {
         style: 'currency',
@@ -103,6 +103,8 @@ export function PrefsProvider({ children }: { children: React.ReactNode }) {
     },
     [currency, rates],
   );
+  const price = useCallback((key: string) => fmt(SITE.prices[key] ?? 0, SITE.priceOverrides[key]?.[currency]), [fmt, currency]);
+  const money = useCallback((mxn: number) => fmt(mxn), [fmt]);
 
   const wa = useCallback(
     (text: string) => `https://wa.me/${SITE.contact.whatsapp}?text=${encodeURIComponent(text)}`,
@@ -110,8 +112,8 @@ export function PrefsProvider({ children }: { children: React.ReactNode }) {
   );
 
   const value = useMemo<Prefs>(
-    () => ({ lang, setLang, currency, setCurrency, t: DICTS[lang], f: fill, price, wa }),
-    [lang, setLang, currency, setCurrency, price, wa],
+    () => ({ lang, setLang, currency, setCurrency, t: DICTS[lang], f: fill, price, money, wa }),
+    [lang, setLang, currency, setCurrency, price, money, wa],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
