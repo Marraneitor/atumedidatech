@@ -137,6 +137,13 @@ export default function Header() {
               <PrefSelects compact />
             </div>
             <a
+              href="/citas"
+              className="hidden h-10 items-center gap-2 rounded-full border border-line bg-white/[.04] px-4 text-sm font-semibold text-ink transition hover:border-white/20 hover:bg-white/[.08] xl:inline-flex"
+            >
+              <Icon name="calendar" className="size-4 text-accent" />
+              {t.nav.book}
+            </a>
+            <a
               href={wa(t.wa.general)}
               target="_blank"
               rel="noopener noreferrer"
@@ -188,6 +195,10 @@ export default function Header() {
               </ul>
               <motion.div variants={{ hide: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }} className="mt-auto space-y-3">
                 <PrefSelects stack />
+                <a href="/citas" className="flex h-14 items-center justify-center gap-2.5 rounded-full border border-line bg-white/[.04] text-base font-semibold text-ink">
+                  <Icon name="calendar" className="size-5 text-accent" />
+                  {t.nav.book}
+                </a>
                 <a
                   href={wa(t.wa.general)}
                   target="_blank"
