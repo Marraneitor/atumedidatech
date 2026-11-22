@@ -4,9 +4,9 @@ import { animate, motion, useMotionValue, useReducedMotion, useTransform } from 
 import { useEffect, useRef, useState } from 'react';
 import { usePrefs } from '@/lib/prefs';
 import { AI_MODELS, PROJECTS, SECTIONS, type AiModel, type Project, type SectionId } from '@/lib/projects';
-import { DUR, EASE, Icon, Laptop, Phone, Reveal, SectionHead } from './ui';
+import { DUR, EASE, Icon, Laptop, Phone, Reveal } from './ui';
+import { PageHead } from './ServiceList';
 
-const host = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 const byId = (id: string) => PROJECTS.find((p) => p.id === id);
 
 /* ---------- Tarjetas ---------- */
@@ -39,8 +39,6 @@ function ProjectCard({ p }: { p: Project }) {
             <span className="sr-only">{t.work.visit}</span>
           </span>
         </div>
-        <p className="line-clamp-3 text-sm leading-relaxed text-muted">{p.desc[lang]}</p>
-        <span className="mt-auto truncate pt-3 text-xs text-dim">{host(p.url)}</span>
       </div>
     </a>
   );
@@ -267,14 +265,6 @@ function SectionRow({ id, n }: { id: SectionId; n: number }) {
               {s.t}
             </h3>
           </div>
-          <div className="flex flex-col gap-3 lg:col-span-5">
-            <p className="max-w-[58ch] leading-relaxed text-pretty text-muted">{s.d}</p>
-            <span aria-hidden className="inline-flex items-center gap-2 text-xs text-dim">
-              <Icon name="arrow" className="size-3.5 rotate-180" />
-              {t.work.drag}
-              <Icon name="arrow" className="size-3.5" />
-            </span>
-          </div>
         </div>
       </div>
       <Carousel
@@ -293,9 +283,9 @@ export default function Portfolio() {
   const rows = SECTIONS.filter((s) => (s.id === 'ai' ? AI_MODELS.length > 0 : s.ids.length > 0));
 
   return (
-    <section id="portafolio" className="relative py-20 sm:py-28">
+    <section id="portafolio" className="relative py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <SectionHead eyebrow={t.work.eyebrow} title={t.work.title} sub={t.work.sub} />
+        <PageHead eyebrow={t.work.eyebrow} title={t.work.title} sub={t.work.sub} />
 
         <Reveal delay={0.1}>
           <nav aria-label={t.work.eyebrow} className="no-scrollbar -mx-5 mt-10 overflow-x-auto px-5 sm:mx-0 sm:px-0">
