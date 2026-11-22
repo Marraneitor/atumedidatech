@@ -2,7 +2,8 @@
 
 import { SITE } from '@/lib/config';
 import { usePrefs } from '@/lib/prefs';
-import { Icon, Reveal, SectionHead, WhatsAppIcon } from './ui';
+import { Icon, Reveal, WhatsAppIcon } from './ui';
+import { PageHead } from './ServiceList';
 
 const P = SITE.prices;
 const sum = (keys: string[]) => keys.reduce((a, k) => a + (P[k] ?? 0), 0);
@@ -23,9 +24,9 @@ export default function Packages() {
   const yearSave = P.plus_ref + 12 * P.plus_month_ref - (P.plus + 12 * P.plus_month);
 
   return (
-    <section id="paquetes" className="relative py-20 sm:py-28">
+    <section id="paquetes" className="relative py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <SectionHead eyebrow={p.eyebrow} title={p.title} sub={p.sub} />
+        <PageHead eyebrow={p.eyebrow} title={p.title} sub={p.sub} />
 
         {/* Tarjeta principal */}
         <Reveal className="mt-14">
@@ -76,54 +77,26 @@ export default function Packages() {
           </article>
         </Reveal>
 
-        {/* Por qué cuesta menos */}
-        <Reveal className="mt-16">
-          <h3 className="max-w-[30ch] font-display text-2xl font-bold tracking-[-0.012em] text-balance sm:text-3xl">{p.whyTitle}</h3>
-          <ol className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
-            {p.why.map((w, i) => (
-              <li key={w.t} className="bg-bg p-6">
-                <span className="font-display text-sm font-bold text-accent tabular-nums">0{i + 1}</span>
-                <p className="mt-3 font-display text-lg font-semibold tracking-[-0.012em]">{w.t}</p>
-                <p className="mt-2 max-w-[58ch] text-[15px] leading-relaxed text-pretty text-muted">{w.d}</p>
-              </li>
-            ))}
-          </ol>
-        </Reveal>
-
         {/* Qué incluye */}
         <div className="mt-16">
           <Reveal>
             <h3 className="font-display text-2xl font-bold tracking-[-0.012em] sm:text-3xl">{p.incTitle}</h3>
           </Reveal>
-          <div className="mt-8 divide-y divide-line border-y border-line">
+          <div className="mt-8 grid gap-x-8 gap-y-10 border-t border-line pt-8 sm:grid-cols-2 lg:grid-cols-5">
             {p.blocks.map((b, i) => (
-              <Reveal key={b.t}>
-                <div className="grid gap-5 py-8 lg:grid-cols-12 lg:gap-8">
-                  <div className="flex items-start gap-4 lg:col-span-4">
-                    <span className="grid size-11 shrink-0 place-items-center rounded-xl border border-line bg-white/[.04] text-accent">
-                      <Icon name={BLOCK_ICONS[i] ?? 'check'} className="size-5" />
-                    </span>
-                    <h4 className="pt-2 font-display text-lg font-semibold tracking-[-0.012em] text-balance">{b.t}</h4>
-                  </div>
-                  <ul className="grid gap-5 sm:grid-cols-2 lg:col-span-8">
-                    {b.items.map(([name, desc]) => (
-                      <li key={name} className="flex items-start gap-3">
-                        <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-white/10 text-accent">
-                          <Icon name="check" className="size-3" strokeWidth={2.6} />
-                        </span>
-                        <span>
-                          <span className="block font-medium text-ink">{name}</span>
-                          <span className="mt-1 block text-[15px] leading-relaxed text-pretty text-muted">{desc}</span>
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <Reveal key={b.t} delay={i * 0.04}>
+                <Icon name={BLOCK_ICONS[i] ?? 'check'} className="size-5 text-accent" />
+                <h4 className="mt-3 font-display text-base font-semibold tracking-[-0.012em] text-balance">{b.t}</h4>
+                <ul className="mt-3 space-y-1.5 text-sm text-muted">
+                  {b.items.map(([name]) => (
+                    <li key={name}>{name}</li>
+                  ))}
+                </ul>
               </Reveal>
             ))}
           </div>
           <Reveal>
-            <ul className="mt-6 max-w-[80ch] space-y-1.5 text-sm text-dim">
+            <ul className="mt-10 max-w-[80ch] space-y-1 text-xs text-dim">
               {p.fine.map((x) => (
                 <li key={x}>* {x}</li>
               ))}

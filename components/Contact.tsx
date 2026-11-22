@@ -207,45 +207,18 @@ export default function Contact() {
     <section id="contacto" className="relative px-3 py-16 sm:px-5 sm:py-24">
       <div className="relative mx-auto max-w-[1400px] overflow-hidden rounded-[36px] border border-white/10 bg-[#070b16]">
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-1/3 -left-1/4 size-[70vmax] animate-aurora rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,.24),transparent)]" />
-          <div className="absolute -right-1/4 -bottom-1/3 size-[60vmax] animate-aurora-slow rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,.26),transparent)]" />
-          <div className="bg-grid absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,#000_20%,transparent_70%)] opacity-60" />
+          <div className="absolute -top-1/3 -left-1/4 size-[70vmax] rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,.1),transparent)]" />
         </div>
 
         <div className="relative grid gap-12 px-6 py-16 sm:px-12 sm:py-20 lg:grid-cols-[1fr_1.05fr] lg:gap-16 lg:px-16 lg:py-24">
           <div className="flex flex-col">
             <Reveal>
-              <h2 className="font-display text-[2.4rem] leading-[1.04] font-extrabold tracking-[-0.022em] text-balance sm:text-6xl">
-                {t.cta.t1} <span className="text-gradient">{t.cta.t2}</span>
+              <h2 className="font-display text-4xl leading-[1.06] font-bold tracking-[-0.022em] text-balance sm:text-5xl">
+                {t.cta.t1}
               </h2>
             </Reveal>
             <Reveal delay={0.08}>
               <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">{t.cta.sub}</p>
-            </Reveal>
-            {/* Contraste: el costo de seguir igual frente al éxito con A TU MEDIDA TECH */}
-            <Reveal delay={0.1} className="mt-8 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl border border-line bg-white/[.02] p-5">
-                <p className="text-xs font-medium tracking-[.08em] text-dim uppercase">{t.cta.loseT}</p>
-                <ul className="mt-3 space-y-2.5 text-[15px] text-muted">
-                  {t.cta.lose.map((x) => (
-                    <li key={x} className="flex items-start gap-2.5">
-                      <Icon name="minus" className="mt-1 size-3.5 shrink-0 text-amber-300/80" strokeWidth={2.4} />
-                      {x}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="rounded-2xl border border-accent/35 bg-accent/[.07] p-5">
-                <p className="text-xs font-medium tracking-[.08em] text-accent uppercase">{t.cta.winT}</p>
-                <ul className="mt-3 space-y-2.5 text-[15px] text-ink">
-                  {t.cta.win.map((x) => (
-                    <li key={x} className="flex items-start gap-2.5">
-                      <Icon name="check" className="mt-1 size-3.5 shrink-0 text-accent" strokeWidth={2.6} />
-                      {x}
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </Reveal>
             <Reveal delay={0.14} className="mt-9 flex flex-col gap-3 sm:flex-row">
               <MagneticButton href={wa(t.wa.general)} variant="wa" external>
@@ -296,7 +269,6 @@ export function Footer() {
     [t.nav.services, '#soluciones'],
     [t.nav.packages, '#paquetes'],
     [t.nav.pricing, '#precios'],
-    [t.nav.why, '#nosotros'],
     [t.nav.contact, '#contacto'],
   ];
   return (
