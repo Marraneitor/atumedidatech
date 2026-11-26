@@ -109,6 +109,10 @@ export const DEFAULT_CONFIG: Config = {
 };
 
 async function seed() {
+  /* Dos servidores pueden arrancar a la vez con la base vacía. Solo el primero que aparta la llave
+     'seeded' (operación atómica) carga los datos iniciales; así no se duplican los temas de llamada. */
+  const claim = await db.run("INSERT OR IGNORE INTO atm_settings(key,value) VALUES('seeded','true')");
+  if (!claim.changes) return false;
   await setSetting('config', DEFAULT_CONFIG);
   const types: [string, string, number, string][] = [
     ['Diagnóstico gratis', 'Platicamos 20 minutos sobre tu negocio y te decimos qué te conviene: página, CRM, chatbot o POS.', 20, 'llamada,whatsapp,meet'],
@@ -123,23 +127,36 @@ async function seed() {
     const open = d !== 0;
     const sat = d === 6;
     await db.run(
-      'INSERT INTO atm_hours(weekday,open,start,end,break_start,break_end) VALUES(?,?,?,?,?,?)',
+      'INSERT OR IGNORE INTO atm_hours(weekday,open,start,end,break_start,break_end) VALUES(?,?,?,?,?,?)',
       d, open ? 1 : 0, '10:00', sat ? '14:00' : '19:00', sat ? '' : '14:00', sat ? '' : '16:00',
     );
   }
   const pw = process.env.PANEL_PASSWORD || (DEMO ? 'demo' : '');
   if (pw) await setSetting('password', hashPassword(pw));
+  return true;
+}
+
+/** Une los temas de llamada repetidos (mismo nombre) que dejó un arranque doble: las citas pasan al
+ *  primero y los demás se borran. Corre una sola vez por base. */
+async function dedupeTypes() {
+  if (await getSetting('dedupe_types_v1')) return;
+  await db.batch([
+    [`UPDATE atm_appointments SET type_id=(SELECT MIN(t2.id) FROM atm_meeting_types t1 JOIN atm_meeting_types t2 ON t2.name=t1.name WHERE t1.id=atm_appointments.type_id)
+      WHERE type_id IN (SELECT id FROM atm_meeting_types WHERE id NOT IN (SELECT MIN(id) FROM atm_meeting_types GROUP BY name))`],
+    ['DELETE FROM atm_meeting_types WHERE id NOT IN (SELECT MIN(id) FROM atm_meeting_types GROUP BY name)'],
+    ["INSERT INTO atm_settings(key,value) VALUES('dedupe_types_v1','true') ON CONFLICT(key) DO NOTHING"],
+  ]);
 }
 
 async function init() {
   await client.executeMultiple(SCHEMA);
   const has = await db.get<{ n: number }>("SELECT COUNT(*) n FROM atm_settings WHERE key='config'");
   if (!has?.n) {
-    await seed();
-    if (DEMO) await (await import('./demo')).seedDemo();
+    if ((await seed()) && DEMO) await (await import('./demo')).seedDemo();
   } else if (process.env.PANEL_PASSWORD && !(await getSetting('password'))) {
     await setSetting('password', hashPassword(process.env.PANEL_PASSWORD));
   }
+  await dedupeTypes();
 }
 
 /** Espera a que la base esté lista (crea tablas y datos iniciales la primera vez). */
