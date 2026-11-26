@@ -182,7 +182,7 @@ export default function Booking() {
               {[
                 ['check', 'Sin costo y sin compromiso', 'Te decimos qué te conviene aunque al final no trabajemos juntos.'],
                 ['monitor', 'Ejemplos reales de tu giro', 'Te mostramos páginas, CRMs y chatbots que ya funcionan.'],
-                ['bolt', 'Precio claro desde la primera llamada', 'Páginas web desde $999 MXN. Sistemas a la medida con cotización por escrito.'],
+                ['bolt', 'Precio claro desde la primera llamada', 'Páginas web desde $1,500 MXN + IVA. Sistemas a la medida con cotización por escrito.'],
               ].map(([ic, t, d]) => (
                 <li key={t} className="flex gap-3.5">
                   <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-xl border border-line bg-white/[.03] text-accent">

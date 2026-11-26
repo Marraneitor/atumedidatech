@@ -50,7 +50,7 @@ const jsonLd = {
   areaServed: 'Worldwide',
   address: { '@type': 'PostalAddress', addressCountry: 'MX' },
   sameAs: [SITE.contact.facebook],
-  priceRange: 'MXN 999+',
+  priceRange: 'MXN 1500+',
   knowsLanguage: ['es', 'en', 'pt'],
   makesOffer: [
     'Páginas web a medida',
