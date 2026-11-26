@@ -26,18 +26,20 @@ export const SITE = {
   /* Precios base en pesos mexicanos (MXN). Se convierten solos a la divisa elegida. */
   baseCurrency: 'MXN',
   prices: {
-    landing: 999, // Página web (landing) — "desde"
-    web_db: 1800, // Página con base de datos
-    chatbot: 3500, // Chatbot de WhatsApp, pago único
-    chatbot_month: 120, // Chatbot: mensualidad sin plazos forzosos
-    social: 1000, // Redes sociales: 3 videos/semana + 12 fotos al mes, una red
-    social_extra: 500, // Cada red social extra, al mes
-    reel: 100, // Reel de 1 minuto
-    nfc: 100, // Tarjeta NFC personalizada (mínimo 5, envío aparte)
-    plus: 9000, // Paquete Plus: implementación, pago único
-    plus_month: 7000, // Paquete Plus: operación mensual
-    plus_ref: 36000, // Paquete Plus: referencia de agencias tradicionales, implementación
-    plus_month_ref: 28000, // Paquete Plus: referencia de agencias tradicionales, mensual
+    landing: 1500, // Página web (landing), + IVA
+    web_db: 2300, // Página con base de datos y calendario, + IVA
+    chatbot: 5400, // Chatbot de WhatsApp, pago único, + IVA
+    chatbot_month: 1000, // Chatbot: mensualidad sin plazos forzosos, + IVA
+    social: 2000, // Redes sociales Instagram y Facebook, al mes, + IVA
+    reel: 200, // Reel de 1 minuto, IVA incluido
+    nfc: 100, // Tarjeta NFC personalizada, + IVA (mínimo 10, envío aparte)
+    course: 1500, // Curso de IA para empresas, por hora, IVA incluido
+    plus: 9000, // Paquete Plus: implementación, pago único, + IVA
+    plus_month: 7000, // Paquete Plus: operación mensual, + IVA
+    /* Paquetes para empezar (+ IVA): pago inicial y mensualidad */
+    start: 5400, start_month: 1000, // Arranque digital
+    growth: 5400, growth_month: 3000, // Crecimiento
+    full: 6200, full_month: 3000, // Negocio completo
   } as Record<string, number>,
 
   /* Precio fijo por divisa (opcional). Si pones un valor aquí se usa en lugar de la conversión.
@@ -68,9 +70,10 @@ export const SITE = {
     { code: 'pt', label: 'Português' },
   ] as { code: Lang; label: string }[],
 
-  /* Divisa sugerida según el país del visitante (si no eligió una antes). */
+  /* Divisa según el país de la IP del visitante (si no eligió una antes). Otros países ven USD. */
   regionCurrency: {
     MX: 'MXN', US: 'USD', CA: 'CAD', GB: 'GBP', CO: 'COP', CL: 'CLP', PE: 'PEN',
     AR: 'ARS', BR: 'BRL', GT: 'GTQ', ES: 'EUR', FR: 'EUR', DE: 'EUR', IT: 'EUR', PT: 'EUR', NL: 'EUR',
+    BE: 'EUR', AT: 'EUR', IE: 'EUR', FI: 'EUR', GR: 'EUR', LU: 'EUR',
   } as Record<string, string>,
 };

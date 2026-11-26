@@ -55,10 +55,20 @@ export function PrefsProvider({ children }: { children: React.ReactNode }) {
     if (savedCur && SITE.currencies[savedCur]) {
       setCurState(savedCur);
     } else {
-      const region = (navigator.language || '').split('-')[1]?.toUpperCase();
-      const byRegion = region && SITE.regionCurrency[region];
-      if (byRegion) setCurState(byRegion);
-      else if (l !== 'es') setCurState('USD');
+      // Divisa por el país de la IP (Vercel); si no se sabe, por la región del navegador.
+      const pick = (country: string) => {
+        const byCountry = country && SITE.regionCurrency[country];
+        if (byCountry) return setCurState(byCountry);
+        if (country) return setCurState('USD');
+        const region = (navigator.language || '').split('-')[1]?.toUpperCase();
+        const byRegion = region && SITE.regionCurrency[region];
+        if (byRegion) setCurState(byRegion);
+        else if (l !== 'es') setCurState('USD');
+      };
+      fetch('/api/geo')
+        .then((r) => (r.ok ? r.json() : { country: '' }))
+        .then((d) => pick(typeof d?.country === 'string' ? d.country.toUpperCase() : ''))
+        .catch(() => pick(''));
     }
 
     fetch(SITE.liveRatesUrl)
