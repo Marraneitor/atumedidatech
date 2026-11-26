@@ -121,7 +121,7 @@ const es = {
     badge: 'Fin de año −25%',
     before: 'Antes',
     until: 'Hasta el {date}',
-    note: '25% de descuento por Fin de año en el chatbot y en todos los paquetes, en el pago inicial y en la mensualidad.',
+    note: '25% de descuento por Fin de año en el chatbot y en todos los paquetes, en el pago único. Las mensualidades no cambian.',
   },
   plus: {
     eyebrow: 'Paquetes',
@@ -367,7 +367,7 @@ const en: Dict = {
     badge: 'Year-end −25%',
     before: 'Was',
     until: 'Until {date}',
-    note: '25% year-end discount on the chatbot and every package, on both the upfront and the monthly price.',
+    note: '25% year-end discount on the chatbot and every package, on the one-time payment. Monthly fees stay the same.',
   },
   plus: {
     eyebrow: 'Packages',
@@ -611,7 +611,7 @@ const pt: Dict = {
     badge: 'Fim de ano −25%',
     before: 'Antes',
     until: 'Até {date}',
-    note: '25% de desconto de fim de ano no chatbot e em todos os pacotes, no pagamento inicial e na mensalidade.',
+    note: '25% de desconto de fim de ano no chatbot e em todos os pacotes, no pagamento único. As mensalidades não mudam.',
   },
   plus: {
     eyebrow: 'Pacotes',

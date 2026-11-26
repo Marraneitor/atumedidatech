@@ -42,14 +42,14 @@ export const SITE = {
     full: 6200, full_month: 3000, // Negocio completo
   } as Record<string, number>,
 
-  /* Promoción de Fin de año: descuento sobre el chatbot y todos los paquetes (pago inicial y mensualidad).
+  /* Promoción de Fin de año: descuento sobre el pago único del chatbot y de todos los paquetes (las mensualidades van a precio normal).
      Se muestra el precio anterior tachado. Se apaga sola después de `until` (fin del día, hora de CDMX),
      o antes si pones active: false. Los precios de arriba son los normales; no los cambies por la promo. */
   promo: {
     active: true,
     pct: 25,
     until: '2026-12-31',
-    keys: ['chatbot', 'chatbot_month', 'plus', 'plus_month', 'start', 'start_month', 'growth', 'growth_month', 'full', 'full_month'],
+    keys: ['chatbot', 'plus', 'start', 'growth', 'full'],
   },
 
   /* Precio fijo por divisa (opcional). Si pones un valor aquí se usa en lugar de la conversión.

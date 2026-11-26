@@ -41,7 +41,7 @@ function data() {
         nombre: 'Promoción de Fin de año',
         descuento: `${SITE.promo.pct}%`,
         vigencia: `hasta el ${fin}`,
-        aplica: 'Chatbot de WhatsApp y todos los paquetes (Arranque digital, Crecimiento, Negocio completo y Paquete Plus), en el pago inicial y en la mensualidad.',
+        aplica: 'Chatbot de WhatsApp y todos los paquetes (Arranque digital, Crecimiento, Negocio completo y Paquete Plus), solo en el pago único (implementación). Las mensualidades van a precio normal.',
         no_aplica: 'página web, página con base de datos, redes sociales, reels, tarjetas NFC, cursos ni sistemas a la medida (van a precio normal).',
       }
     : null;
@@ -70,8 +70,8 @@ function texto(d: ReturnType<typeof data>) {
     l.push(`## ${p.nombre.toUpperCase()} (VIGENTE ${p.vigencia.toUpperCase()})`);
     l.push(`- ${p.descuento} de descuento en: ${p.aplica}`);
     l.push(`- No aplica en: ${p.no_aplica}`);
-    l.push('- Los precios de abajo YA tienen el descuento. Cuando hables del chatbot o de un paquete, menciona la promoción de Fin de año y el precio de antes, y que es por tiempo limitado, sin presionar.');
-    l.push('- Si preguntan si la mensualidad con descuento es para siempre, di que lo confirma el asesor al cerrar.', '');
+    l.push('- Los pagos únicos de abajo YA tienen el descuento. Cuando hables del chatbot o de un paquete, menciona la promoción de Fin de año y el precio de antes, y que es por tiempo limitado, sin presionar.');
+    l.push('- Las mensualidades NO tienen descuento. Si preguntan, aclara que el descuento es solo en el pago único.', '');
   }
   l.push('## Servicios');
   for (const s of d.servicios)
