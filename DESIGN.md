@@ -45,7 +45,7 @@ Técnica, confiable y cercana. Calidad de agencia con trato directo. Nunca "plan
 - Animar solo `transform` y `opacity`, nunca `filter: blur`.
 - El titular del inicio entra con CSS (`animate-rise`), no con JS, para que el LCP no espere a la hidratación.
 - `prefers-reduced-motion`: sin desplazamientos ni parallax, solo fundidos.
-- Fondo de agua (`components/WaterRipple.tsx`): gotas y ondas en un canvas fijo detrás del contenido, al mover el mouse o tocar la pantalla. Malla a 1/6 de resolución, solo corre mientras hay ondas, se pausa con la pestaña oculta y se apaga con movimiento reducido. Es el único efecto de "carácter": no sumar otros que sigan al cursor.
+- Inicio: retícula en perspectiva, luz de marca, un destello que cruza una vez y capturas reales en abanico 3D que entran una por una (`components/Home.tsx`). Es el único efecto de "carácter": no sumar efectos que sigan al cursor.
 
 ## Evitar siempre
 - Degradados morado/azul, emojis como íconos, tarjetas idénticas de ícono + título + párrafo.

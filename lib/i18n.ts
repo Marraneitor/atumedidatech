@@ -30,6 +30,7 @@ const es = {
     modelsCount: '{n} modelos',
     aiTag: 'Modelo IA',
     sections: {
+      best: { t: 'Proyectos destacados', d: 'Negocios reales con su propio dominio. Entra y compruébalo tú mismo.' },
       ai: { t: 'Modelos IA para marketing', d: 'Modelos creadas con IA para tus anuncios, catálogos y redes. Sin sesión de fotos y con el estilo de tu marca.' },
       landing: { t: 'Landing pages', d: 'Páginas con una sola meta: que tu visitante te escriba por WhatsApp, reserve o pida su cita.' },
       marketing: { t: 'Marketing digital', d: 'Sitios y contenido para atraer público, explicar lo que ofreces y crecer en redes.' },
@@ -67,8 +68,9 @@ const es = {
       cta1: 'Cotizar por WhatsApp',
       cta2: 'Ver proyectos',
       facts: ['200+ proyectos publicados', 'Respuesta en menos de 24 h', 'Páginas desde {price} + IVA'],
+      trust: 'Negocios que ya están en línea con nosotros',
     },
-    recent: { title: 'Trabajo reciente', all: 'Ver portafolio' },
+    recent: { title: 'Proyectos destacados', all: 'Ver portafolio' },
     what: {
       title: 'Qué hacemos',
       all: 'Ver servicios',
@@ -268,6 +270,7 @@ const en: Dict = {
     modelsCount: '{n} models',
     aiTag: 'AI model',
     sections: {
+      best: { t: 'Featured projects', d: 'Real businesses with their own domain. Visit them and see for yourself.' },
       ai: { t: 'AI models for marketing', d: 'AI-generated models for your ads, catalogs and social media. No photo shoot, in your brand’s style.' },
       landing: { t: 'Landing pages', d: 'Pages with one goal: getting your visitor to message you on WhatsApp, book or schedule.' },
       marketing: { t: 'Digital marketing', d: 'Websites and content that attract an audience, explain what you offer and grow your social media.' },
@@ -305,8 +308,9 @@ const en: Dict = {
       cta1: 'Get a quote on WhatsApp',
       cta2: 'See our work',
       facts: ['200+ projects launched', 'Reply in under 24 h', 'Websites from {price} + VAT'],
+      trust: 'Businesses already online with us',
     },
-    recent: { title: 'Recent work', all: 'See portfolio' },
+    recent: { title: 'Featured projects', all: 'See portfolio' },
     what: {
       title: 'What we do',
       all: 'See services',
@@ -504,6 +508,7 @@ const pt: Dict = {
     modelsCount: '{n} modelos',
     aiTag: 'Modelo IA',
     sections: {
+      best: { t: 'Projetos em destaque', d: 'Negócios reais com domínio próprio. Entre e confira você mesmo.' },
       ai: { t: 'Modelos IA para marketing', d: 'Modelos criadas com IA para seus anúncios, catálogos e redes. Sem sessão de fotos e com o estilo da sua marca.' },
       landing: { t: 'Landing pages', d: 'Páginas com um só objetivo: que o visitante chame você no WhatsApp, reserve ou agende.' },
       marketing: { t: 'Marketing digital', d: 'Sites e conteúdo para atrair público, explicar o que você oferece e crescer nas redes.' },
@@ -541,8 +546,9 @@ const pt: Dict = {
       cta1: 'Orçamento pelo WhatsApp',
       cta2: 'Ver projetos',
       facts: ['200+ projetos publicados', 'Resposta em menos de 24 h', 'Sites a partir de {price} + IVA'],
+      trust: 'Negócios que já estão online com a gente',
     },
-    recent: { title: 'Trabalhos recentes', all: 'Ver portfólio' },
+    recent: { title: 'Projetos em destaque', all: 'Ver portfólio' },
     what: {
       title: 'O que fazemos',
       all: 'Ver serviços',

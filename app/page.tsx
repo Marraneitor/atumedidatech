@@ -8,14 +8,12 @@ import ServiceList from '@/components/ServiceList';
 import PriceList from '@/components/PriceList';
 import { TabPanel, TabsProvider } from '@/components/Tabs';
 import Contact, { Footer, WaFloat } from '@/components/Contact';
-import WaterRipple from '@/components/WaterRipple';
 
 export default function Page() {
   return (
     <PrefsProvider>
       <MotionConfig reducedMotion="user">
         <TabsProvider>
-          <WaterRipple />
           <Header />
           {/* Cada pestaña es un panel; se navega de izquierda a derecha con la barra de arriba. */}
           <main>

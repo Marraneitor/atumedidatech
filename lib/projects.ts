@@ -8,6 +8,24 @@ export type Project = { id: string; name: string; url: string; cat: 'web' | 'sys
 
 export const PROJECTS: Project[] = [
   {
+    id: 'ruah', name: 'Clínica Ruah Tijuana', url: 'https://clinicaruahtijuana.com', cat: 'web', mobile: true, featured: true,
+    type: { es: 'Salud · Rehabilitación', en: 'Healthcare · Addiction recovery', pt: 'Saúde · Reabilitação' },
+    desc: {
+      es: 'Sitio para clínica de rehabilitación con tratamiento integral, orientación a familias, proceso de ingreso y contacto confidencial.',
+      en: 'Website for an addiction recovery clinic with full treatment, family guidance, admission process and confidential contact.',
+      pt: 'Site para clínica de reabilitação com tratamento integral, orientação às famílias, processo de internação e contato confidencial.',
+    },
+  },
+  {
+    id: 'instintos', name: 'Instintos Veterinaria y Spa', url: 'https://instintos.com.mx', cat: 'web', mobile: true, featured: true,
+    type: { es: 'Veterinaria · Citas en línea', en: 'Veterinary · Online booking', pt: 'Veterinária · Agendamento online' },
+    desc: {
+      es: 'Sitio con agenda en línea en tres pasos, cartilla de vacunación digital, recolección a domicilio y reseñas de Google.',
+      en: 'Website with three-step online booking, digital vaccination card, pet pickup and Google reviews.',
+      pt: 'Site com agendamento online em três passos, carteira de vacinação digital, busca em domicílio e avaliações do Google.',
+    },
+  },
+  {
     id: 'srsburger', name: 'Sr & Sra Burger', url: 'https://www.srsburger.com', cat: 'web', mobile: true, featured: true,
     type: { es: 'Restaurante · Pedidos en línea', en: 'Restaurant · Online ordering', pt: 'Restaurante · Pedidos online' },
     desc: {
@@ -26,7 +44,7 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: 'gestia', name: 'Gestia POS', url: 'https://gestia.rest', cat: 'system', mobile: true, featured: true,
+    id: 'gestia', name: 'Gestia POS', url: 'https://gestia.rest', cat: 'system', mobile: true,
     type: { es: 'SaaS · Punto de venta', en: 'SaaS · Point of sale', pt: 'SaaS · Ponto de venda' },
     desc: {
       es: 'Sistema TPV para restaurantes que funciona sin internet y sincroniza en tiempo real: ventas, mesas e inventario.',
@@ -201,9 +219,10 @@ export const PROJECTS: Project[] = [
 /* SECCIONES DEL PORTAFOLIO — cada fila del carrusel, en este orden.
    Un proyecto puede aparecer en más de una sección. Los textos de cada sección
    están en lib/i18n.ts (work.sections). */
-export type SectionId = 'ai' | 'landing' | 'marketing' | 'crm' | 'pos' | 'chatbot' | 'store';
+export type SectionId = 'ai' | 'best' | 'landing' | 'marketing' | 'crm' | 'pos' | 'chatbot' | 'store';
 export const SECTIONS: { id: SectionId; ids: string[] }[] = [
   { id: 'ai', ids: [] }, // usa AI_MODELS
+  { id: 'best', ids: ['ruah', 'instintos', 'srsburger', 'beautymina'] }, // destacados: clientes con dominio propio
   { id: 'landing', ids: ['denti7', 'hotelmadrid', 'oxford', 'yuridia', 'funeraria', 'littlecakes'] },
   { id: 'marketing', ids: ['prettythings', 'debate', 'gps', 'yuridia'] },
   { id: 'crm', ids: ['websights', 'cobranza', 'streamly'] },
