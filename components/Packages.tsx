@@ -1,27 +1,20 @@
 'use client';
 
-import { SITE } from '@/lib/config';
 import { usePrefs } from '@/lib/prefs';
 import { Icon, Reveal, WhatsAppIcon } from './ui';
 import { PageHead } from './ServiceList';
 
-const P = SITE.prices;
-const sum = (keys: string[]) => keys.reduce((a, k) => a + (P[k] ?? 0), 0);
-
-/* Paquetes para empezar: el precio es la suma de cada servicio (lib/config.ts). Nombres y textos en lib/i18n.ts. */
+/* Paquetes para empezar: precio inicial y mensual en lib/config.ts. Nombres y textos en lib/i18n.ts. */
 const BUNDLES = [
-  { up: ['landing', 'chatbot'], mo: ['chatbot_month'] },
-  { up: ['landing', 'chatbot'], mo: ['chatbot_month', 'social'] },
-  { up: ['web_db', 'chatbot'], mo: ['chatbot_month', 'social', 'social_extra'] },
+  { up: 'start', mo: 'start_month' },
+  { up: 'growth', mo: 'growth_month' },
+  { up: 'full', mo: 'full_month' },
 ];
 const BLOCK_ICONS = ['globe', 'users', 'chat', 'video', 'life'];
 
 export default function Packages() {
-  const { t, price, money, wa, f } = usePrefs();
+  const { t, price, wa, f } = usePrefs();
   const p = t.plus;
-  const month1 = P.plus + P.plus_month;
-  const month1Ref = P.plus_ref + P.plus_month_ref;
-  const yearSave = P.plus_ref + 12 * P.plus_month_ref - (P.plus + 12 * P.plus_month);
 
   return (
     <section id="paquetes" className="relative py-20 sm:py-24">
@@ -39,23 +32,8 @@ export default function Packages() {
             <p className="mt-1 text-lg text-muted">{p.tagline}</p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-2">
-              <PriceBox label={p.setup} value={price('plus')} unit={p.setupUnit} refLabel={p.agency} refValue={price('plus_ref')} incl={p.setupIncl} />
-              <PriceBox label={p.month} value={price('plus_month')} unit={p.monthUnit} refLabel={p.agency} refValue={`${price('plus_month_ref')} ${p.monthUnit}`} incl={p.monthIncl} />
-            </div>
-
-            <div className="mt-4 grid gap-4 rounded-2xl border border-line bg-bg/60 p-5 sm:p-6 lg:grid-cols-[1fr_1fr_1.3fr] lg:items-center">
-              <div>
-                <p className="text-sm text-dim">{p.compare} · {p.agency}</p>
-                <p className="mt-1 font-display text-2xl font-bold text-muted tabular-nums line-through decoration-white/30">{money(month1Ref)}</p>
-              </div>
-              <div>
-                <p className="text-sm text-dim">{p.compare} · {p.us}</p>
-                <p className="mt-1 font-display text-2xl font-bold text-ink tabular-nums">{money(month1)}</p>
-              </div>
-              <div className="border-t border-line pt-4 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-6">
-                <p className="font-display text-xl font-bold tracking-[-0.012em] text-accent">{f(p.saving, { amount: money(yearSave) })}</p>
-                <p className="mt-1 text-sm text-dim">{p.savingNote}</p>
-              </div>
+              <PriceBox label={p.setup} value={price('plus')} unit={p.setupUnit} incl={p.setupIncl} />
+              <PriceBox label={p.month} value={price('plus_month')} unit={p.monthUnit} incl={p.monthIncl} />
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -114,8 +92,8 @@ export default function Packages() {
             {BUNDLES.map((b, i) => {
               const txt = p.bundles[i];
               if (!txt) return null;
-              const up = money(sum(b.up));
-              const mo = money(sum(b.mo));
+              const up = price(b.up);
+              const mo = price(b.mo);
               return (
                 <Reveal key={txt.name} delay={i * 0.08}>
                   <div className="surface flex h-full flex-col rounded-[24px] p-6 sm:p-7">
@@ -132,8 +110,9 @@ export default function Packages() {
                       <p className="text-sm text-dim">{p.upfront}</p>
                       <p className="font-display text-3xl font-extrabold tracking-[-0.012em] tabular-nums">{up}</p>
                       <p className="mt-1 text-sm font-medium text-accent">+ {mo} {p.monthly}</p>
+                      <p className="mt-1 text-xs text-dim">{p.iva}</p>
                       <a
-                        href={wa(f(t.wa.bundle, { name: txt.name, price: `${up} + ${mo} ${p.monthly}` }))}
+                        href={wa(f(t.wa.bundle, { name: txt.name, price: `${up} + ${mo} ${p.monthly}, ${p.iva.toLowerCase()}` }))}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-line bg-white/[.04] text-[15px] font-semibold transition hover:bg-white/10"
@@ -153,14 +132,11 @@ export default function Packages() {
   );
 }
 
-function PriceBox({ label, value, unit, refLabel, refValue, incl }: { label: string; value: string; unit: string; refLabel: string; refValue: string; incl: string }) {
+function PriceBox({ label, value, unit, incl }: { label: string; value: string; unit: string; incl: string }) {
   return (
     <div className="rounded-2xl border border-line bg-bg/60 p-5 sm:p-6">
       <p className="text-sm font-medium tracking-[.08em] text-dim uppercase">{label}</p>
-      <p className="mt-3 text-sm text-dim">
-        {refLabel}: <span className="line-through decoration-white/30">{refValue}</span>
-      </p>
-      <p className="mt-1 flex flex-wrap items-baseline gap-x-2">
+      <p className="mt-3 flex flex-wrap items-baseline gap-x-2">
         <span className="text-gradient font-display text-4xl font-extrabold tracking-[-0.012em] tabular-nums sm:text-5xl">{value}</span>
         <span className="text-sm text-muted">{unit}</span>
       </p>
