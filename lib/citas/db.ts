@@ -108,8 +108,11 @@ export const DEFAULT_CONFIG: Config = {
   welcome: 'Elige el tema, el día y la hora. Te confirmamos por WhatsApp y platicamos sin compromiso.',
 };
 
+/** Datos iniciales. Solo los crea la primera instancia que "aparta" la configuración:
+    si dos arranques en frío llegan a la vez, el segundo no vuelve a insertar los temas. */
 async function seed() {
-  await setSetting('config', DEFAULT_CONFIG);
+  const claim = await db.run("INSERT OR IGNORE INTO atm_settings(key,value) VALUES('config',?)", JSON.stringify(DEFAULT_CONFIG));
+  if (!claim.changes) return false;
   const types: [string, string, number, string][] = [
     ['Diagnóstico gratis', 'Platicamos 20 minutos sobre tu negocio y te decimos qué te conviene: página, CRM, chatbot o POS.', 20, 'llamada,whatsapp,meet'],
     ['Demo del CRM con chatbot', 'Te mostramos en vivo el panel de citas, el chatbot de WhatsApp y los reportes, con ejemplos de tu giro.', 30, 'meet,whatsapp'],
@@ -123,23 +126,40 @@ async function seed() {
     const open = d !== 0;
     const sat = d === 6;
     await db.run(
-      'INSERT INTO atm_hours(weekday,open,start,end,break_start,break_end) VALUES(?,?,?,?,?,?)',
+      'INSERT OR IGNORE INTO atm_hours(weekday,open,start,end,break_start,break_end) VALUES(?,?,?,?,?,?)',
       d, open ? 1 : 0, '10:00', sat ? '14:00' : '19:00', sat ? '' : '14:00', sat ? '' : '16:00',
     );
   }
   const pw = process.env.PANEL_PASSWORD || (DEMO ? 'demo' : '');
   if (pw) await setSetting('password', hashPassword(pw));
+  return true;
+}
+
+/** Quita temas de llamada repetidos (mismo nombre y descripción) que dejó un arranque doble.
+    Las citas que usaban una copia pasan al tema original. */
+async function dedupeTypes() {
+  const dup = `SELECT t.id FROM atm_meeting_types t WHERE t.id > (
+    SELECT MIN(x.id) FROM atm_meeting_types x WHERE x.name=t.name AND x.description=t.description)`;
+  const n = await db.get<{ n: number }>(`SELECT COUNT(*) n FROM (${dup})`);
+  if (!n?.n) return;
+  await db.batch([
+    [`UPDATE atm_appointments SET type_id=(
+        SELECT MIN(x.id) FROM atm_meeting_types x JOIN atm_meeting_types t ON x.name=t.name AND x.description=t.description
+        WHERE t.id=atm_appointments.type_id)
+      WHERE type_id IN (${dup})`],
+    [`DELETE FROM atm_meeting_types WHERE id IN (${dup})`],
+  ]);
 }
 
 async function init() {
   await client.executeMultiple(SCHEMA);
   const has = await db.get<{ n: number }>("SELECT COUNT(*) n FROM atm_settings WHERE key='config'");
   if (!has?.n) {
-    await seed();
-    if (DEMO) await (await import('./demo')).seedDemo();
+    if ((await seed()) && DEMO) await (await import('./demo')).seedDemo();
   } else if (process.env.PANEL_PASSWORD && !(await getSetting('password'))) {
     await setSetting('password', hashPassword(process.env.PANEL_PASSWORD));
   }
+  await dedupeTypes();
 }
 
 /** Espera a que la base esté lista (crea tablas y datos iniciales la primera vez). */
