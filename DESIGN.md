@@ -45,6 +45,7 @@ Técnica, confiable y cercana. Calidad de agencia con trato directo. Nunca "plan
 - Animar solo `transform` y `opacity`, nunca `filter: blur`.
 - El titular del inicio entra con CSS (`animate-rise`), no con JS, para que el LCP no espere a la hidratación.
 - `prefers-reduced-motion`: sin desplazamientos ni parallax, solo fundidos.
+- Entrada (`components/IntroVortex.tsx`, CSS `.intro`): torbellino de capturas que colapsa en un punto y "¿Listo para comenzar?", 1.5 s, una vez por visita, nunca con movimiento reducido.
 - Inicio: retícula en perspectiva, luz de marca, un destello que cruza una vez y capturas reales en abanico 3D que entran una por una (`components/Home.tsx`). Es el único efecto de "carácter": no sumar efectos que sigan al cursor.
 
 ## Evitar siempre

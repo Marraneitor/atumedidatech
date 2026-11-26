@@ -8,10 +8,12 @@ import ServiceList from '@/components/ServiceList';
 import PriceList from '@/components/PriceList';
 import { TabPanel, TabsProvider } from '@/components/Tabs';
 import Contact, { Footer, WaFloat } from '@/components/Contact';
+import IntroVortex from '@/components/IntroVortex';
 
 export default function Page() {
   return (
     <PrefsProvider>
+      <IntroVortex />
       <MotionConfig reducedMotion="user">
         <TabsProvider>
           <Header />

@@ -63,7 +63,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-MX" className={`${inter.variable} ${jakarta.variable}`}>
+    <html lang="es-MX" className={`${inter.variable} ${jakarta.variable}`} suppressHydrationWarning>
       <body>
         {children}
         <VisitBeacon />
