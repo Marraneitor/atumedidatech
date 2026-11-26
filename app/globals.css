@@ -167,6 +167,9 @@
 
 /* Protector de pantalla (/pantalla): columnas que suben sin fin */
 @keyframes wall-up { to { transform: translateY(-50%); } }
+@keyframes spot-in { from { opacity: 0; transform: translateY(24px) scale(0.96); } }
+@keyframes spot-bar { from { transform: scaleX(0); } }
+@keyframes fade-in { from { opacity: 0; } }
 
 /* ---------- Entrada: torbellino de proyectos (components/IntroVortex.tsx) ----------
    0–0.97 s giran y colapsan · 0.7–1.1 s punto de luz y onda · 0.85 s texto · 1.15–1.5 s se desvanece.
