@@ -33,7 +33,7 @@ export default function Packages() {
 
             <div className="mt-8 grid gap-4 md:grid-cols-2">
               <PriceBox label={p.setup} value={price('plus')} unit={p.setupUnit} incl={p.setupIncl} />
-              <PriceBox label={p.month} value={price('plus_month')} unit={p.monthUnit} incl={p.monthIncl} />
+              <PriceBox label={p.month} value={price('plus_month')} unit={p.monthUnit} incl={p.monthIncl} extra={f(p.botMaint, { price: price('chatbot_month') })} />
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -110,7 +110,7 @@ export default function Packages() {
                       <p className="text-sm text-dim">{p.upfront}</p>
                       <p className="font-display text-3xl font-extrabold tracking-[-0.012em] tabular-nums">{up}</p>
                       <p className="mt-1 text-sm font-medium text-accent">+ {mo} {p.monthly}</p>
-                      <p className="mt-1 text-xs text-dim">{p.iva}</p>
+                      <p className="mt-1 text-xs text-dim">{f(p.bundleMaint, { price: price('chatbot_month') })}. {p.iva}</p>
                       <a
                         href={wa(f(t.wa.bundle, { name: txt.name, price: `${up} + ${mo} ${p.monthly}, ${p.iva.toLowerCase()}` }))}
                         target="_blank"
@@ -132,7 +132,7 @@ export default function Packages() {
   );
 }
 
-function PriceBox({ label, value, unit, incl }: { label: string; value: string; unit: string; incl: string }) {
+function PriceBox({ label, value, unit, incl, extra }: { label: string; value: string; unit: string; incl: string; extra?: string }) {
   return (
     <div className="rounded-2xl border border-line bg-bg/60 p-5 sm:p-6">
       <p className="text-sm font-medium tracking-[.08em] text-dim uppercase">{label}</p>
@@ -140,6 +140,7 @@ function PriceBox({ label, value, unit, incl }: { label: string; value: string; 
         <span className="text-gradient font-display text-4xl font-extrabold tracking-[-0.012em] tabular-nums sm:text-5xl">{value}</span>
         <span className="text-sm text-muted">{unit}</span>
       </p>
+      {extra && <p className="mt-1 text-sm font-medium text-accent">{extra}</p>}
       <p className="mt-3 text-[15px] text-pretty text-muted">{incl}</p>
     </div>
   );
