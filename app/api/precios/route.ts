@@ -1,21 +1,22 @@
 /* Precios y paquetes vigentes, en un solo lugar, para el chatbot de WhatsApp (atumedida-bot).
    Sale de lib/config.ts (precios) y lib/i18n.ts (nombres y textos en español), así que se
    actualiza solo con cada cambio publicado del sitio. ?formato=texto da la versión para el prompt. */
-import { SITE } from '@/lib/config';
+import { onSale, priceMXN, promoOn, SITE } from '@/lib/config';
 import { DICTS, fill } from '@/lib/i18n';
 
 export const dynamic = 'force-dynamic';
 
 const mxn = (n: number) => '$' + n.toLocaleString('es-MX') + ' MXN';
-const P = SITE.prices;
+/* Precio vigente; si la clave está en promoción, añade el precio normal para que el bot lo mencione. */
+const pr = (k: string) => mxn(priceMXN(k)) + (onSale(k) ? ` (antes ${mxn(SITE.prices[k])}, ${SITE.promo.pct}% de descuento de Fin de año)` : '');
 
 function data() {
   const t = DICTS.es;
   const servicios = t.pricing.plans.map((p) => ({
     nombre: p.name,
-    precio: p.key ? mxn(P[p.key]) : 'A cotizar',
+    precio: p.key ? pr(p.key) : 'A cotizar',
     unidad: p.unit,
-    extra: p.extraKey ? fill(p.extra, { price: mxn(P[p.extraKey]) }) : p.extra,
+    extra: p.extraKey ? fill(p.extra, { price: pr(p.extraKey) }) : p.extra,
     descripcion: p.desc,
     incluye: p.f,
   }));
@@ -23,20 +24,31 @@ function data() {
   const paquetes = t.plus.bundles.map((b, i) => ({
     nombre: b.name,
     incluye: b.items,
-    pago_inicial: mxn(P[keys[i][0]]),
-    mensual: mxn(P[keys[i][1]]),
+    pago_inicial: pr(keys[i][0]),
+    mensual: pr(keys[i][1]),
   }));
   const plus = {
     nombre: `${t.plus.name} (${t.plus.tagline})`,
-    implementacion: `${mxn(P.plus)} ${t.plus.setupUnit}`,
-    mensual: `${mxn(P.plus_month)} ${t.plus.monthUnit}`,
+    implementacion: `${pr('plus')} ${t.plus.setupUnit}`,
+    mensual: `${pr('plus_month')} ${t.plus.monthUnit}`,
     resumen: t.plus.sub,
     incluye: t.plus.blocks.map((b) => `${b.t}: ${b.items.map((x) => x[0]).join(', ')}`),
     letras_pequenas: t.plus.fine,
   };
+  const fin = new Date(`${SITE.promo.until}T12:00:00-06:00`).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+  const promocion = promoOn()
+    ? {
+        nombre: 'Promoción de Fin de año',
+        descuento: `${SITE.promo.pct}%`,
+        vigencia: `hasta el ${fin}`,
+        aplica: 'Chatbot de WhatsApp y todos los paquetes (Arranque digital, Crecimiento, Negocio completo y Paquete Plus), en el pago inicial y en la mensualidad.',
+        no_aplica: 'página web, página con base de datos, redes sociales, reels, tarjetas NFC, cursos ni sistemas a la medida (van a precio normal).',
+      }
+    : null;
   return {
     actualizado: new Date().toISOString(),
     fuente: `${SITE.url}/#precios`,
+    promocion,
     nota: t.pricing.note,
     preferencial: t.pricing.pref,
     servicios,
@@ -53,6 +65,14 @@ function texto(d: ReturnType<typeof data>) {
   const l: string[] = [];
   l.push(`# PRECIOS VIGENTES DE A TU MEDIDA TECH (fuente: ${d.fuente}, generado ${d.actualizado})`);
   l.push('Usa SOLO estos precios. Si algo no está aquí, se cotiza a la medida.', '');
+  if (d.promocion) {
+    const p = d.promocion;
+    l.push(`## ${p.nombre.toUpperCase()} (VIGENTE ${p.vigencia.toUpperCase()})`);
+    l.push(`- ${p.descuento} de descuento en: ${p.aplica}`);
+    l.push(`- No aplica en: ${p.no_aplica}`);
+    l.push('- Los precios de abajo YA tienen el descuento. Cuando hables del chatbot o de un paquete, menciona la promoción de Fin de año y el precio de antes, y que es por tiempo limitado, sin presionar.');
+    l.push('- Si preguntan si la mensualidad con descuento es para siempre, di que lo confirma el asesor al cerrar.', '');
+  }
   l.push('## Servicios');
   for (const s of d.servicios)
     l.push(`- ${s.nombre}: ${s.precio}${s.unidad ? ' ' + s.unidad : ''}${s.extra ? '. ' + s.extra : ''}. ${s.descripcion} Incluye: ${s.incluye.join('; ')}.`);

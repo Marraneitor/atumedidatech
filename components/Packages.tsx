@@ -1,8 +1,10 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { usePrefs } from '@/lib/prefs';
 import { Icon, Reveal, WhatsAppIcon } from './ui';
 import { PageHead } from './ServiceList';
+import { PromoBadge, Was } from './Promo';
 
 /* Paquetes para empezar: precio inicial y mensual en lib/config.ts. Nombres y textos en lib/i18n.ts. */
 const BUNDLES = [
@@ -13,7 +15,7 @@ const BUNDLES = [
 const BLOCK_ICONS = ['globe', 'users', 'chat', 'video', 'life'];
 
 export default function Packages() {
-  const { t, price, wa, f } = usePrefs();
+  const { t, price, oldPrice, wa, f } = usePrefs();
   const p = t.plus;
 
   return (
@@ -27,13 +29,14 @@ export default function Packages() {
             <div className="flex flex-wrap gap-2">
               <span className="rounded-full bg-gradient-to-r from-sky-300 to-accent-2 px-3 py-1 text-xs font-bold tracking-[.08em] text-[#03111c] uppercase">{p.badge}</span>
               <span className="rounded-full border border-accent/40 px-3 py-1 text-xs font-semibold tracking-[.08em] text-accent uppercase">{p.badge2}</span>
+              <PromoBadge withDate />
             </div>
             <h3 className="mt-6 font-display text-3xl font-extrabold tracking-[-0.022em] sm:text-4xl">{p.name}</h3>
             <p className="mt-1 text-lg text-muted">{p.tagline}</p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-2">
-              <PriceBox label={p.setup} value={price('plus')} unit={p.setupUnit} incl={p.setupIncl} />
-              <PriceBox label={p.month} value={price('plus_month')} unit={p.monthUnit} incl={p.monthIncl} />
+              <PriceBox label={p.setup} value={price('plus')} old={<Was k="plus" />} unit={p.setupUnit} incl={p.setupIncl} />
+              <PriceBox label={p.month} value={price('plus_month')} old={<Was k="plus_month" />} unit={p.monthUnit} incl={p.monthIncl} />
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -87,6 +90,7 @@ export default function Packages() {
           <Reveal>
             <h3 className="font-display text-2xl font-bold tracking-[-0.012em] sm:text-3xl">{p.bundlesTitle}</h3>
             <p className="mt-3 max-w-[58ch] text-pretty text-muted">{p.bundlesSub}</p>
+            <PromoBadge withDate className="mt-4" />
           </Reveal>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {BUNDLES.map((b, i) => {
@@ -108,11 +112,16 @@ export default function Packages() {
                     </ul>
                     <div className="mt-auto pt-6">
                       <p className="text-sm text-dim">{p.upfront}</p>
-                      <p className="font-display text-3xl font-extrabold tracking-[-0.012em] tabular-nums">{up}</p>
-                      <p className="mt-1 text-sm font-medium text-accent">+ {mo} {p.monthly}</p>
+                      <p className="flex flex-wrap items-baseline gap-x-2">
+                        <span className="font-display text-3xl font-extrabold tracking-[-0.012em] tabular-nums">{up}</span>
+                        <Was k={b.up} className="text-base" />
+                      </p>
+                      <p className="mt-1 text-sm font-medium text-accent">
+                        + {mo} {p.monthly} <Was k={b.mo} className="ml-1 font-normal" />
+                      </p>
                       <p className="mt-1 text-xs text-dim">{p.iva}</p>
                       <a
-                        href={wa(f(t.wa.bundle, { name: txt.name, price: `${up} + ${mo} ${p.monthly}, ${p.iva.toLowerCase()}` }))}
+                        href={wa(f(t.wa.bundle, { name: txt.name, price: `${up} + ${mo} ${p.monthly}, ${p.iva.toLowerCase()}${oldPrice(b.up) ? ` (${t.promo.badge})` : ''}` }))}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-line bg-white/[.04] text-[15px] font-semibold transition hover:bg-white/10"
@@ -132,7 +141,7 @@ export default function Packages() {
   );
 }
 
-function PriceBox({ label, value, unit, incl }: { label: string; value: string; unit: string; incl: string }) {
+function PriceBox({ label, value, old, unit, incl }: { label: string; value: string; old?: ReactNode; unit: string; incl: string }) {
   return (
     <div className="rounded-2xl border border-line bg-bg/60 p-5 sm:p-6">
       <p className="text-sm font-medium tracking-[.08em] text-dim uppercase">{label}</p>
@@ -140,6 +149,7 @@ function PriceBox({ label, value, unit, incl }: { label: string; value: string; 
         <span className="text-gradient font-display text-4xl font-extrabold tracking-[-0.012em] tabular-nums sm:text-5xl">{value}</span>
         <span className="text-sm text-muted">{unit}</span>
       </p>
+      {old && <p className="mt-1 text-base">{old}</p>}
       <p className="mt-3 text-[15px] text-pretty text-muted">{incl}</p>
     </div>
   );

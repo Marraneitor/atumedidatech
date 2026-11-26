@@ -42,6 +42,16 @@ export const SITE = {
     full: 6200, full_month: 3000, // Negocio completo
   } as Record<string, number>,
 
+  /* Promoción de Fin de año: descuento sobre el chatbot y todos los paquetes (pago inicial y mensualidad).
+     Se muestra el precio anterior tachado. Se apaga sola después de `until` (fin del día, hora de CDMX),
+     o antes si pones active: false. Los precios de arriba son los normales; no los cambies por la promo. */
+  promo: {
+    active: true,
+    pct: 25,
+    until: '2026-12-31',
+    keys: ['chatbot', 'chatbot_month', 'plus', 'plus_month', 'start', 'start_month', 'growth', 'growth_month', 'full', 'full_month'],
+  },
+
   /* Precio fijo por divisa (opcional). Si pones un valor aquí se usa en lugar de la conversión.
      Ejemplo: landing: { USD: 49, EUR: 45 } */
   priceOverrides: {
@@ -77,3 +87,20 @@ export const SITE = {
     BE: 'EUR', AT: 'EUR', IE: 'EUR', FI: 'EUR', GR: 'EUR', LU: 'EUR',
   } as Record<string, string>,
 };
+
+/** ¿La promoción está vigente ahora? Termina al final del día `until` en hora de la Ciudad de México (UTC-6). */
+export function promoOn(now: Date = new Date()) {
+  const p = SITE.promo;
+  return p.active && now.getTime() < Date.parse(`${p.until}T23:59:59-06:00`);
+}
+
+/** ¿Esta clave de precio tiene descuento ahora? */
+export function onSale(key: string, now?: Date) {
+  return promoOn(now) && SITE.promo.keys.includes(key);
+}
+
+/** Precio vigente en MXN (con descuento si aplica) y precio normal. */
+export function priceMXN(key: string, now?: Date) {
+  const base = SITE.prices[key] ?? 0;
+  return onSale(key, now) ? Math.round((base * (100 - SITE.promo.pct)) / 100) : base;
+}

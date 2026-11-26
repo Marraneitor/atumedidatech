@@ -2,6 +2,7 @@
 
 import { usePrefs } from '@/lib/prefs';
 import { Icon, Reveal } from './ui';
+import { Was } from './Promo';
 
 /* Servicios: una línea por servicio con su precio de entrada, y el proceso en tres pasos. */
 export default function ServiceList() {
@@ -21,7 +22,7 @@ export default function ServiceList() {
               <p className="text-sm text-dim sm:col-span-3 sm:text-right">
                 {x.key ? (
                   <>
-                    {s.from} <span className="font-semibold text-ink tabular-nums">{price(x.key)}</span> {x.unit}
+                    {s.from} <Was k={x.key} className="mr-1" /> <span className="font-semibold text-ink tabular-nums">{price(x.key)}</span> {x.unit}
                   </>
                 ) : (
                   s.quote

@@ -117,6 +117,12 @@ const es = {
       ],
     },
   },
+  promo: {
+    badge: 'Fin de año −25%',
+    before: 'Antes',
+    until: 'Hasta el {date}',
+    note: '25% de descuento por Fin de año en el chatbot y en todos los paquetes, en el pago inicial y en la mensualidad.',
+  },
   plus: {
     eyebrow: 'Paquetes',
     title: 'Paquete Plus: tu negocio digital completo',
@@ -357,6 +363,12 @@ const en: Dict = {
       ],
     },
   },
+  promo: {
+    badge: 'Year-end −25%',
+    before: 'Was',
+    until: 'Until {date}',
+    note: '25% year-end discount on the chatbot and every package, on both the upfront and the monthly price.',
+  },
   plus: {
     eyebrow: 'Packages',
     title: 'Plus Package: your whole digital business',
@@ -594,6 +606,12 @@ const pt: Dict = {
         { t: 'Nota fiscal e tudo no seu nome', d: 'Emitimos a nota no final. Domínio, código e acessos são seus.' },
       ],
     },
+  },
+  promo: {
+    badge: 'Fim de ano −25%',
+    before: 'Antes',
+    until: 'Até {date}',
+    note: '25% de desconto de fim de ano no chatbot e em todos os pacotes, no pagamento inicial e na mensalidade.',
   },
   plus: {
     eyebrow: 'Pacotes',

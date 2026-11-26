@@ -3,10 +3,11 @@
 import { usePrefs } from '@/lib/prefs';
 import { Icon, Reveal } from './ui';
 import { PageHead } from './ServiceList';
+import { PromoBadge, Was } from './Promo';
 
 /* Precios: una tabla corta (servicio, precio, cotizar), cómo trabajamos y preguntas frecuentes. */
 export default function PriceList() {
-  const { t, price, wa, f } = usePrefs();
+  const { t, price, oldPrice, wa, f } = usePrefs();
   const p = t.pricing;
   const s = t.site.prices;
 
@@ -31,11 +32,17 @@ export default function PriceList() {
                     <span className="font-display text-2xl font-bold tracking-[-0.012em] tabular-nums">{value}</span>
                     {plan.unit && <span className="text-sm text-dim">{plan.unit}</span>}
                   </p>
-                  {extra && <p className="mt-1 text-sm text-accent">{extra}</p>}
+                  {plan.key && oldPrice(plan.key) && (
+                    <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                      <Was k={plan.key} />
+                      <PromoBadge />
+                    </p>
+                  )}
+                  {extra && <p className="mt-1 text-sm text-accent">{extra}{plan.extraKey && oldPrice(plan.extraKey) ? <Was k={plan.extraKey} className="ml-2" /> : null}</p>}
                 </div>
                 <div className="sm:col-span-2 sm:text-right">
                   <a
-                    href={wa(f(t.wa.plan, { name: plan.name, price: [value, plan.unit].filter(Boolean).join(' ') }))}
+                    href={wa(f(t.wa.plan, { name: plan.name, price: [value, plan.unit, plan.key && oldPrice(plan.key) ? `(${t.promo.badge})` : ''].filter(Boolean).join(' ') }))}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition-colors hover:text-accent"

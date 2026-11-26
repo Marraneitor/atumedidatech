@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { SITE, type Lang } from './config';
+import { onSale, priceMXN, SITE, type Lang } from './config';
 import { DICTS, fill, type Dict } from './i18n';
 
 type Prefs = {
@@ -12,6 +12,8 @@ type Prefs = {
   t: Dict;
   f: typeof fill;
   price: (key: string) => string;
+  /** Precio normal si la clave tiene promoción vigente (para mostrarlo tachado), si no null. */
+  oldPrice: (key: string) => string | null;
   /** Formatea un monto en MXN a la divisa elegida (con el mismo redondeo que price). */
   money: (mxn: number) => string;
   wa: (text: string) => string;
@@ -113,7 +115,11 @@ export function PrefsProvider({ children }: { children: React.ReactNode }) {
     },
     [currency, rates],
   );
-  const price = useCallback((key: string) => fmt(SITE.prices[key] ?? 0, SITE.priceOverrides[key]?.[currency]), [fmt, currency]);
+  const price = useCallback(
+    (key: string) => (onSale(key) ? fmt(priceMXN(key)) : fmt(SITE.prices[key] ?? 0, SITE.priceOverrides[key]?.[currency])),
+    [fmt, currency],
+  );
+  const oldPrice = useCallback((key: string) => (onSale(key) ? fmt(SITE.prices[key] ?? 0, SITE.priceOverrides[key]?.[currency]) : null), [fmt, currency]);
   const money = useCallback((mxn: number) => fmt(mxn), [fmt]);
 
   const wa = useCallback(
@@ -122,8 +128,8 @@ export function PrefsProvider({ children }: { children: React.ReactNode }) {
   );
 
   const value = useMemo<Prefs>(
-    () => ({ lang, setLang, currency, setCurrency, t: DICTS[lang], f: fill, price, money, wa }),
-    [lang, setLang, currency, setCurrency, price, money, wa],
+    () => ({ lang, setLang, currency, setCurrency, t: DICTS[lang], f: fill, price, oldPrice, money, wa }),
+    [lang, setLang, currency, setCurrency, price, oldPrice, money, wa],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
