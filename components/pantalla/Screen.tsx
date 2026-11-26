@@ -12,19 +12,21 @@ const host = (url: string) => url.replace(/^https?:\/\//, '').replace(/^www\./, 
 /** Dominio propio si lo tiene; si es una vista de Vercel, un nombre corto del proyecto. */
 const label = (p: { id: string; url: string }) => (host(p.url).includes('vercel.app') ? `${p.id}.app` : host(p.url));
 
-const desk = PROJECTS.map((p) => ({ id: p.id, name: p.name, url: label(p), src: `/assets/img/projects/${p.id}.webp` }));
-const phones = PROJECTS.filter((p) => p.mobile).map((p) => ({ id: p.id, name: p.name, url: label(p), src: `/assets/img/mobile/${p.id}.webp` }));
+const desk = PROJECTS.map((p) => ({ id: p.id, name: p.name, url: label(p), type: p.type.es, mobile: !!p.mobile, src: `/assets/img/projects/${p.id}.webp` }));
+const phones = desk.filter((p) => p.mobile).map((p) => ({ ...p, src: `/assets/img/mobile/${p.id}.webp` }));
 
 type Item = (typeof desk)[number];
 
-/** Reparte la lista en n columnas empezando en puntos distintos, para que no se vean iguales. */
-function columns(list: Item[], n: number, per: number) {
-  return Array.from({ length: n }, (_, c) => Array.from({ length: per }, (_, i) => list[(c * 3 + i * n + c) % list.length]));
+/** Reparte TODOS los proyectos en n columnas sin repetir (uno a cada columna, por turnos). */
+function deal(list: Item[], n: number) {
+  const cols: Item[][] = Array.from({ length: n }, () => []);
+  list.forEach((p, i) => cols[i % n].push(p));
+  return cols;
 }
 
 const COLS: { kind: 'desk' | 'phone'; items: Item[]; dur: number; reverse: boolean }[] = (() => {
-  const d = columns(desk, 4, 6);
-  const m = columns(phones, 2, 5);
+  const d = deal(desk, 4);
+  const m = deal(phones, 2);
   return [
     { kind: 'desk', items: d[0], dur: 150, reverse: false },
     { kind: 'phone', items: m[0], dur: 120, reverse: true },
@@ -35,12 +37,14 @@ const COLS: { kind: 'desk' | 'phone'; items: Item[]; dur: number; reverse: boole
   ];
 })();
 
-export default function Screen() {
+/** overlay: se usa como protector dentro del sitio (sin pantalla completa ni atajos). */
+export default function Screen({ overlay = false }: { overlay?: boolean }) {
   const root = useRef<HTMLDivElement>(null);
   const [idle, setIdle] = useState(false);
 
   // Oculta el cursor tras 2.5 s sin moverlo.
   useEffect(() => {
+    if (overlay) return;
     let t: ReturnType<typeof setTimeout>;
     const wake = () => {
       setIdle(false);
@@ -62,10 +66,10 @@ export default function Screen() {
       window.removeEventListener('dblclick', full);
       window.removeEventListener('keydown', onKey);
     };
-  }, []);
+  }, [overlay]);
 
   return (
-    <div ref={root} className={`fixed inset-0 overflow-hidden bg-bg select-none ${idle ? 'cursor-none' : ''}`}>
+    <div ref={root} className={`fixed inset-0 overflow-hidden bg-bg select-none ${idle || overlay ? 'cursor-none' : ''} ${overlay ? 'z-[300] animate-[fade-in_.6s_ease-out_both]' : ''}`}>
       {/* Muro de proyectos */}
       <div aria-hidden className="absolute top-1/2 left-1/2 h-[220vh] w-[170vw] -translate-x-1/2 -translate-y-1/2 [perspective:2000px]">
         <div className="flex h-full justify-center gap-[1.6vw] [transform:rotateX(24deg)_rotateZ(-14deg)] [transform-style:preserve-3d]">
@@ -100,7 +104,59 @@ export default function Screen() {
         <p className="mt-[.8vw] font-[ui-monospace,SFMono-Regular,Menlo,monospace] text-[1.05vw] text-accent">atumedidatech.online</p>
       </div>
 
+      <Spotlight />
       <Terminal />
+    </div>
+  );
+}
+
+/* Proyecto destacado: pasa por TODOS los proyectos, uno cada 5 s, con su captura grande y su dominio. */
+const SPOT_MS = 5000;
+function Spotlight() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setI((x) => (x + 1) % desk.length), SPOT_MS);
+    return () => clearInterval(t);
+  }, []);
+  const p = desk[i];
+  const next = desk[(i + 1) % desk.length];
+  return (
+    <div aria-hidden className="absolute top-[7vh] right-[4vw] w-[34vw]">
+      <div key={p.id} className="animate-[spot-in_.9s_cubic-bezier(.16,1,.3,1)_both]">
+        <div className="relative">
+          <div className="overflow-hidden rounded-[1vw] border border-white/15 bg-bg-2 shadow-[0_40px_120px_-30px_rgba(0,0,0,.95),0_0_60px_-20px_rgba(56,189,248,.5)]">
+            <div className="flex items-center gap-[.45vw] border-b border-white/[.06] px-[.9vw] py-[.6vw]">
+              <span className="size-[.55vw] rounded-full bg-white/20" />
+              <span className="size-[.55vw] rounded-full bg-white/20" />
+              <span className="size-[.55vw] rounded-full bg-white/20" />
+              <span className="ml-[.6vw] truncate font-[ui-monospace,SFMono-Regular,Menlo,monospace] text-[.8vw] text-dim">{p.url}</span>
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={p.src} alt="" width={960} height={600} className="block h-auto w-full" />
+          </div>
+          {p.mobile && (
+            <div className="absolute right-[-2vw] bottom-[-3vw] w-[8.5vw] overflow-hidden rounded-[1.1vw] border-[.3vw] border-[#141a26] bg-bg-2 shadow-[0_30px_80px_-20px_rgba(0,0,0,.95)]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={`/assets/img/mobile/${p.id}.webp`} alt="" width={585} height={1266} className="block h-auto w-full" />
+            </div>
+          )}
+        </div>
+        <div className="mt-[1.4vw] mr-[7vw] flex items-baseline justify-between gap-[1vw] rounded-[.8vw] border border-white/10 bg-bg/90 px-[1.2vw] py-[.9vw] shadow-[0_20px_60px_-20px_rgba(0,0,0,.9)]">
+          <div>
+            <p className="text-[.8vw] font-medium tracking-[.12em] text-accent uppercase">{p.type}</p>
+            <p className="mt-[.3vw] font-display text-[1.9vw] leading-tight font-bold tracking-[-0.012em] text-ink">{p.name}</p>
+          </div>
+          <p className="shrink-0 font-[ui-monospace,SFMono-Regular,Menlo,monospace] text-[.85vw] text-dim tabular-nums">
+            {String(i + 1).padStart(2, '0')} / {desk.length}
+          </p>
+        </div>
+      </div>
+      {/* precarga la siguiente captura para que el cambio no parpadee */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={next.src} alt="" width={1} height={1} className="hidden" />
+      <div className="mt-[.6vw] mr-[7vw] h-[2px] overflow-hidden rounded-full bg-white/10">
+        <div key={i} className="h-full origin-left animate-[spot-bar_5s_linear_both] bg-accent" />
+      </div>
     </div>
   );
 }

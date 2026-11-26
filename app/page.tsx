@@ -9,6 +9,7 @@ import PriceList from '@/components/PriceList';
 import { TabPanel, TabsProvider } from '@/components/Tabs';
 import Contact, { Footer, WaFloat } from '@/components/Contact';
 import IntroVortex from '@/components/IntroVortex';
+import IdleScreen from '@/components/IdleScreen';
 
 export default function Page() {
   return (
@@ -40,6 +41,7 @@ export default function Page() {
           </main>
           <Footer />
           <WaFloat />
+          <IdleScreen />
         </TabsProvider>
       </MotionConfig>
     </PrefsProvider>
